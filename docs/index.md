@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: 木向阳
-  text: 向阳树木年年青，盛开花朵日日红
+  text: 向阳树木年年青，盛开花朵日日红.
   tagline: 欢迎访问👏
   image:
     src: https://avatars.githubusercontent.com/u/16522288?v=4
