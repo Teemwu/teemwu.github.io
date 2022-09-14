@@ -5,22 +5,10 @@ export default defineConfig({
 	description: 'Teemwu\'s blog',
 	themeConfig: {
 		nav: [
-			{ text: 'Guide', link: '/guide' },
+			{ text: '学习', link: '/guide' },
+			{ text: '娱乐', link: '/' },
 			{
-				text: 'Dropdown Menu',
-				items: [
-					{
-						// Title for the section.
-						text: 'Section A Title',
-						items: [
-							{ text: 'Section A Item A', link: '...' },
-							{ text: 'Section B Item B', link: '...' }
-						]
-					}
-				]
-			},
-			{
-				text: 'Dropdown Menu',
+				text: '百宝箱',
 				items: [
 					{
 						// You may also omit the title.
