@@ -1,5 +1,4 @@
 export default {
 	title: 'Teemwu\'s Blog',
-	description: 'Just playing around.',
-	base: '/notes/'
+	description: 'Just playing around.'
 }
