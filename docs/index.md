@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: 木向阳
-  text: 向阳树木年年青，盛开花朵日日红.
-  tagline: 欢迎访问👏
+  name: Teemwu
+  text: Love untamed
+  tagline: forever...
   image:
     src: https://avatars.githubusercontent.com/u/16522288?v=4
     alt: Teemwu
@@ -13,7 +13,7 @@ hero:
       text: Get Started
       link: /guide/what-is-vitepress
     - theme: alt
-      text: 关于我 👨‍💻
+      text: AboutMe 👨‍💻
       link: /about-me
 
 features:
