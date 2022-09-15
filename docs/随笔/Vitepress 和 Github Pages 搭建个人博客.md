@@ -1,4 +1,4 @@
-# Vitepress + Github Pages 搭建个人博客
+# Vitepress 和 Github Pages 搭建个人博客
 
 上次更改时间: September 15, 2022 9:15 AM
 创建时间: September 14, 2022 7:05 PM

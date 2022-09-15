@@ -42,6 +42,4 @@ if (files && files.length) {
 	})
 }
 
-console.log('sidebar:', sidebar)
-
 export default sidebar
