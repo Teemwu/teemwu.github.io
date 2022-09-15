@@ -1,28 +1,44 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, DefaultTheme } from 'vitepress'
+import sidebar from './sidebar'
+const themeConfig: DefaultTheme.Config = {
+	nav: [
+		{ text: '随笔', link: '/随笔/' },
+		{ text: '基础知识', link: '/基础知识/' },
+		{ text: '工程化', link: '/前端工程化/' },
+		{ text: '面试题集', link: '/面试题集/' },
+		{
+			text: '百宝箱',
+			items: [
+				{
+					text: '工具',
+					items: [
+						{ text: 'Section A Item A', link: '...' },
+						{ text: 'Section B Item B', link: '...' }
+					]
+				}
+			]
+		}
+	],
+	socialLinks: [
+		{
+			icon: 'github',
+			link: 'https://github.com/Teemwu'
+		}
+	],
+	sidebar,
+	footer: {
+		message: 'Released under the MIT License.',
+		copyright: 'Copyright © 2022-present Teemwu'
+	}
+}
 
 export default defineConfig({
 	title: 'Teemwu\'s blog',
 	description: 'Teemwu\'s blog',
-	themeConfig: {
-		nav: [
-			{ text: '学习', link: '/guide' },
-			{ text: '娱乐', link: '/' },
-			{
-				text: '百宝箱',
-				items: [
-					{
-						// You may also omit the title.
-						items: [
-							{ text: 'Section A Item A', link: '...' },
-							{ text: 'Section B Item B', link: '...' }
-						]
-					}
-				]
-			}
-		],
-		footer: {
-			message: 'Released under the MIT License.',
-			copyright: 'Copyright © 2019-present Evan You'
+	themeConfig,
+	vite: {
+		server: {
+			open: true
 		}
 	}
 })
