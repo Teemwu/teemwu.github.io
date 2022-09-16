@@ -1,5 +1,6 @@
 import { defineConfig, DefaultTheme } from 'vitepress'
 import sidebar from './sidebar'
+
 const themeConfig: DefaultTheme.Config = {
 	nav: [
 		{ text: '随笔', link: '/随笔/' },
@@ -29,6 +30,16 @@ const themeConfig: DefaultTheme.Config = {
 	footer: {
 		message: 'Released under the MIT License.',
 		copyright: 'Copyright © 2022-present Teemwu'
+	},
+	algolia: {
+		appId: 'DSW8O07XW5',
+		apiKey: 'a2f6b81f63d5da048c4124158af8ebc1',
+		indexName: 'dev_teemwu'
+	},
+	lastUpdatedText: '最后更新时间',
+	editLink: {
+		pattern: 'https://github.com/Teemwu/teemwu.github.io/edit/main/docs/:path',
+		text: 'Edit this page on GitHub'
 	}
 }
 
@@ -36,6 +47,32 @@ export default defineConfig({
 	title: 'Teemwu\'s blog',
 	description: 'Teemwu\'s blog',
 	themeConfig,
+	lastUpdated: true,
+	cleanUrls: 'with-subfolders',
+	markdown: {
+		headers: {
+			level: [0, 0]
+		}
+	},
+	head: [
+		['script', {
+			'src': 'https://giscus.app/client.js',
+			'data-repo': 'Teemwu/teemwu.github.io',
+			'data-repo-id': 'R_kgDOH_qrDg',
+			'data-category': 'Announcements',
+			'data-category-id': 'DIC_kwDOH_qrDs4CRdju',
+			'data-mapping': 'pathname',
+			'data-strict': '0',
+			'data-reactions-enabled': '1',
+			'data-emit-metadata': '0',
+			'data-input-position': 'top',
+			'data-theme': 'preferred_color_scheme',
+			'data-lang': 'zh-CN',
+			'data-loading': 'lazy',
+			'crossorigin': 'anonymous',
+			'async': 'true'
+		}],
+	],
 	vite: {
 		server: {
 			open: true

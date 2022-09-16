@@ -1,3 +1,6 @@
+---
+lastupdated:true
+---
 # Vitepress 和 Github Pages 搭建个人博客
 
 上次更改时间: September 15, 2022 9:15 AM

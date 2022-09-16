@@ -11,15 +11,15 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/what-is-vitepress
+      link: /随笔/
     - theme: alt
       text: AboutMe 👨‍💻
-      link: /about-me
+      link: /关于我
 
 features:
   - icon: 🖊️
     title: 文章、随笔
-    details: 好记性不如烂笔头
+    details: 歇一歇，写一写
   - icon: 📖 
     title: 书籍、电影、音乐
     details: 生活中不可或缺的精神洗礼

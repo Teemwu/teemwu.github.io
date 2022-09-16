@@ -1,5 +1,5 @@
 ---
-layout: false
+layout: doc
 ---
 
 # 个人随笔
