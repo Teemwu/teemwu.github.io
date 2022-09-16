@@ -4,3 +4,4 @@ node_modules
 pnpm-global
 *.log
 /docs/.vitepress/dist
+package-lock.json
