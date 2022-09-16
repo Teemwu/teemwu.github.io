@@ -15,7 +15,6 @@ export default {
 		watch(
 			() => router.route.path,
 			(path) => {
-				console.log('ggggg');
 				try {
 					const _path = localStorage.getItem('pathname')
 					if (_path !== router.route.path) {
