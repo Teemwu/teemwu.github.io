@@ -1,7 +1,7 @@
 <template>
 	<Layout>
 		<template #doc-after>
-			<Comment></Comment>
+			<Comment />
 		</template>
 	</Layout>
 </template>

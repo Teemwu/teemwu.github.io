@@ -57,9 +57,9 @@ export default defineConfig({
 	vite: {
 		server: {
 			open: true,
-			hmr: {
-				protocol: 'wss'
-			}
+			// hmr: {
+			// 	protocol: 'ws'
+			// }
 		}
 	}
 })
