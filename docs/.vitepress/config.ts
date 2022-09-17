@@ -54,37 +54,6 @@ export default defineConfig({
 			level: [0, 0]
 		}
 	},
-	head: [
-		['script', {
-			'src': 'https://giscus.app/client.js',
-			'data-repo': 'Teemwu/teemwu.github.io',
-			'data-repo-id': 'R_kgDOH_qrDg',
-			'data-category': 'Comments',
-			'data-category-id': 'DIC_kwDOH_qrDs4CRdju',
-			'data-mapping': 'pathname',
-			'data-strict': '0',
-			'data-reactions-enabled': '1',
-			'data-emit-metadata': '0',
-			'data-input-position': 'top',
-			'data-theme': 'preferred_color_scheme',
-			'data-lang': 'zh-CN',
-			'data-loading': 'lazy',
-			'crossorigin': 'anonymous',
-			'async': 'true'
-			// src: 'https://giscus.app/client.js',
-			// async: 'true',
-			// 'data-repo': 'Teemwu/teemwu.github.io',
-			// 'data-repo-id': 'R_kgDOH_qrDg',
-			// 'data-category': 'Comments',
-			// 'data-category-id': 'DIC_kwDOH_qrDs4CRdju',
-			// 'data-mapping': 'pathname',
-			// 'data-reactions-enabled': '1',
-			// 'data-emit-metadata': '0',
-			// 'data-theme': 'light',
-			// // 'data-lang': 'zh-CN',
-			// 'crossorigin': 'anonymous',
-		}],
-	],
 	vite: {
 		server: {
 			open: true

@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+	},
+	"include": [
+		"docs/.vitepress/**/*.ts",
+		"docs/.vitepress/**/*.vue",
+	]
+}

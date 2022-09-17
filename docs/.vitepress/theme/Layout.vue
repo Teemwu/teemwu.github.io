@@ -1,12 +1,14 @@
 <template>
 	<Layout>
-		<template #page-bottom>
-			<div class="giscus" />
+		<template #doc-after>
+			<Comment></Comment>
 		</template>
 	</Layout>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import DefaultTheme from 'vitepress/theme'
+import Comment from './components/comment.vue'
+
 const { Layout } = DefaultTheme
 </script>

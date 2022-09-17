@@ -21,6 +21,7 @@
     "vue": "^3.2.39"
   },
   "dependencies": {
+    "@vueuse/core": "^9.2.0",
     "fast-glob": "^3.2.12",
     "markdown-it-anchor": "^8.6.5"
   }

@@ -1,5 +1,7 @@
 ---
-layout: doc
+aside: false
+editLink: false
+lastUpdated: false
 ---
 
 # 个人随笔
