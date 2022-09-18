@@ -1,10 +1,10 @@
 import DefaultTheme from 'vitepress/theme'
 import './custom.css'
 import Layout from './Layout.vue'
-import { onBeforeMount, watch } from 'vue'
+import { watch } from 'vue'
 import { useScriptTag } from '@vueuse/core'
+import { getCurrentTheme } from './utils'
 
-const getCurrentTheme = () => window.localStorage.getItem('vitepress-theme-appearance') === 'light' ? 'light' : 'dark'
 const { load, unload } = useScriptTag('https://giscus.app/client.js', undefined, {
 	manual: true,
 	attrs: {
@@ -24,26 +24,15 @@ const { load, unload } = useScriptTag('https://giscus.app/client.js', undefined,
 	}
 })
 
-const sendMessage = message => {
-	const iframe = document.querySelector('iframe.giscus-frame') as any
-	if (!iframe) return
-	iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
-}
-const setCommentTheme = () => sendMessage({ setConfig: { theme: getCurrentTheme() } })
-const observerThemeChange = () => {
-	const observer = new MutationObserver(mutations => mutations.forEach(setCommentTheme))
-	observer.observe(document.getElementsByTagName('html')[0], { attributes: true, attributeFilter: ['class'] })
-}
-
 export default {
 	...DefaultTheme,
 	Layout,
-	enhanceApp(e) {
+	enhanceApp({ router }) {
 		watch(
-			() => e.router.route.path,
+			() => router.route.path,
 			() => {
 				unload()
-				load().then(() => observerThemeChange())
+				load()
 			}
 		)
 	}

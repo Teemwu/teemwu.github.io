@@ -15,6 +15,7 @@ if (files && files.length) {
 		const removeMd = (str: string) => str.replace('.md', '')
 		file = removeRoot(file)
 		const names = file.split('/').map(removeMd)
+		console.log('names:', names)
 		if (names.length > 1) {
 			if (!names[2] && names[1].indexOf('index') !== -1) return
 			const key = `/${names[0]}/`
