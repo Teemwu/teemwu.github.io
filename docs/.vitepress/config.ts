@@ -2,6 +2,7 @@ import { defineConfig, DefaultTheme } from 'vitepress'
 import sidebar from './sidebar'
 
 const themeConfig: DefaultTheme.Config = {
+	logo: '/logo.png',
 	nav: [
 		{ text: '随笔', link: '/随笔/' },
 		{ text: '基础知识', link: '/基础知识/' },
@@ -54,6 +55,16 @@ export default defineConfig({
 			level: [0, 0]
 		}
 	},
+	head: [
+		[
+			'link',
+			{
+				rel: 'shortcut icon',
+				type: 'image/x-icon',
+				href: '/favicon.ico'
+			}
+		]
+	],
 	vite: {
 		server: {
 			open: true,

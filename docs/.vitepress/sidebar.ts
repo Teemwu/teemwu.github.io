@@ -15,9 +15,8 @@ if (files && files.length) {
 		const removeMd = (str: string) => str.replace('.md', '')
 		file = removeRoot(file)
 		const names = file.split('/').map(removeMd)
-		console.log('names:', names)
 		if (names.length > 1) {
-			if (!names[2] && names[1].indexOf('index') !== -1) return
+			if (!names[2] && names[1].indexOf('index') !== -1 && names[names.length - 1].indexOf('.md') === -1) return
 			const key = `/${names[0]}/`
 			const link = `/${file}`
 			const text = removeIndex(names[2] || names[1])
@@ -42,5 +41,7 @@ if (files && files.length) {
 		}
 	})
 }
+
+// console.dir(sidebar, { depth: null })
 
 export default sidebar

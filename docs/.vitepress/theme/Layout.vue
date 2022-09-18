@@ -13,8 +13,5 @@ import Comment from './components/comment.vue'
 import { observerThemeChange } from './utils'
 
 const { Layout } = DefaultTheme
-onMounted(()=>{
-	console.log('mounted:', )
-	observerThemeChange()
-})
+onMounted(() => observerThemeChange())
 </script>
