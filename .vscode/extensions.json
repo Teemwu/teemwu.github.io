@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"yzhang.markdown-all-in-one",
+		"bierner.emojisense",
+		"mushan.vscode-paste-image",
+		"vue.volar",
+		"bradlc.vscode-tailwindcss",
+		"esbenp.prettier-vscode"
+	]
+}

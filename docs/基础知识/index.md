@@ -2,6 +2,7 @@
 aside: false
 editLink: false
 lastUpdated: false
+hideComment: true
 ---
 
 # 基础知识

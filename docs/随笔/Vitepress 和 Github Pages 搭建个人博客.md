@@ -1,10 +1,17 @@
 ---
-lastupdated:true
+title: Vitepress 和 Github Pages 搭建个人博客
+author: Teemwu
+date: 2020/10/02 21:29
+categories:
+  - Java基础快速入门
+tags:
+  - Java
+  - Java基础
+  - JDK
+  - 开发环境
 ---
-# Vitepress 和 Github Pages 搭建个人博客
 
-上次更改时间: September 15, 2022 9:15 AM
-创建时间: September 14, 2022 7:05 PM
+# Vitepress 和 Github Pages 搭建个人博客
 
 ## Vitepress
 
@@ -132,7 +139,7 @@ GitHub 仓库收到推送后会去自动构建我们的项目，在分支那可�
 
 此时我们需要配置一下，待配置完后，我们就可以，通过 [xxx.github.io](http://xxx.github.io) 来访问我们自己的博客了。
 
-![Untitled](/image/Untitled.png)
+![](../public/imgs/2022/09/19/20220919180014.png)
 
 至此，我们的部署已完成，后续配置那些就看文档吧，或者等我哪天有空再写。
 
@@ -151,15 +158,12 @@ npx tailwindcss init -p
 ```jsx
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	darkMode: 'class',
-  content: [
-		'./docs/**/*.{html,js,vue,ts,md}',
-    './docs/.vitepress/**/*.{html,js,vue,ts,md}'
-  ],
+  darkMode: 'class',
+  content: ['./docs/**/*.{html,js,vue,ts,md}', './docs/.vitepress/**/*.{html,js,vue,ts,md}'],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
+  plugins: []
 }
 ```
 
@@ -170,11 +174,11 @@ module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {
-      autoprefixer: { flexbox: "no-2009" },
-      features: { "custom-properties": false },
+      autoprefixer: { flexbox: 'no-2009' },
+      features: { 'custom-properties': false },
       stage: 3
-    },
-  },
+    }
+  }
 }
 ```
 

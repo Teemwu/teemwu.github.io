@@ -1,0 +1,9 @@
+{
+	"pasteImage.basePath": "${projectRoot}/docs",
+	"pasteImage.defaultName": "YYYY/MM/DD/YYYYMMDDHHmmss",
+	"pasteImage.path": "${projectRoot}/docs/public/imgs",
+	"pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFilePath}${imageSyntaxSuffix}",
+	"pasteImage.showFilePathConfirmInputBox": false,
+	"pasteImage.filePathConfirmInputBoxMode": "fullPath",
+	"pasteImage.prefix": "../"
+}

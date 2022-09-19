@@ -3,6 +3,7 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"esModuleInterop": true,
+		"jsx": "preserve"
 	},
 	"include": [
 		"docs/.vitepress/**/*.ts",

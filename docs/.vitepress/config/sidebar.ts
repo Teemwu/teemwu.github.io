@@ -1,12 +1,13 @@
 import path from 'path'
 import fg from 'fast-glob'
+import { DefaultTheme } from 'vitepress/theme'
 
 const docsPath = path.resolve(process.cwd(), 'docs')
 const resolve = (dir: string) => path.resolve(docsPath, dir)
 
 const files = fg.sync([resolve('**/*.md'), resolve('.vitepress')])
 
-const sidebar = {}
+const sidebar: DefaultTheme.Sidebar = {}
 
 if (files && files.length) {
 	files.sort().forEach(file => {
@@ -44,4 +45,4 @@ if (files && files.length) {
 
 // console.dir(sidebar, { depth: null })
 
-export default sidebar
+export { sidebar }
