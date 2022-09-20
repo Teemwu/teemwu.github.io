@@ -11,10 +11,10 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /随笔/
+      link: /随笔/index.md
     - theme: alt
       text: AboutMe 👨‍💻
-      link: /关于我
+      link: /about.md
 
 features:
   - icon: 🖊️
@@ -26,4 +26,6 @@ features:
   - icon: 🛠️
     title: 百宝箱
     details: 存放一些小惊喜
+
+hideComment: true
 ---

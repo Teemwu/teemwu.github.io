@@ -1,6 +1,7 @@
 ---
 layout: page
 showInSide: false
+hideComment: true
 ---
 
 <div class="w-full mx-auto max-w-sm mt-[100px]  bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

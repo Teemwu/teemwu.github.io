@@ -10,9 +10,9 @@
 import DefaultTheme from 'vitepress/theme'
 import Comment from './components/comment.vue'
 import { useGiscus } from './hooks/useGiscus'
-import { useGoogleAnaly } from './hooks/useGooogleAnaly'
+import { useGoogleAnalytics } from './hooks/useGooogleAnalytics'
 
-useGoogleAnaly()
+useGoogleAnalytics()
 
 const { Layout } = DefaultTheme
 const { hideCommentRef } = useGiscus()

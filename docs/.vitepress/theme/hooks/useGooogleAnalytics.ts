@@ -1,6 +1,6 @@
 import { useScriptTag } from '@vueuse/core'
 
-export function useGoogleAnaly() {
+export function useGoogleAnalytics() {
 	useScriptTag('https://www.googletagmanager.com/gtag/js?id=G-9YNB4KC0CW', () => {
 		// @ts-ignore
 		window.dataLayer = window.dataLayer || []
