@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /随笔/index.md
+      link: /随笔/2022/02-Chrome 日常使用五个必备小技巧.md
     - theme: alt
       text: AboutMe 👨‍💻
       link: /about.md

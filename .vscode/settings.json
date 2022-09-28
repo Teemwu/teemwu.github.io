@@ -5,5 +5,7 @@
 	"pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFilePath}${imageSyntaxSuffix}",
 	"pasteImage.showFilePathConfirmInputBox": false,
 	"pasteImage.filePathConfirmInputBoxMode": "fullPath",
-	"pasteImage.prefix": "../"
+	"pasteImage.prefix": "../",
+	"css.lint.unknownAtRules": "ignore",
+	"scss.lint.unknownAtRules": "ignore"
 }

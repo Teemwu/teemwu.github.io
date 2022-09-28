@@ -6,3 +6,44 @@ hideComment: true
 ---
 
 # 工程化
+
+[组件库](https://www.notion.so/074fda45c20e4483bf9d9146227b57ea)
+
+[自动部署](https://www.notion.so/3915f073a65242eeb561852317d53794)
+
+[参考](https://www.notion.so/e3339c2abe9e412da5d4aef1fcb8aba3)
+
+[自动化测试](https://www.notion.so/b76dc10428904fb1a9b4a8731f6a5142)
+
+- 数据驱动的思考方式
+
+- 工具链
+    - 工具分类
+        - 脚手架
+        - 本地调试
+        - 单元测试
+        - 发布
+    - 工具链体系的设计
+        - 版本问题
+        - 数据统计
+- 持续集成
+    - 客户端软件持续集成
+        - Daily build
+        - BVT(Build Verification Test)
+    - 前端持续集成
+        - Check-in build
+        - Lint + Rule Check
+- 技术架构
+    - 客户端架构：解决软件需求规模带来的复杂性
+    - 服务端架构：解决大量用户访问带来的复杂性
+    - 前端架构：解决大量页面需求带来的重复劳动问题—复用
+        - 库：有复用价值的代码
+            - URL：链接解析
+            - AJAX：请求加解密、防止XSS攻击
+            - ENV：环境判断
+            
+        - 组件：UI 上多次出现的元素
+            - 轮播
+            - Tab
+        - 模块：经常被使用的业务区块
+            - 登录

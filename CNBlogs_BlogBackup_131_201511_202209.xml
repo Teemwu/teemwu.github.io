@@ -1,0 +1,3881 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"><channel><title>博客园-编程小记</title><link>https://www.cnblogs.com/teemwu/</link><description>微信公众号：编程小记</description><language>zh-cn</language><lastBuildDate>Wed, 28 Sep 2022 13:39:40 GMT</lastBuildDate><pubDate>Wed, 28 Sep 2022 13:39:40 GMT</pubDate><ttl>60</ttl><item><title>科学计数转十进制</title><link>http://www.cnblogs.com/teemwu/archive/2022/09/28/11793246.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 28 Sep 2022 07:00:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2022/09/28/11793246.html</guid><description><![CDATA[### 转成字符串形式
+```javascript
+### 方法一
+function toNonExponential(num) {
+    var m = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
+    return num.toFixed(Math.max(0, (m[1] || '').length - m[2]));
+}
+toNonExponential(3.3e-7)     // "0.00000033"
+toNonExponential(3e-7)       // "0.0000003"
+toNonExponential(1.401e10)   // "14010000000"
+toNonExponential(0.0004)     // "0.0004"
+// 方法二
+
+```
+### 求和
+```javascript
+function sumBigNumber(a, b) {
+  var res = '',
+    temp = 0;
+  a = a.split('');
+  b = b.split('');
+  while (a.length || b.length || temp) {
+    temp += ~~a.pop() + ~~b.pop();
+    res = (temp % 10) + res;
+    temp = temp > 9;
+  }
+  return res.replace(/^0+/, '');
+}
+```
+缺点：`1e+20` 打上则无效
+
+### 参考
+- [https://www.html.cn/archives/9318](https://www.html.cn/archives/9318)
+- [https://www.jianshu.com/p/c51d63028371](https://www.jianshu.com/p/c51d63028371)]]></description></item><item><title>【踩坑】异步下载 Excel 文件打不开 </title><link>http://www.cnblogs.com/teemwu/archive/2022/02/22/15921721.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 22 Feb 2022 01:52:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2022/02/22/15921721.html</guid><description><![CDATA[## 起因
+修改管理系统，需要实现上传一个 excel 文件，后台处理后立即返回一个 excel 文件流，前端下载返回文件并保存到本地。]]></description></item><item><title>Chrome 日常使用五个必备小技巧</title><link>http://www.cnblogs.com/teemwu/archive/2022/01/20/15825818.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 20 Jan 2022 04:04:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2022/01/20/15825818.html</guid><description><![CDATA[如今互联网已经改变了我们的工作、娱乐以及彼此交流的方式，浏览器则是通往网络世界的一个通道。Chrome 作为目前全球份额第一的浏览器，我们除了用它简单的娱乐搜索、浏览页面、装一些好用的第三方插件外，其本身还有许多隐藏的小技巧，了解这些小技巧，可以大大提高你的工作、学习效率。
+
+## 一、查看已保存密码
+
+### 场景
+
+在登录某个网站时，Chrome 会提示是否需要帮你记录账号密码，如果选择“是”，则下次再登录此网站，Chrome 就会默认填充已保存的账号密码，你只需点一下登录按钮即可。此时，填充的密码是看不见的，密码输入框只显示”······“。如果我们忘了之前填了什么密码，想查看一下，该怎么办呢？
+
+### 操作
+
+- 在密码输入框处右击鼠标
+- 弹出框选择“检查“
+- 此时会弹出开发者调试面板，看不懂不用慌，找到 `<input type="password”` 字符开头的标签，将 `type="password”` 改成 `type="text”` 按下会车键，此时密码输入框就可以看见保存的密码
+
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120114704330-536302295.gif)
+
+实际上此方法在其他浏览器也适用。
+
+## 二、截取网页长图
+
+### 场景
+
+使用微信截图、或者其它第三方快捷键截图时，想要截取滚动页面部分的话是比较困难的。好在 Chrome 自带了截取全屏页面的功能，下面讲解下如何操作。
+
+### 操作
+
+- 按键盘的 `F12` 键或者在页面中随意的地方右击选择“检查”
+- 弹出开发者调试面板后再按住 `command + shift + P` (Windows 系统 : `control + shift + P`)
+- 开发者调试面板处会弹出一个 `Run>` 开头的命令输入框，输入 `full` 后会出筛选结果，点击 `Capture full size screenshot` 即可对页面进行全屏截取
+- 截取执行后浏览器会自动下载刚截取对图片到本地，在浏览器左下角可查看
+    
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120114722390-1282669877.gif)
+
+## 三、分享跳转到页面特定位置链接
+
+### 场景
+
+日常浏览页面，看到某个新闻、消息或者某句话，想要分享给别人，抑或是用浏览器来看很长的文章，看到了某处想搁置一下下次再看，那怎么才能下次打开页面就直接跳到我们想要分享内容的位置呢？
+
+### 操作
+
+- 选中我们要分享或者标记的句子
+- 右击鼠标，选择“复制指向突出显示的内容的链接“
+- 此时复制的链接已经暂存在你的剪切版里，找个地方粘贴，再进行分享或保存就好啦
+- 用 Chrome 打开粘贴的链接，即可跳转到特定内容的位置并且高亮所选内容
+
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120114736004-1213508933.gif)
+
+## 四、简易计算
+
+### 场景
+
+你是否会偶尔需要用到计算器的功能？以往要计算一些简单的数据，我们往往需要打开手机或者电脑自带的计算器 APP。假如你打开了 Chrome ，就可以直接使用其地址栏进行简单的计算，无须打开其它工具。
+
+### 操作
+
+- 在地址栏输入你要计算的数值和计算符号
+- 地址栏下方会实时显示计算结果
+
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120114744211-908621732.gif)
+
+## 五、反向图片搜索
+
+### 场景
+
+通过浏览器阅读文章时，往往会看到一些精美、有趣的配图，除了将其保存到本地外，我们是否可以找到图片的来源、抑或是类似到图片？其实，最近几年在人工智能的加持下，图片搜索变得更加智能，搜索结果也更接近使用者的想法，下面介绍 Chrome 自带的图片搜索功能。
+
+### 操作
+
+- 光标移动到对应图片上右击
+- 在弹窗选择“使用 Google 智能镜头搜索图片“
+- 随后会打开一个搜索结果页面 （https://lens.google.com/search?p=）
+- 调整左侧选框会自动重新识别并搜索图片
+
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120114754767-710288702.gif)
+
+实际上 Chrome 的使用还有很多小技巧，本文只是总结了五个笔者常用的，希望对你有所帮助。当然，如果你还知道其它小技巧，欢迎留言分享。
+]]></description></item><item><title>Chrome 日常使用五个必备小技巧</title><link>http://www.cnblogs.com/teemwu/archive/2022/01/20/15825011.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 20 Jan 2022 04:02:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2022/01/20/15825011.html</guid><description><![CDATA[如今互联网已经改变了我们的工作、娱乐以及彼此交流的方式，浏览器则是通往网络世界的一个通道。Chrome 作为目前全球份额第一的浏览器，我们除了用它简单的娱乐搜索、浏览页面、装一些好用的第三方插件外，其本身还有许多隐藏的小技巧，了解这些小技巧，可以大大提高你的工作、学习效率。
+
+## 一、查看已保存密码
+
+### 场景
+
+在登录某个网站时，Chrome 会提示是否需要帮你记录账号密码，如果选择“是”，则下次再登录此网站，Chrome 就会默认填充已保存的账号密码，你只需点一下登录按钮即可。此时，填充的密码是看不见的，密码输入框只显示”······“。如果我们忘了之前填了什么密码，想查看一下，该怎么办呢？
+
+### 操作
+
+- 在密码输入框处右击鼠标
+- 弹出框选择“检查“
+- 此时会弹出开发者调试面板，看不懂不用慌，找到 `<input type="password”` 字符开头的标签，将 `type="password”` 改成 `type="text”` 按下会车键，此时密码输入框就可以看见保存的密码
+
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120105144273-495716702.gif)
+
+实际上此方法在其他浏览器也适用。
+
+## 二、截取网页长图
+
+### 场景
+
+使用微信截图、或者其它第三方快捷键截图时，想要截取滚动页面部分的话是比较困难的。好在 Chrome 自带了截取全屏页面的功能，下面讲解下如何操作。
+
+### 操作
+
+- 按键盘的 `F12` 键或者在页面中随意的地方右击选择“检查”
+- 弹出开发者调试面板后再按住 `command + shift + P` (Windows 系统 : `control + shift + P`)
+- 开发者调试面板处会弹出一个 `Run>` 开头的命令输入框，输入 `full` 后会出筛选结果，点击 `Capture full size screenshot` 即可对页面进行全屏截取
+- 截取执行后浏览器会自动下载刚截取对图片到本地，在浏览器左下角可查看
+    
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120105207977-1886892978.gif)
+
+## 三、分享跳转到页面特定位置链接
+
+### 场景
+
+日常浏览页面，看到某个新闻、消息或者某句话，想要分享给别人，抑或是用浏览器来看很长的文章，看到了某处想搁置一下下次再看，那怎么才能下次打开页面就直接跳到我们想要分享内容的位置呢？
+
+### 操作
+
+- 选中我们要分享或者标记的句子
+- 右击鼠标，选择“复制指向突出显示的内容的链接“
+- 此时复制的链接已经暂存在你的剪切版里，找个地方粘贴，再进行分享或保存就好啦
+- 用 Chrome 打开粘贴的链接，即可跳转到特定内容的位置并且高亮所选内容
+
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120105224122-1221201336.gif)
+
+## 四、简易计算
+
+### 场景
+
+你是否会偶尔需要用到计算器的功能？以往要计算一些简单的数据，我们往往需要打开手机或者电脑自带的计算器 APP。假如你打开了 Chrome ，就可以直接使用其地址栏进行简单的计算，无须打开其它工具。
+
+### 操作
+
+- 在地址栏输入你要计算的数值和计算符号
+- 地址栏下方会实时显示计算结果
+
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120105233248-1219875225.gif)
+
+## 五、反向图片搜索
+
+### 场景
+
+通过浏览器阅读文章时，往往会看到一些精美、有趣的配图，除了将其保存到本地外，我们是否可以找到图片的来源、抑或是类似到图片？其实，最近几年在人工智能的加持下，图片搜索变得更加智能，搜索结果也更接近使用者的想法，下面介绍 Chrome 自带的图片搜索功能。
+
+### 操作
+
+- 光标移动到对应图片上右击
+- 在弹窗选择“使用 Google 智能镜头搜索图片“
+- 随后会打开一个搜索结果页面 （https://lens.google.com/search?p=）
+- 调整左侧选框会自动重新识别并搜索图片
+
+![](https://img2022.cnblogs.com/blog/831280/202201/831280-20220120105240990-1313081824.gif)
+
+实际上 Chrome 的使用还有很多小技巧，本文只是总结了五个笔者常用的，希望对你有所帮助。当然，如果你还知道其它小技巧，欢迎留言分享。
+]]></description></item><item><title>axios 封装及 API 接口管理</title><link>http://www.cnblogs.com/teemwu/archive/2021/09/23/15323626.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 23 Sep 2021 04:12:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/09/23/15323626.html</guid><description><![CDATA[## 前言
+
+最近在跟后端对接请求的加解密时，发现之前封装的 axios 模块存在触发两次拦截器的问题，找了许久问题方才发现是 axios 没有实例化而直接使用造成的。溯其根源，是之前封装时并未仔细去看 axios 的文档，没完全理解代码，直接就参考别人封装好的例子，殊不知别人封装的也是不完善。因此，结合自己的项目，梳理下 axios 的封装及 API 接口的管理模块。
+
+## Axios 封装
+
+axios 本身就是封装好了的请求库，为什么我们要对其进行二次封装呢？这个原因很简单，和大多数的封装一样，目的是为了简化代码使用以及便于管理维护。
+
+### 安装
+
+```bash
+npm install axios
+// or
+yarn add axios
+```
+
+### 使用
+
+官方的文档一开始就列举了直接引入 axios 使用的方法，然而这样子对我们进行后面的个性化定制不利，所以我们需要进行实例话后再使用，防止重复触发拦截器。
+
+```javascript
+// request.ts
+import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
+
+// 判断是否为开发模式
+const isDev = process.env.NODE_ENV === 'development'
+// 根据不同环境设置不同的请求地址
+const baseURL = isDev ? '' : 'http://www.example.com'
+// 请求超时设置
+const timeout = 6000
+// 创建 axios 实例
+const http = axios.create({ baseURL, timeout })
+
+// TODO: 拦截器
+
+export { http, axios }
+```
+
+### 拦截器
+
+在请求数据前和请求数据后我们通常需要做一些认证、错误处理、加解密等操作，利用 axios 提供的 `interceptors` 方法分别对请求和响应进行拦截处理。
+
+```javascript
+// 拦截请求
+http.interceptors.request.use(
+  (config: AxiosRequestConfig) => {
+    // TODO: 请求加密
+
+    return config
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error)
+  }
+)
+
+// 拦截响应
+http.interceptors.response.use(
+  (response: AxiosResponse) => {
+    if (response) {
+      // 返回文件类型时不做处理直接返回
+      if (response.request.responseType === 'arraybuffer') return response
+
+      const { code, msg, success } = response.data
+
+      // TODO: 解密响应数据
+
+      // 根据后端自定义的状态码进行操作
+      switch (code) {
+        case 7001:
+          // TODO
+          break
+        default:
+          // Pop message
+          break
+      }
+    }
+
+    return Promise.reject(response)
+  },
+  (error: AxiosError) => {
+    if (error.response) {
+      const { status, data } = error.response
+      // 处理 HTTP 状态码
+      switch (status) {
+        case 401:
+          // TODO: Login
+          break
+        default:
+          // TODO: Pop message
+          break
+      }
+    }
+
+    return Promise.reject(error)
+  }
+)
+```
+
+以上只是简单列举了拦截器的使用，还有加解密、Loading 控制、请求超时处理等需要另外补充。
+
+### 封装
+
+通常情况下我们可以直接使用 axios 的实例方法来调用 get、post 等请求，假如后端返回数据的默认结构为：
+
+```javascript
+{
+  code: 200,
+  success: true,
+  data: {},
+  msg: '请求成功'
+}
+```
+
+正常处理请求返回数据如下：
+
+```javascript
+import { http } from './request'
+
+http.get('/path', { id: 1 }).then(response => {
+  const { data, code, success, msg } = response.data
+
+  if (success) {
+    // TODO: 处理获取成功的数据
+  } else {
+    // TODO: 错误处理
+  }
+})
+```
+
+而通常情况下，我们请求数据只想手动处理页面显示所需的数据，那些异常的数据应该全部放到 catch 中处理或者交由全局进行统一处理，比如：
+
+```javascript
+import { http } from './request'
+
+// 处理特殊异常
+http.get('/path', { id: 1 }).then(res => {
+  // TODO: 处理获取成功的数据
+}).catch(err => {
+  // TODO: 处理异常
+})
+
+// 不使用 catch 时
+// 异常交由全局默认处理
+http.get('/path', { id: 1 }).then(res => {
+  // TODO: 处理获取成功的数据
+})
+```
+
+要默认处理异常，需要重写 Promise 的 `then` , `catch` , `finally` 方法：
+
+```javascript
+function RequestPromise(originalPromise: Promise<any>) {
+  this._promise = originalPromise
+
+  this._catchyPromise = Promise.resolve()
+    .then(() => this._promise)
+    .catch(err => console.error('Error', err)) // 默认处理异常
+
+  const methods = ['then', 'catch', 'finally']
+
+  for (const method of methods) {
+    this[method] = function (...args: any) {
+      this._promise = this._promise[method](...args)
+
+      return this
+    }
+  }
+}
+```
+
+从上面的方法可知，我们的异步请求会被拦截一道，获取异常并进行错误输出处理，重写了 catch 方法，方便使用时能进行特殊处理。
+
+```javascript
+// get 请求封装
+const get = <R = any>(uri: string, data?: any, config?: AxiosRequestConfig): Promise<R> => {
+  // @ts-ignore
+  return new RequestPromise(new Promise((resolve, reject) => {
+    http
+      .get(uri, { params: data, ...config })
+      .then(response => {
+        const { success, data } = response.data
+        if (success) return resolve(data)
+        return reject(response.data)
+      })
+      .catch(reject)
+  }))
+}
+```
+
+除了以上处理，假设我们要请求分页列表，其后端返回的数据格式为：
+
+```javascript
+{
+  code: 200,
+  success: true,
+  data: {
+    results: []
+  },
+  msg: '请求成功'
+}
+```
+
+如果想默认返回 `results` 字段内容，我们可以在 post、get 请求方法的基础上更进一步定制化请求方法，如：
+
+```javascript
+// 列表请求封装
+const table = <R = ListResponse>(path: string, pagination?: number, data?: any, config?: AxiosRequestConfig): Promise<R> => {
+  return new Promise((resolve, reject) => {
+    const listConfig = {
+      pageSize: 10,
+      pageNo: pagination || 1
+    }
+    uri = `${uri}/action/table`
+    get(uri, Object.assign({}, listConfig, data), config).then(data => resolve(data.results)).catch(reject)
+  })
+}
+```
+
+其实，如果是做管理后台系统，可以根据以上实例对常用的增删查改进行封装，调用时可大大节省时间。
+
+### 挂载全局
+
+考虑到会污染全局实例且不便于维护对接，很多人是不推荐挂载请求方法到全局实例上的，这些见仁见智吧。如果抛开不利因素，只为了在页面中便捷地使用，可以将封装好的请求方法绑定到全局。具体做法如下：
+
+```javascript
+// main.js or main.ts
+
+// Vue 2.x
+import Vue from 'vue'
+
+Vue.prototype.$get = get
+Vue.prototype.$post = post
+Vue.prototype.$table = table
+
+// Vue 3.x
+import { createApp } from 'vue'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.config.globalProperties.$get = get
+app.config.globalProperties.$post = post
+app.config.globalProperties.$table = table
+```
+
+在页面中使用：
+
+```javascript
+// xxx.vue
+
+// Vue 2.x
+this.$post()
+
+// Vue 3.x
+const { proxy } = getCurrentInstance()
+
+proxy.$post()
+```
+
+如果项目中使用了 typescript ，为了能智能提示，需要在项目根目录增加声明文件：
+
+```javascript
+// request.d.ts
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $post<R = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<R>
+    $get<R = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<R>
+    $table<R = any>(uri: string, pagination?: number, data?: any, config?: AxiosRequestConfig): Promise<R>
+  }
+}
+```
+
+## API 接口管理
+
+如果我们将请求方法挂载到了全局，只要新建一个文件来管理请求的接口，在要使用的页面引入对应接口即可。
+
+```javascript
+// api.ts
+export const ACCOUNT = {
+  logout: 'account/logout',
+  login: 'account/login'
+}
+```
+
+在页面配合请求方法进行使用：
+
+```javascript
+import { ACCOUNT } from '@/config/api'
+
+this.$post(ACCOUNT.logout).then(() => {
+  // TODO
+}
+```
+
+这样子，请求和接口就完全分离了。再想想，还有哪里写得不爽的？在使用的过程中，发现接口定义的时候总是要手动去命名，接口少还能接受，但是接口很多的情况下命名就是一件相当头疼的事。可为了能够使用 typescript 的智能提示功能，命名又是必要的。思前想后，最后通过 nodeJS 进行自动化生成接口文件，自动命名。用的时候在配置文件配置下就好，配置文件如下：
+
+```javascript
+// config/api.js
+/**
+ * 接口配置文件
+ * 接口名称:[ 接口前缀, ...业务路径 ]
+ */
+module.exports = {
+  account: [
+    'account',
+    'logout',
+    'login'
+  ]
+}
+```
+
+为了能够实现自动更新，使用 `nodemon` 对 `config/api.js` 文件进行监听。文件更改时会自动执行生成脚本，具体的自动生成脚本可以根据自己要输出的接口结构进行定制。
+
+```javascript
+// build/api.js
+// 接口生成脚本
+
+const path = require('path')
+const chalk = require('chalk')
+const fs = require('fs-extra')
+const api = require('../config/api')
+
+const resolve = dir => {
+  return path.join(__dirname, '..', dir)
+}
+
+/**
+ * 生成 API 文件
+ * 路径：src/api/index.ts
+ */
+function initAPI() {
+  let tmpStr = ''
+
+  for (let key in api) {
+    let uri = ''
+    let str = `export const ${key.toUpperCase()} = {\n`
+
+    const comma = index => api[key].length - 1 !== index ? ',' : ''
+
+    api[key].forEach((item, index) => {
+      const _key = key.toLowerCase()
+      if (!index) {
+        uri = item
+        str = `const ${_key} = '${uri}/'\n` + str
+        str += `  uri: ${_key}${comma(index)}\n`
+      } else {
+        str += `  ${item.replace(/(\/|\-)/g, '_')}: ${_key} + '${item}'${comma(index)}\n`
+      }
+    })
+    str += '}\n\n'
+    tmpStr += str
+  }
+
+  return tmpStr
+}
+
+const apiPath = resolve('src/api/index.ts')
+
+const status = fs.outputFileSync(apiPath, initAPI())
+
+if (status) {
+  throw status
+} else {
+  console.log(chalk.blue('生成') + '  接口文件  ' + apiPath);
+}
+```
+
+当然这种做法也是为了偷懒，如果有更好的做法欢迎留言讨论。需要注意的是，如果通过 nodeJS 动态生成接口，需要在 `.gitignore` 中排除掉生成文件的提交，否则会产生提交冲突。
+
+## 总结
+
+不管是小程序、H5 还是管理系统，请求封装还是很有必要的，倘若能统一，能在各个项目中复用那就再好不过了。接口管理不仅在项目中管理，使用时还需要配合接口文档，项目中知道这个接口属于那个模块下就好。]]></description></item><item><title>小程序 - 代码压缩实践</title><link>http://www.cnblogs.com/teemwu/archive/2021/09/04/15227429.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Sat, 04 Sep 2021 10:30:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/09/04/15227429.html</guid><description><![CDATA[## 起因
+
+随着业务的发展，项目不断地迭代，功能模块越加越多，项目代码和静态资源文件体积已经超过了微信小程序限定的 2M 范围。虽说小程序支持分包操作，然而用户进入分包模块时会有一个比较长的加载时间，整体体验还是不友好的，万不得已不要分包。既然不分包，那么我们可以从哪方面来进行项目体积的“瘦身”呢？
+
+## 文件层
+
+通过分析小程序的项目目录我们可知，小程序的文件主要有 `.js` `.wxs` `.wxss` `.wxml` `.json` 后缀的文件和一些图片资源文件，如果对这些文件进行压缩，项目的体积至少能缩减 10%。微信开发者工具有提供代码压缩的配置，只要上传代码前勾选对应配置即可。这对于一般小程序项目来说是挺方便的，然而对于使用了第三方框架（如：wepy、taro）的项目，这些功能基本框架代码编译层面就进行来处理，无需在开发者工具中勾选。
+
+![](https://img2020.cnblogs.com/blog/831280/202109/831280-20210904182909729-127613409.png)
+
+
+既然这么完备了，我们还有必要自行编写代码来对这些文件进行压缩么？其实，实际上上面提到的都会有些不足的地方，如官方提供的压缩做不到图片的压缩，第三方方框架不会对部分文件进行压缩。所以根据我们的需求，自行写一套自动化压缩流程才是最稳妥的。
+
+### 自动化压缩
+
+要实现自动化压缩流程，可使用 gulp、grunt、webpack 等构建工具来进行构建。由于自己比较熟悉 gulp 故使用它来进行构建流程的编写。gulp 的使用比较简单，只要在项目根目录新建一个 `gulpfile.js` 文件，安装相关依赖后就能运行。
+
+```shell
+// 安装
+npm install gulp-cli -g
+npm install --save-dev gulp
+// 执行（默认执行根目录 gulpfile.js 文件）
+gulp
+```
+
+因为 `gulpfile.js` 文件还没写内容，所以打印只能看到 ‘default’ 任务的执行记录。下面我们使用 gulp 4.x 的版本进行开发，旧版本写法可能会有些出入，不过大致原理是一样的。
+
+```javascript
+// gulpfile.js
+'use strict'
+const { task, dest, src, series } = require('gulp')
+
+task('js', function(){
+	// 压缩 .js 
+})
+
+task('wxml', function(){
+	// 压缩 .wxml
+})
+
+// 省略...
+
+task(
+    'default',
+    series([
+        'js',
+	'wxml',
+	//...
+    ])
+)
+```
+
+### .js 压缩
+
+原本是使用 [gulp-uglify](https://github.com/terinjokes/gulp-uglify) 这个库进行压缩的，后发现其不支持 es6语法，所以转用 [gulp-uglify-es](https://gitlab.com/itayronen/gulp-uglify-es)，两者配置有些出入。小程序的 js 文件因其语法和标准的 JavaScript 语法是一样的，故无需额外配置，直接默认配置压缩即可。
+
+```jsx
+const uglify = require('gulp-uglify-es').default
+
+task('js', function () {
+    return src('dist/**/*.js')
+        .pipe(uglify())
+        .pipe(dest('dist/'))
+})
+```
+
+第三方框架 wepy 或者 taro 都会对 `.js` 文件进行压缩，正常情况下我们无需二次压缩。
+
+### .wxs 压缩
+
+> WXS（WeiXin Script）是小程序的一套脚本语言，结合 WXML，可以构建出页面的结构。
+WXS 与 JavaScript 是不同的语言，有自己的语法，并不和 JavaScript 一致。
+
+正常情况下 `.wxs` 文件可以和 `.js` 一样可通过 gulp-uglify-es 来进行压缩，不过由于微信坑爹地搞特殊化，wxs 就像严重阉割版的 js，在压缩后会出现各种问题。
+
+```jsx
+task('wxs', function () {
+    return src(['dist/**/*.wxs', '!dist/components/vant/wxs/add-unit.wxs'])
+        .pipe(uglify({
+            compress: {
+                ie8: true,       // 支持 ie8，为了禁止 a === undefined 自动转换为 void 0 === a
+                join_vars: false // 禁止合并 var
+            }
+        }))
+        .pipe(dest('dist/'))
+})
+```
+
+代码中 "!dist/components/vant/wxs/add-unit.wxs" 是排除掉了此文件，原因是暂无方法解决压缩后部分正则无法正常使用的问题。
+
+```jsx
+// 压缩前
+var REGEXP = getRegExp('^\d+(\.\d+)?$');
+// 压缩后
+var REGEXP = getRegExp('^d+(.d+)?$');
+```
+
+微信的 getRegExp 并不像 new RegExp 那样支持双反斜杆进行字符转义，巨坑！！！老实说，如果官方不出专门的压缩库，感觉最好还是不要压缩这个东西。
+
+### .wxss 压缩
+
+样式和常规的的 css 文件的差不多，因此可以通过一般的样式工具进行压缩，比如 [gulp-clean-css](https://github.com/scniro/gulp-clean-css) 第三方库。
+
+```jsx
+const cleanCss = require('gulp-clean-css')
+const replaceimport = require('./replaceImport')
+
+task('wxss', function () {
+    return src('dist/**/*.wxss')
+        .pipe(cleanCss({ compatibility: '*', inline: false }))
+        .pipe(replaceimport())
+        .pipe(dest('dist/'))
+})
+```
+
+由于压缩老版本 wepy 项目样式时，组件引入样式 `@import "xxx"` 会被转成 `@import url('xxx')` 在开发者工具中会报错，故写了 replaceimport 转回来，taro 项目无需加。
+
+```jsx
+// replaceimport.js
+'use strict';
+/**
+ * 由于使用 gulp-clean-css 进行样式压缩时
+ * 会将 `@import "xxx";` 转成 `@import url(xxx);`
+ * 而转化后的 import 在小程序开发者工具会报错
+ * 所以用此方法，将 @import url(xxx) 转回 @import 'xxx'
+ */
+const through = require('through2')
+
+module.exports = () => through.obj(function (file, enc, next) {
+    if (file.isNull()) {
+        next(null, file);
+        return;
+    }
+    try {
+        const reg = /(?:^|\s)?(?:@import)(?:\s)(?:url)?(?:(?:(?:\()(["'])?(?:https?:)?([^"')]+)\1(?:\))|(["'])(?:.+)\2)(?:[A-Z\s])*)+(?:;)/ig
+        file.contents = new Buffer.from(file.contents.toString().replace(reg, '@import "$2";'))
+        next(null, file)
+    } catch (error) {
+        next(null, file)
+    }
+});
+```
+
+### .wxml 压缩
+
+> WXML（WeiXin Markup Language）是框架设计的一套标签语言，结合基础组件、事件系统，可以构建出页面的结构。
+
+其实跟 HTML 类似的标签语言，我们可以通过现有的 HTML 压缩库来对其进行压缩。这里我们可以用 [gulp-htmlmin](https://github.com/jonschlinkert/gulp-htmlmin) 。
+
+```jsx
+const htmlmin = require('gulp-htmlmin')
+
+task('wxml', function () {
+    return src('dist/**/*.wxml').pipe(htmlmin({
+        caseSensitive: true,     // 大小写敏感
+        removeComments: true,    // 删除 HTML 注释
+        keepClosingSlash: true,  // 单标签上保留斜线
+        collapseWhitespace: true,// 压缩 HTML
+        ignoreCustomFragments: [
+            /<input([\s\S]*?)<\/input>/
+        ],
+    })).pipe(dest('dist/'))
+})
+```
+
+用来压缩 taro 的 base.wxml 文件时会报错，原因是 `<input></input>` 标签被压缩成 `<input>` 了，小程序 input 标签必须要有斜杠结尾，否则会报错。因此，我们在 `ignoreCustomFragments` 通过设置正则排除掉 `<input></input>` 这种情况。
+
+### .json 压缩
+
+要压缩 json 文件，最简单的方法是直接 `JSON.parse(JSON.stringify('jsonString'))` ，既然我们用了 gulp ，那就用第三方库 [gulp-jsonminify](https://github.com/tcarlsen/gulp-jsonminify) 吧，方便维护。
+
+```jsx
+const jsonminify = require('gulp-jsonminify')
+
+task('json', function () {
+    return src('dist/**/*.json')
+        .pipe(jsonminify())
+        .pipe(dest('dist/'))
+})
+```
+
+### 图片压缩
+
+一般情况下第三方框架都会有对图片进行压缩处理的，如果是小程序原生的项目，可以安装 [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin) 对图片进行压缩。
+
+```jsx
+const imagemin = require('gulp-imagemin')
+
+task('json', function () {
+    return src('dist/*')
+        .pipe(jsonminify())
+        .pipe(dest('dist/'))
+})
+```
+
+## 代码层
+
+微信开发者工具自带的代码分析工具，我们可以很直观地知道哪个文件夹、哪个文件比较大，分析后专门对比较大的文件进行优化即可。
+![](https://img2020.cnblogs.com/blog/831280/202109/831280-20210904182944258-1651433097.png)
+
+
+### 替换较小第三方库
+
+有些第三方包是可以替换的，比如早期常用的 moment.js 可用 dayjs 替换，只需要做一些转化，体积能减少将近 40K。再比如加解密用的 crypto-js，我们通常只用到其中部分模块，旧版本 wepy 是没有做 tree-shaking 的，需要手动移除无用模块。还有些第三方库，项目中只用到其中一些简单的功能，大可自行写一个，不必使用第三方库。
+
+### 样式引入方式更改
+
+通过分析打包后的 `.wxss` 文件，发现 wepy 编译压缩 `less` 样式时，less 会将 `@import` 引用的文件直接编译进来，造成文件体积的增大，比如
+
+```less
+/* a.less */
+.a{
+    color: red;
+}
+```
+
+```less
+/* b.less */
+@imoprt 'a.less';
+.b{
+    color: black;
+}
+```
+
+```css
+/* output: b.wxss */
+.a{
+    color: red;
+}
+.b{
+    color: black;
+}
+```
+
+要解决这个问题，只需改成 `[@import (css)](https://lesscss.org/features/#import-atrules-feature)` 
+
+```less
+/* b.less */
+@imoprt (css) 'a.less';
+.b{
+    color: black;
+}
+```
+
+```css
+/* output: b.wxss */
+@import 'a.wxss';
+.b{
+     color: black;
+}
+```
+
+改完这个，估计项目体积又减少了 200K 左右。在改的时候页面众多，要进行更改，比较合理的做法是通过正则表达式进行全局替换。还可能涉及到批量重命名文件后缀，由于不同的编辑器和操作系统不同，就不展开说了。
+
+### 删减无关配置
+
+删除某个页面或者模块后，记得同时删除其页面配置路径。由于 wepy 会根据页面路径配置去生成页面，如果页面已删除，页面配置 pages 中的路径没删除，执行 build 打包后它会自动生成一个空白的基础页面。
+
+### 简化文件层级
+
+这个其实既是文件层亦是代码层，原因是，如果你的文件层级越多，在引入的时候路径就越长，占用的字节数就会越多。如果有上百处引用的化，还是挺占体积的。
+
+### 字体图标提取
+
+分析样式文件还发现一个问题，就是存在比较多的零散的字体图标，其使用方式是通过 `@font-face` 以字体 base64 的形式进行引入。这样做的好处是图标不会失真，存放在样式中页面样式加载完成即可显示，不好的地方是不方便管理，不好复用。要解决这个问题常用的方法是使用第三方的 UI 组件库，一般成熟的组件库都会有配套的图标组件，还有一种做法是自行在阿里图标网站新建一个图标目录将用到的字体图标上传上去，然后通过阿里图标网站生成字体图标文件，将文件下载下来放到服务器存着，用的时候使用链接引入就好。当然，为了方便管理最好是在本地写脚本去自动执行下载和上传，同时做版本管理方便后续维护更新。
+
+## 总结
+
+经过一顿操作，老项目的体积从 2M 变成了 1.5M，既兴奋又有点不好意思，不好意思是因为之前写的代码太多不足了。不过，好在如今小程序的生态越来越完备了，很多东西都无需从零开始，现在在做的新项目都会考虑比较全面。虽然时常想吐槽微信小程序的各种不友好，可回过头来看看这几年的小程序开发，自己何不尝是从一个编程小白一步步地在成长，说起来还是要感谢微信赏饭吃呢。
+]]></description></item><item><title>项目 NodeJS 版本锁定及自动切换</title><link>http://www.cnblogs.com/teemwu/archive/2021/08/24/15181407.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 24 Aug 2021 09:33:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/08/24/15181407.html</guid><description><![CDATA[## 介绍
+
+随着项目的增多，旧项目和新项目使用的 node 版本可能差异比较大，在多人协作或者交接项目时，其他开发者的开发环境 node 的版本也不尽相同。因此，我们有必要锁定每个项目的 node 版本范围，为了减少工作量，还需实现运行项目时能自动切换到对应的 node 版本。
+
+## 版本锁定
+
+要锁定 node 的版本可以直接在 `package.json` 中设置，其中 `">=10 <14"` 则表明 node 的版本要大于等于 10 小于 14，如果当前 node 版本不在此限定范围内的话，运行项目的时候终端会抛出提示说 node 的版本有误，并终止后续执行。
+
+```json
+"engines": {
+    "node": ">=10 <14",
+    "npm": ">= 3.0.0"
+},
+```
+
+为了兼容通过 npm 来执行运行项目命令，需要在项目根目录新建一个文件名为 `.npmrc` 的配置文件，并加入以下语句。
+
+```
+engine-strict = true
+```
+
+到这里，版本锁定已完成。
+
+## 自动切换
+
+之前一直使用 [nvm](https://github.com/nvm-sh/nvm) 来对 node 进行多版本管理，为了轻量化，就不引入其它自动切换 node 的版本库了。由于 nvm 对 Windows 支持不是很完善，建议 Windows 用户使用 [nvs](https://github.com/jasongin/nvs) 进行版本管理。假设已经安装成功 nvm（没安装的可以根据[官方文档](https://github.com/nvm-sh/nvm#install--update-script)安装），我们需要在`～/.zshrc`文件中加入以下配置：
+
+```bash
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+```
+
+如果你的终端是 bash 或者其它的话，请自行查看[官方示例](https://github.com/nvm-sh/nvm#deeper-shell-integration)。上面的代码是当你在项目下打开终端时，nvm 会在当前项目下去找 `.nvmrc` 文件，因此我们需要在项目根目录增加此文件，写入自己想要执行的版本号，如：
+
+```
+13.14.0
+```
+
+倘若你还没安装此版本的 node，nvm 则会自动去安装对应版本的 node 并且自动设为该版本。在项目中打开终端，nvm 就会自动切换到对应的 node 版本啦。
+
+⚠️ ***如果没有自动切换版本，请重新打开终端或者重新通过 cd 指令进入项目目录***
+
+## Jenkins 中使用
+
+通过 jenkins 自动化打包部署项目，发现就算按照以上步骤在服务器上进行 nvm 的安装和配置了，构建部署项目时亦不能进行 node 版本自动切换。调试后发现，jenkins 的构建项目环境并不能找到 nvm 指令，猜测是 jenkins 的运行环境中找不到 nvm 配置。因此，我门可以在 pipeline 中手动执行一下 nvm 配置，如下：
+
+```bash
+// xxx.groovy
+stage('Build') {
+		git credentialsId: 'gitlab', url: "${projectScm}"
+		sh """
+			. ~/.nvm/nvm.sh
+			. ~/.bashrc
+			node -v
+			yarn install
+			yarn build
+			zip -r dist.zip dist/
+		"""
+}
+```
+
+保存后，重新执行下项目构建即可。
+
+通过搜索发现还可以通过安装 Jenkins 的 [nvm-wrapper](https://plugins.jenkins.io/nvm-wrapper/) 插件来解决此问题，暂未测试。
+
+## 参考
+
+- [https://github.com/nvm-sh/nvm#nvmrc](https://github.com/nvm-sh/nvm#nvmrc)
+- [https://docs.npmjs.com/cli/v7/configuring-npm/package-json#engines](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#engines)
+- [https://plugins.jenkins.io/nvm-wrapper/](https://plugins.jenkins.io/nvm-wrapper/)]]></description></item><item><title>小程序 - Unexpected token 'var'</title><link>http://www.cnblogs.com/teemwu/archive/2021/08/18/15158310.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 18 Aug 2021 10:40:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/08/18/15158310.html</guid><description><![CDATA[## 问题
+使用 uglify 对 wxs 文件进行压缩后开发者工具报的错，原因是压缩后 wxs 中 for 语句合并了其它变量。
+```javascript
+  // 压缩前
+  var obj = {}
+  for (var i = 0;i < args.length;i++) {
+        obj['key' + i] = args[i];
+  }
+  // 压缩后
+  ﻿for (var obj = {}, i = 0;i < args.length;i++) {
+        obj['key' + i] = args[i];
+  }
+```
+目前 wxs 的 for 语法不像 JavaScript 那样支持在括号中声明多个变量，或许后面会完善 wxs 的语法吧，目前挺坑的。
+## 解决
+根据 [uglify 的配置信息](https://github.com/mishoo/UglifyJS#compress-options) 可知，将 `join_vars` 属性设置为 false 即可。
+```javascript
+  compress: {
+    join_vars: false // 禁止合并 var
+  }
+```
+也可以将 obj 变量放在 for 后面，或者隔着一个表达式或者语句放在 for 前面。]]></description></item><item><title>ts 排除 node_modules 目录检测无效</title><link>http://www.cnblogs.com/teemwu/archive/2021/08/06/15108945.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 06 Aug 2021 07:52:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/08/06/15108945.html</guid><description><![CDATA[在项目中使用自己编写的组件库，运行项目时发现组件库中有些第三方包会报类型错误，提示说找不到类型包，而实际上在组件库中是安装了对应的类型包的。
+根据网上的答案，只要开启 skipLibCheck，然而依旧无效：
+```json
+// tsconfig.json
+{
+    "compilerOptions": {
+        "skipLibCheck": true
+    }
+}
+```
+后将 import 改为 require 导入包使用，确实是可以了，然而这样做并不友好
+```javascript
+// 将
+// import * as LZString from 'lz-string'
+// 改为
+const LZString = require('lz-string')
+```
+最后解决方法是将类型提示包添加到 `dependencies` 中即可
+```json
+// package.json
+{
+  "dependencies": {
+      "@types/lz-string":"^1.3.34"
+  }
+}
+```
+这样，项目中安装使用自己编写的组件库时，会自动去安装对应的类型包。
+
+### 参考
+- [https://stackoverflow.com/a/67999392](https://stackoverflow.com/a/67999392)]]></description></item><item><title>小程序 - 画一个环形图( Doughnut)</title><link>http://www.cnblogs.com/teemwu/archive/2021/06/30/14876352.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 30 Jun 2021 08:58:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/06/30/14876352.html</guid><description><![CDATA[
+## 前言
+
+项目中需要用到一个环形图来进行数据的展示，效果如图，参考了第三方开源的小程序图表库，大都几十上百、甚者两百多k！考虑到体积的因素，且就用到一种图表，所以打算自己来写一个。看了微信小程序 canvas 相关的 API，发现旧版本和新版本不兼容，其中遇到一些坑，记录下。项目使用的是 taro 框架，所以写法和小程序原生写法有些出入，但其原理是一样的。
+
+![](https://img2020.cnblogs.com/blog/831280/202106/831280-20210630165752164-616262180.png)
+
+
+## 创建画布
+
+首先，需要创建一个画布。由于小程序 canvas 接口版本缘故，旧版本接口停止维护，新版本接口改成 Canvas 2D 跟 HTML 的 canvas 接口看齐。 为了在电脑和手机上显示正常，需要做一些兼容处理。
+
+```html
+<canvas style="width: 200px; height: 200px;"
+        id="canvas"
+        canvas-id="canvas"
+        :type="is2D?'2d':''"
+        @touchstart="canvasTouch"></canvas>
+```
+
+旧版本 API 是通过 createCanvasContext 来获取 canvas 绘图上下文， 并且 canvas 标签需要设置 `canvas-id` 属性，而新版本 API 是通过 createSelectorQuery 获取 canvas 实例，且需要设置 `id` 属性。
+
+```javascript
+initCanvas() {
+  if (this.is2D) {
+    nextTick(() => {
+      createSelectorQuery()
+        .select('#canvas')
+        .fields({ node: true, size: true })
+        .exec(res => {
+          const canvas = res[0].node
+          const ctx = canvas.getContext('2d')
+          const dpr = getSystemInfoSync().pixelRatio
+          // 根据分辨率设置画布宽高
+          canvas.width = res[0].width * dpr
+          canvas.height = res[0].height * dpr
+          ctx.scale(dpr, dpr)
+
+          this.canvas = canvas
+          this.ctx = ctx
+
+          if (ctx) {
+            // to draw
+          }
+        })
+    })
+  } else {
+    this.ctx = createCanvasContext('canvas')
+    if (this.ctx) {
+      // to draw	
+    }
+  }
+}
+```
+
+## 画弧线
+
+拿到 canvas 实例后，我们就可以开始画弧线了。从图中我们可以看出，环形图其实就是由一段段弧线组成。微信小程序提供了画弧线的方法 [CanvasContext.arc](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.arc.html) ，具体参数可以查看官方文档。
+
+```javascript
+/**
+ * 画弧线
+ * sAngle：开始弧度
+ * eAngle：结束弧度
+ * border：弧线宽度
+ * color ：弧线的颜色
+ */
+drawArc(sAngle, eAngle, border, color) {
+    // r：半径 
+    // centerPoint：圆心坐标 
+    // ctx：canvas 实例
+    const { r, centerPoint, ctx, is2D } = this
+    const { x, y } = centerPoint
+    // 开始创建一个绘画路径
+    ctx.beginPath()
+    // 设置弧线宽度
+    ctx.lineWidth = border
+    // 设置弧线的颜色
+    ctx.strokeStyle = color
+    // 创建一条弧线
+    ctx.arc(x, y, r, sAngle, eAngle, false)
+    // 画出弧线的边框
+    ctx.stroke()
+    // 关闭绘画路径
+    ctx.closePath()
+    // 将之前在绘图上下文中的描述（路径、变形、样式）画到 canvas 中
+    // canvas 2d 下不需要调用 draw 方法
+    // 如果不做判断会报错
+    if(!is2D) ctx.draw()
+}
+```
+
+通过以上方法我们可以大概知道一段弧线是怎么画出来了，如果需要画多段弧，则修改弧线的弧度等参数即可。下面我们假设每段弧线的百分比为 `20、30、15、35` ，计算出每段弧的开始弧度和结束弧度就能画出一个完整的环形图。
+
+```javascript
+drawArcs() {
+  const { ctx } = this
+  // 各段弧百分比
+  const ratios = [20, 30, 15, 35]
+  // 各段弧颜色
+  const colors = ['#6d77e6', '#fe4e75', '#fcd95c', '#3bdeff']
+  // 每段弧开始弧度
+  let sAngle = 0
+
+  ratios.forEach((item, index) => {
+    // 各段线的弧度
+    // 2*Math.PI*弧线百分比/100
+    const angle = (item * Math.PI) / 50
+    // 结束弧度，需要加上上一段弧线的结束弧度
+    const eAngle = sAngle + angle
+
+    this.drawArc(sAngle, eAngle, border, colors[index])
+
+    sAngle = eAngle
+  })
+}
+```
+
+## 画提示文字
+
+```javascript
+drawText() {
+  const { is2D, ctx } = this
+  const size = 8
+  const text = '要绘制的文本'
+  const x = 60
+  const y = 0
+
+  // 兼容文本绘制的字体和字体颜色设置
+  if (is2D) {
+    ctx.font = size
+    ctx.fillStyle = 'white'
+  } else {
+    ctx.setFontSize(size)
+    ctx.setFillStyle('white')
+  }
+
+  ctx.fillText(text, x, y)
+}
+```
+
+文字的绘画不难，难点在于获取绘画文字的坐标位置。根据设计稿可以看出，提示文字位于每段弧线的“中心”位置，因此，我们需要在绘制弧线时获取每段弧线的“中心”位置。
+
+```javascript
+drawArcs(ratios) {
+  // 省略...
+
+  // 半径
+  const r = 60
+  const { x: _x, y: _y } = centerPoint
+  const _textPoints = []
+
+  ratios.forEach((item, index) => {
+    // 省略...
+
+    // 要绘制文本所在点的弧度
+    // 需要注意的是：
+    // 要加上一段弧线的结束弧度
+    // 不然文字绘画不能居于弧线“中心”位置
+    const _angle = sAngle + angle / 2
+    // 求圆上某点
+    const x = _x + r * Math.cos(_angle)
+    const y = _y + r * Math.sin(_angle)
+
+    _textPoints.push({ x, y, value: item })
+
+    // 省略...
+  })
+  // 获取各弧线“中心”位置坐标
+  this.textPoints = _textPoints
+},
+drawText() {
+  const { is2D, ctx, textPoints } = this
+  const size = 8
+
+  // 兼容文本绘制的字体和字体颜色设置
+  if (is2D) {
+    ctx.font = size
+    ctx.fillStyle = 'white'
+  } else {
+    ctx.setFontSize(size)
+    ctx.setFillStyle('white')
+  }
+
+  textPoints.forEach((item, index) => {
+    if (item.value > 0) {
+      // 获取文本宽度
+      const { width } = ctx.measureText(`${item.value}%`)
+      const x = item.x - width / 2
+      const y = item.y + tipsSize / 2
+      const text = `${item.value}%`
+
+      ctx.fillText(text, x, y)
+    }
+  })
+}
+```
+
+## 画圆心区域
+
+圆心区域主要是画一个圆和一行文本，没啥好说的，参考上面代码做一下修改即可。
+
+## 添加点击事件
+
+要知道点了哪个区域的弧，小程序 canvas 提供了点击画布的事件，我们可以通过计算点击的位置、距离圆心的角度来判断是否位于弧线内。
+
+```javascript
+canvasTouch(e) {
+  const { centerPoint, r, angles, border, activeIndex } = this
+  const { x, y } = e.changedTouches[0]
+  const { x: _x, y: _y } = centerPoint
+  // 两点距离
+  const len = Math.sqrt(Math.pow(_y - y, 2) + Math.pow(_x - x, 2))
+  const borderHalf = border / 2
+  // 是否在弧线内
+  const isInRing = len > r - borderHalf && len < r + borderHalf
+  let current = activeIndex
+
+  if (isInRing) {
+    // 获取圆心角
+    let angle = Math.atan2(y - _y, x - _x)
+    // 判断弧度是否为负，为负时需要转正
+    angle = angle > 0 ? angle : 2 * Math.PI + angle
+
+    angles.some((item, index) => {
+      // 是否在弧度内
+      if (item > angle) {
+        current = index
+        return true
+      }
+    })
+  } else {
+    current = -1
+  }
+  // 设置当前激活区域
+  this.activeIndex = current
+}
+```
+
+## 增加动画
+
+动画，无非是特定时间内某个状态过渡到另外一个状态。假设我们要动画持续执行 600 毫秒，则可以计算每次执行绘画的开始和结束的时间差，并通过时间差总和来判断是否执行了足够长的时间进而终止动画。
+
+```javascript
+requestAnimationFrame(callback, lastTime = 0) {
+  const { canvas, is2D } = this
+  const intervel = 16
+  const start = new Date().getTime()
+
+  if (is2D && canvas && canvas.requestAnimationFrame) {
+    this.timer = canvas.requestAnimationFrame(() => {
+      const now = new Date().getTime()
+      lastTime += now - start
+      callback(lastTime)
+    })
+  } else {
+    this.timer = setTimeout(() => {
+      const now = new Date().getTime()
+      lastTime += now - start
+      callback(lastTime)
+    }, intervel)
+  }
+},
+cancelAnimationFrame() {
+  const { is2D, canvas, timer, ctx } = this
+  if (is2D && canvas && canvas.cancelAnimationFrame) {
+    canvas.cancelAnimationFrame(timer)
+  } else {
+    clearTimeout(timer)
+  }
+},
+init() {
+  const { is2D, ctx, value, duration, timer } = this
+  let ratios = [20, 30, 15, 35]
+
+  if (ctx) {
+    if (timer) this.cancelAnimationFrame()
+
+    const callback = lastTime => {
+      // 清除画布内容
+      ctx.clearRect(0, 0, 200, 200)
+
+      lastTime = lastTime >= duration ? duration : lastTime
+
+      if (lastTime === duration) {
+        // 终止动画
+        this.cancelAnimationFrame()
+        return
+      }
+      // 当前时间各弧线的百分比值
+      ratios = ratios.map(i => lastTime*i/duration)
+
+      this.drawArcs(ratios)
+
+      if (!is2D) ctx.draw()
+
+      this.requestAnimationFrame(callback, lastTime)
+    }
+
+    this.requestAnimationFrame(callback)
+  } else {
+    this.initCanvas()
+  }
+}
+```
+
+小程序 canvas 旧版本接口没有 `requestAnimationFrame` 和 `cancelAnimationFrame` 方法，不过我们可以用 `setTimeout` 和 `clearTimeout` 来做兼容处理。
+
+## 使用缓动函数
+
+上面实现了动画效果，不过动得还不够“自然”，缺乏一些“节奏”感，生活中一些会动的东西基本都是有一个逐渐加速或逐渐减速的过程，不然的话会显得很生硬。有了这个需求，我们要怎么实现呢？在 CSS3 的 animation 中会有 `ease、ease-in、ease-in-eout` 等预设函数可用，而在 JavaScript 里我们可以使用第三方写好的缓动函数库，为了减少体积，我们就自己写吧。
+
+```javascript
+/**
+ * 二次方缓动函数
+ * currentTime：当前动画执行的时长
+ * startValue：开始值
+ * changeValue：变化量，即动画执行到最后的值
+ * duration：动画持续执行的时间
+ */
+easeInQuadratic(currentTime, startValue, changeValue, duration) {
+  currentTime /= duration
+  return changeValue * currentTime * currentTime + startValue
+}
+```
+
+上面的缓动方法是基于数学的指数函数（f(x)=x^2）来写的，具体怎么演变出来后面有时间可以推导一番。
+
+```javascript
+init() {
+  const { is2D, ctx, value, duration, timer } = this
+  let ratios = [20, 30, 15, 35]
+
+  if (ctx) {
+    if (timer) this.cancelAnimationFrame()
+
+    const callback = lastTime => {
+      // 省略...
+
+      // 当前时间各弧线的百分比值
+      ratios = value.map(i => this.easeInQuadratic(lastTime, 0, i, duration))
+
+      this.drawArcs(ratios)
+
+      // 省略...
+    }
+
+    this.requestAnimationFrame(callback)
+  } else {
+    this.initCanvas()
+  }
+}
+```
+
+## 总结
+
+至此，自行手写的环形图算是大致完成了，其中有些几何数学的知识点有些遗忘了，写的时候查了公式才晓得，用别人的东西用多了脑子就不好使了，有空真的得多造些轮子才行。文中只是大概的按思路写了下代码，具体 [完整代码](https://github.com/Teemwu/doughnut) 可在 Github 上查看，如果觉得有用就请点个 star 吧。]]></description></item><item><title>【踩坑】使用自定义组件库引入 css 样式无效</title><link>http://www.cnblogs.com/teemwu/archive/2021/06/03/14845980.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 03 Jun 2021 08:59:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/06/03/14845980.html</guid><description><![CDATA[自行开发 vue 组件库，为了节省写打包配置的时间，使用 vue-sfc-rollup 傻瓜式生成打包配置，组件库发布后使用 npm 包时发现通过 import 'packageName/dist/xxx.css' 不能引入 css 样式，一开始以为是 vue 项目打包配置有问题，各种排查，由于无报错提示，尝试了引入其它第三方组件库，是能正常引入样式的。后来对比了 package.json 文件，发现 sideEffects 这一配置
+```json
+  "sideEffects": false,
+```
+其含义表明整个工程是"无副作用"的”，而正常来说项目中肯定会包含一些“副作用”的文件，如 import 'xxx' 就是有副作用，故不能设置为 false，将其删除或者设置具体的排除名单，具体可见参考。
+
+### 参考
+
+- [https://github.com/yinxin630/blog/issues/23](https://github.com/yinxin630/blog/issues/23)]]></description></item><item><title>CentOS7 - "gyp ERR! build error" </title><link>http://www.cnblogs.com/teemwu/archive/2021/04/20/14680287.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 20 Apr 2021 03:23:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/04/20/14680287.html</guid><description><![CDATA[## 起因
+将本地运行完好的项目推送到服务器端进行自动打包部署，运行 “npm install“ 进行包安装，提示一大堆 “gyp ..." 的报错，记得之前 Windows 上报此错误是需要安装 c++ 相关的运行套件，而在 CentOS7 上则需要安装 gcc （一个驱动程序，根据代码的后缀名来判断调用c编译器还是c++编译器 (g++)）,正常情况下 CentOS7 是自带 gcc 的，之所以运行报错，是因为 gcc 版本太低了，或者说我们的项目相关依赖需要的 gcc 版本太高了。
+
+## 解决方法一
+降低 node 版本，“npm install” 进行依赖安装时，node 会进行代相关码编译，其中过高的 node 版本对 gcc 的版本要求就更高，所以可以试下降低 node 的版本，实测中 node 版本从 15.x 降到 14.x 解决问题。
+
+## 解决方法二
+更新 gcc 的版本，依次执行如下命令：
+```javascript
+// 安装centos-release-scl
+sudo yum install centos-release-scl
+// 安装devtoolset，8.x 版本
+sudo yum install devtoolset-8-gcc*
+// 激活对应的 devtoolset
+scl enable devtoolset-8 bash
+// 查看当前 gcc 版本
+gcc -v
+```
+至此，重新执行 “npm install” ，应该可以正常安装了。
+需要注意的是上面的操作只限当前会话，如若需要重启后继续使用，则需要执行以下配置：
+```javascript
+// 启用指定版本 devtoolset
+source /opt/rh/devtoolset-8/enable
+// 打开开机自启执行文件，将上一个命令添加到 rc.local 末尾
+vi /etc/rc.d/rc.local
+// 如果遇到权限问题，可执行以下进行赋权后再操作
+chmod +x /etc/rc.d/rc.local
+```
+如果不想每次都 enable 来指定版本的话，可以尝试替换掉旧版本 gcc，具体如下：
+```javascript
+mv /usr/bin/gcc /usr/bin/gcc-4.8.5
+
+ln -s /opt/rh/devtoolset-8/root/bin/gcc /usr/bin/gcc
+
+mv /usr/bin/g++ /usr/bin/g++-4.8.5
+
+ln -s /opt/rh/devtoolset-8/root/bin/g++ /usr/bin/g++
+
+gcc --version
+
+g++ --version
+```
+
+### 参考
+- https://www.cnblogs.com/jixiaohua/p/11732225.html
+]]></description></item><item><title>Gitlab 自动化部署和局域网访问 Gitlab Pages</title><link>http://www.cnblogs.com/teemwu/archive/2021/03/03/14477181.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 03 Mar 2021 13:54:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/03/03/14477181.html</guid><description><![CDATA[### 介绍
+
+前些天好不容易升级了 Gitlab，组件库文档也搭建好了，只差自动化部署。由于只是想给团队内部使用，所以 gitlab 部署时并没有使用域名，而 gitlab pages 访问却需要填具体域名，如果填 IP 的话是访问不到的。下面记录下简单的配置过程。
+
+### 安装
+安装前先查看是否已经安装了
+```sh
+gitlab-runner -v
+```
+如果还没安装的话，可以根据官方的方法进行安装
+ ```sh
+# Download the binary for your system
+sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+
+# Give it permissions to execute
+sudo chmod +x /usr/local/bin/gitlab-runner
+
+# Create a GitLab CI user
+sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
+
+# Install and run as service
+sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start
+```
+### 配置
+修改 gitlab.rb 的配置文件
+```sh
+vi /etc/gitlab/gitlab.rb
+```
+gitlab pages 的域名我们假设为 `http://kk-gitlab.cn`，你也可以根据自己的喜好来填，切记不能是 IP 地址！
+修改如下
+
+```bash
+##! Define to enable GitLab Pages
+pages_external_url "http://kk-gitlab.cn"
+gitlab_pages['enable'] = true
+```
+保存后，执行以下命令
+```sh
+# 刷新配置
+gitlab-ctl reconfigure
+# 重启 gitlab
+gitlab-ctl restart
+```
+然后我们需要先启动 gitlab-runner 服务
+```sh
+gitlab-runner start
+```
+启动成功后我们就需要开始注册 runner 了，具体执行命令可通过下图步骤获得，需要注意的是登录的账号必须为管理者账号，否则看不到那个“设置”按钮
+![](https://img2020.cnblogs.com/blog/831280/202103/831280-20210303212100000-1577582961.png)
+点击第三步，弹出提示窗，在最底下找到类似下面的语句，复制到服务器执行
+```sh
+sudo gitlab-runner register --url http://xx.xx.xx.xxx/ --registration-token xxxxxxxxxxxxxx
+```
+执行后需要你输入一些信息，步骤如下
+
+1. 输入url地址（enter 跳过）
+2. 输入token（enter 跳过）
+3. 输入描述，任意即可
+4. 输入标签（enter 跳过）
+5. 选择Runner executor，这里选择 shell
+
+操作完后，刷新 Runners 页面，就可以看到新注册的 runner 了
+
+![](https://img2020.cnblogs.com/blog/831280/202103/831280-20210303213239471-1982405936.png)
+
+点击编辑，进入 runner 的设置，设置保存后，在页面下面选择要应用 runner 的项目 enable 即可
+
+![](https://img2020.cnblogs.com/blog/831280/202103/831280-20210303213602246-679806739.png)
+
+我们可以检查下 runner 的状态
+
+```sh
+gitlab-runner verify
+```
+此时我们重新提交代码时，gitlab-runner 应该会自动执行部署了，部署成功如下图
+![](https://img2020.cnblogs.com/blog/831280/202103/831280-20210303214132740-508007761.png)
+
+![](https://img2020.cnblogs.com/blog/831280/202103/831280-20210303214335398-335081576.png)
+
+在上图我们可以看到 gitlab-page 的访问地址，直接访问是不行的，因为是我们乱写的域名，此时我们如果只在本地访问的话，可以修改服务器和本地机器的 [hosts](https://www.cnblogs.com/teemwu/p/10063842.html)，将 gitlab-page 的域名指向我们服务器的IP
+```sh
+# 服务器端 hosts 增加
+127.0.0.1 gitlab-page 的地址
+```
+```sh
+# 本地的 hosts 增加
+服务器IP  gitlab-page地址
+```
+至此，本地可以直接访问你的 gitlab pages 了，当然这种方式不是很好的地方是每个项目都要修改一次 hosts，后面或许会通过 nginx 来做转发，待续。。
+]]></description></item><item><title>Gitlab 跨版本升级</title><link>http://www.cnblogs.com/teemwu/archive/2021/02/26/14447939.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 26 Feb 2021 08:17:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/02/26/14447939.html</guid><description><![CDATA[### 介绍
+由于想使用 gitlab 新版本添加的一些特性，最近项目不是很忙，故开始了作死的 gitlab 升级之旅。。。真的，没事还是不建议升级这东西！很久没弄 gitlab 很多东西都忘了，过程中各种踩坑，故写一篇文章记录下升级、安装及配置的过程，希望对各位看官有点帮助。
+
+### 开始
+一般升级某个软件直接去 [官网](https://about.gitlab.com/update) 看更新教程即可，而其官网提示 CentOS 7 升级 gitlab 也很简单，就两步：
+```bash
+# 备份
+sudo gitlab-rake gitlab:backup:create STRATEGY=copy
+# 下载&安装更新
+sudo yum install -y gitlab-ce
+```
+一时兴起，执行完第二步后发现，升级失败，原因是我的 gitlab 版本过老（11.11.3），不能直接升级到 13.x 的版本，需要一个版本一个版本升，参考别人的踩坑经验，选择了
+`11.11.3 -> 12.0.12 -> 12.10.14 -> 13.0.10 -> 13.4.2 -> 13.9.1` 这个版本升级路线
+开始尝试升级时，通过 `curl` 和 `yum` 的方式在服务器端进行 gitlab-ce 下载，然而经常会因为网络问题中断掉，换了国内镜像源(清华源、阿里云)依旧偶尔中断，第一次更新，通过 `yum` 进行下载，到百分之九十多的时候进度条卡住了，继续执行安装操作，后面启动时报错(“STDOUT: WARNING: This version of GitLab depends on gitlab-shell 9.3.0, but you're running 9.1.0. Please update gitlab-shell.”)，找了一晚上的处理方法，各种尝试无果，估计是下载不完全强行安装造成的某些包不对应，或者是之前手动改了一些配置文件导致的，后另起服务器重新安装备份文件的对应版本 11.11.3 重新进行更新操作
+
+### 系统&环境
+- CentOS 7
+- Gitlab-CE 11.11.3 -> 12.0.12 -> 12.10.14 -> 13.0.10 -> 13.4.2 -> 13.9.1
+
+### 下载&安装
+由于国内原因，如果你想通过修改镜像源来下载安装 gitlab-ce 的安装包，可以查看文末的“参考”链接，我不推荐这种做法，因为国内镜像源不稳定，如清华源下载到500M左右就很不稳定，且有些同步不及时。我的做法是，在电脑本地开 VPN 去 [官网下载](https://packages.gitlab.com/gitlab/gitlab-ce) 完所有文件后，再上传到服务器上进行安装
+```bash
+# 上传本地文件到指定服务器
+scp /path/filename username@servername:/path
+```
+上传到服务器之后，需要先备份且停掉 gitlab 再进行安装
+```bash
+# 创建备份
+gitlab-rake gitlab:backup:create
+# 停止 gitlab 各项服务
+gitlab-ctl stop unicorn
+gitlab-ctl stop sidekiq
+gitlab-ctl stop nginx
+# 安装指定版本 gitlab
+rpm -Uvh gitlab-ce-12.0.12-ce.0.el7.x86_64.rpm
+# 刷新配置
+gitlab-ctl reconfigure
+# 重启 gitlab
+gitlab-ctl restart
+```
+重复以上几条命令，即可升级到最新版本，如果过程中有红字提示“Warning: Your gitlab.rb and gitlab-secrets.json files contain sensitive data..."可以暂时不管，升级到最新版本后再处理，报错原因是 gitlab.rb 和 gitlab-secrets.json 两个文件包含敏感信息。未被备份到备份文件中。需要手动备份，两文件路径分别为 `/etc/gitlab/gitlab.rb` 和 `/etc/gitlab/gitlab-secrets.json`，如果需要使用旧版本的配置，将老版本的 gitlab.rb 文件替换新版本的 gitlab.rb 即可，gitlab-secrets.json 文件同理，不过这个是记录了安全相关的，比如你访问 Runners 页面提示 500 报错，就需要将旧版本替换掉新版
+
+### 自动&定时备份
+修改 `/etc/gitlab/gitlab.rb` 文件
+```bash
+# 设置备份存储位置
+gitlab_rails['backup_path'] = "/mnt/udisk/gitlab/backups"
+# 备份最近七天的数据，即 7*24*60*60 秒
+gitlab_rails['backup_keep_time'] = 604800
+```
+保存后，刷新配置文件
+```bash
+gitlab-ctl reconfigure
+```
+编辑定时任务
+```bash
+crontab -e
+```
+加入以下内容后保存(每天中午 12 点和傍晚 18 点自动执行备份操作)
+```bash
+0 12 * * * /opt/gitlab/bin/gitlab-rake gitlab:backup:create
+0 18 * * * /opt/gitlab/bin/gitlab-rake gitlab:backup:create
+```
+保存后我们需要重新启动定时器，执行如下语句
+```bash
+# 重启定时任务
+systemctl restart crond.service
+# 重装定时任务
+systemctl reload crond.service
+# 查看定时任务是否开启（可选）
+systemctl is-enabled crond.service
+# 查看所有用户下的定时任务（可选）
+cat /etc/passwd | cut -f 1 -d : |xargs -I {} crontab -l -u {}
+```
+至此，自动定时备份完成
+### 参考
+- [CentOS 7下安装指定版本的GitLab，和数据备份与恢复](https://blog.csdn.net/djzhao627/article/details/88356067)
+- [gitlab从11.11.3升级至13.4.2](https://blog.csdn.net/huoyan98/article/details/108917811)
+- [gitlab安装、备份、恢复、升级、内存消耗问题](https://www.cnblogs.com/jxd283465/p/11525629.html)
+- [curl命令断点续传多线程下载文件](https://www.codenong.com/cs106080856/)
+- [访问Gitlab中的runners页面时显示500问题](https://blog.csdn.net/fishinhouse/article/details/105131917)
+- [【linux】【tomcat】linux下定时重启tomcat 【CentOS 6.4】【CentOS 7.6】](https://www.cnblogs.com/sxdcgaq8080/p/10730633.html)
+]]></description></item><item><title>Gitlab 私有化管理 npm 包</title><link>http://www.cnblogs.com/teemwu/archive/2021/02/03/14368669.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 03 Feb 2021 10:16:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/02/03/14368669.html</guid><description><![CDATA[### 新建私有 npm 模块
+1. 在 Gitlab 新建一个组，名为 kk
+2. 新建组 kk 里新建一个项目 kk-cms
+3. 将 kk-cms 克隆到本地开发环境
+4. 打开 kk-cms 终端执行 `npm init --scope=kk` 生成 `package.json` 文件
+5. 将 kk-cms 提交到 Gitlab 仓库
+
+### 使用私有 npm 模块
+1. 在需要使用到项目 `package.json` 文件中添加依赖
+```json
+"@kk/kk-cms":"git+http://git.your-inc.com/kk/kk-cms.git"
+```
+2. 执行 `npm install` 或者 `yarn` 进行安装即可
+
+### 更新私有 npm 模块
+1. `npm install @kk/kk-cms` 或 `yarn upgrade @kk/kk-cms`
+
+### 问题&解决
+1. 执行 yarn 进行包安装时报错“Exit code: 128”
+清空 yarn 到缓存文件重新安装即可，路径`/Users/yourName/Library/Caches/Yarn/v1/.tmp/`
+
+### 参考
+- [打造简易的 NPM 私有仓库](https://www.jianshu.com/p/996f8a8d9e17)
+- [Bug: Yarn fails to install (Exit code: 128)](https://github.com/yarnpkg/yarn/issues/3303#issuecomment-407369153)]]></description></item><item><title>Postman-请求加密和设置 Cookie</title><link>http://www.cnblogs.com/teemwu/archive/2021/01/29/14343467.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 29 Jan 2021 02:19:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/01/29/14343467.html</guid><description><![CDATA[### 请求加密
+``` javascript
+/**
+ * Pre-request Script
+ */
+const md5 = CryptoJS.MD5
+
+pm.environment.set('sign', md5('要加密的字符串').toString())
+pm.environment.set('timestamp', '时间戳')
+```
+设置完环境变量后即可在 headers 中使用，如下图
+![](https://img2020.cnblogs.com/blog/831280/202101/831280-20210129100000940-2108659039.png)
+
+### 设置 Cookie
+```javascript
+/**
+ * Pre-request Script
+ */
+const cookieJar = pm.cookies.jar()
+const domain = pm.request.url.host.join('.')
+
+cookieJar.set(domain, 'cookieName', 'cookieValue', (error, cookie) => {
+    if (error) {
+        console.error(`An error occurred: ${error}`);
+    } else {
+        console.log(`Cookie saved: ${cookie}`);
+    }
+})
+```
+需要注意的是，设置 cookie 需要开启域名白名单，如下图
+![](https://img2020.cnblogs.com/blog/831280/202101/831280-20210129101818505-1251294319.png)
+
+
+### 参考
+- [Using cookies](https://learning.postman.com/docs/sending-requests/cookies/)
+- [CookieStore: programmatic access to "127.0.0.1" is denied ](https://github.com/postmanlabs/postman-app-support/issues/9253)]]></description></item><item><title>纯 CSS 实现一些工作中常用效果</title><link>http://www.cnblogs.com/teemwu/archive/2021/01/28/14337902.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 28 Jan 2021 00:20:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/01/28/14337902.html</guid><description><![CDATA[### 大弧度边
+
+### 四角边
+
+### 票据凹陷
+
+### 扫描]]></description></item><item><title>Promise 如何默认处理 catch</title><link>http://www.cnblogs.com/teemwu/archive/2021/01/18/14293990.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 18 Jan 2021 09:56:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/01/18/14293990.html</guid><description><![CDATA[### 起因
+为了方便管理，封装全局请求方法的时候，需要对异步请求返回值进行统一的异常处理，符合的值就走 then 进行返回，不符合的数据走 catch 进行返回或者处理。
+
+### 需求
+1、当执行 Promise 方法出现异常时自动调用 catch 并执行对应的处理方法
+2、需要单独手动处理 catch 时可以自行手动调用 catch 进行错误处理
+3、手动调用 catch 时要覆盖掉默认执行的 catch
+
+比如
+```javascript
+const p = MyPromise() // promise 方法
+
+p.then() // 出错时自动执行默认的 catch
+
+p.then().catch(res=>{}) // 手动调用 catch
+```
+### 解决
+核心方法如下，catch 默认将报错信息进行输出。
+```javascript
+function RequestPromise(originalPromise) {
+  this._promise = originalPromise
+
+  this._catchyPromise = Promise.resolve()
+    .then(() => this._promise)
+    .catch(err => console.error('Error', err))
+
+  // every method but 'constructor' from Promise.prototype
+  const methods = ['then', 'catch', 'finally']
+
+  for (const method of methods) {
+    this[method] = function (...args) {
+      this._promise = this._promise[method](...args)
+
+      return this
+    }
+  }
+}
+```
+由于项目中使用了 flyio ，下面例子基于该请求库
+```javascript
+// post 请求封装
+export const post = (uri, data, config)=> {
+  return new RequestPromise(new Promise((resolve, reject) => {
+    fly
+      .post(uri, data, config)
+      .then(response => {
+        const { success, data } = response.data
+        if (success) return resolve(data)
+        return reject(response.data)
+      })
+      .catch(reject)
+  }))
+}
+// 报错时默认执行 catch
+post(URL).then()
+
+// 手动处理报错信息
+post(URL).then().catch(error=>{
+      // TODO
+})
+```
+### 参考
+- [Define fallback catch for promise chain?](https://stackoverflow.com/a/39732825)]]></description></item><item><title>css 使用 calc() 无效的两种常见情况</title><link>http://www.cnblogs.com/teemwu/archive/2021/01/10/14260021.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Sun, 10 Jan 2021 14:46:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/01/10/14260021.html</guid><description><![CDATA[### 第一种
+运算符间没加空格，如
+```css
+/*错误示例*/
+div{
+      width: calc(100%-10px);
+}
+/*正确写法*/
+div{
+      width: calc(100% - 10px);
+}
+```
+为什么要加空格？其实不是所有运算符间都需要加空格，只有 `+` 和 `-` 需要加空格，因为运算允许负数的出现，如
+```css
+div{
+       width: calc(100% + -10px);
+}
+```
+所以，为了统一，`/` 和 `*`  最好都带上空格。
+
+### 第二种
+运算值不带单位，如
+```css
+/*错误写法*/
+div{
+      width: calc(0 + 10px);
+}
+/*正确写法*/
+div{
+      width: calc(0px + 10px);
+}
+```
+看到这里，你可能会疑问，为啥 0 还要带个单位呢？其实，calc() 函数传入的是一个数学表达式，而表达式的值可以有多种类型，如长度、百分比、角度等，
+那如果你传个 0 进去，没单位的话，怎么知道这个 0 是属于什么类型呢？
+
+### 参考
+- https://drafts.csswg.org/css-values-3/#calc-type-checking
+]]></description></item><item><title>在 template 中使用 sass 变量</title><link>http://www.cnblogs.com/teemwu/archive/2021/01/09/14254378.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Sat, 09 Jan 2021 03:09:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/01/09/14254378.html</guid><description><![CDATA[日常开发中总会有些不如意的地方。比如说，在 sass 中定义好了颜色变量，而在 template 却不能直接使用，每次都要去找到对应的色彩值手动进行复制粘贴，真的是伤害不高，侮辱性极强！
+那么，我们该如何解决这个问题呢？其实很简单， 可以使用 CSS Modules 提供的 :export 关键字，示例如下
+```scss
+// styles/_variables.scss
+$purple: #5344b6;
+
+:export {
+    purple: $purple;
+}
+```
+在 .vue 中使用
+```html
+<template>
+    <div>
+        <van-icon :color="variables.purple"/>
+    </div>
+</template>
+<script>
+import variables from '@/styles/_variables.scss'
+export default {
+    data(){
+        return {
+             variables
+        }
+    }
+}
+</script>
+```
+为了方便管理，以及其它地方引用 `_variables.scss` 连同`:export`一同被解析的问题，我们新建一个文件来管理提供变量给 js 的方法
+```scss
+// styles/_export.scss
+@import './_variables.scss'
+:export {
+    purple: $purple;
+}
+```
+每次使用时都要定义个变量，是否还是有些不爽？别急，Vue 用户的话，如下可以解决
+```html
+<template>
+    <div>
+        <van-icon :color="$style.purple"/>
+    </div>
+</template>
+<style module lang="scss" src="@/styles/_export.scss"></style>      
+```
+如果项目中使用了 typescript ，想要使用时有提示，则可定义对应的 ts 声明文件
+
+
+### 参考
+- [https://css-tricks.com/getting-javascript-to-talk-to-css-and-sass/](https://css-tricks.com/getting-javascript-to-talk-to-css-and-sass/)
+- [https://github.com/css-modules/icss#export](https://github.com/css-modules/icss#export)
+- [https://www.netguru.com/codestories/vue.js-scoped-styles-vs-css-modules](https://www.netguru.com/codestories/vue.js-scoped-styles-vs-css-modules)
+- [https://vue-loader.vuejs.org/guide/css-modules.html#usage](https://vue-loader.vuejs.org/guide/css-modules.html#usage)
+- [https://sergiocarracedo.es/2020/07/17/sharing-variables-between-scss-and-typescript/](https://sergiocarracedo.es/2020/07/17/sharing-variables-between-scss-and-typescript/)]]></description></item><item><title>打造一个属于自己的“打卡”小程序</title><link>http://www.cnblogs.com/teemwu/archive/2021/01/08/14253309.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 08 Jan 2021 12:36:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2021/01/08/14253309.html</guid><description><![CDATA[### 介绍
+
+  可能是由于没有什么目标，感觉 20 年过得挺快的。虽然工作上貌似很充实，但不过是整天写着一堆业务代码，在写年度总结时竟一时词穷，回想一整年的工作情景，有点”十年如一日“的感觉。2021 年，希望能做出一些改变，立了一些 flag，比如早睡早起、旅游、健身等等。考虑到有些 flag 需要长期坚持的，故想找个地方打卡，把自己每天的完成度记录下来，方便随时查看完成度。然而，看了挺多的打卡 app 和日历提醒功能，感觉总是在某些方面上不符合自己的预想。因此，打算自己来实现一个打卡功能的app，考虑到时间成本和开发成本，最终决定以小程序的形式来展示和实现自己想要的功能。
+
+### 技术选型
+
+  工作中开发小程序，刚开始时用的是 wepy 框架，这个框架有很多不足的地方，然而在小程序刚兴起的时候，有这个框架用是挺香的。如今，经过几年的发展，小程序相关的开发框架层出不穷，各种小程序也如雨后春笋般涌了出来。兼容各个平台的小程序也成了一个问题。还好，现在京东出的 taro 在各方面做得还是很不错的，一键编译各端小程序、H5，甚至 RN，支持 typescript，可以通过 Vue 或者 React 进行编写，这极大方便了开发者。如今工作中用上后，是相当的香！所以，打卡小程序的项目框架就选它了。
+  前端展示有了，还差后端数据支持，当然，可以自己搭建服务器跑后台服务和数据库，不过，大可不必！因为腾讯云小程序提供给小程序开发者 5G 的免费存储空间，不用我们自己去备案域名、折腾服务器，对于做个人的小程序真的是太适合不过了。]]></description></item><item><title>正则匹配多行任意字符</title><link>http://www.cnblogs.com/teemwu/archive/2020/10/22/13856877.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 22 Oct 2020 02:51:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/10/22/13856877.html</guid><description><![CDATA[```bash
+([\w\W]*)
+```
+例子：
+```javascript
+const str= `
+pages: [
+      'a',
+      'b',
+      'c'
+],
+windows: {
+}
+`
+str.replace(/([\w\W]*)/,'any')
+```
+![](https://img2020.cnblogs.com/blog/831280/202010/831280-20201022104929759-514570819.png)
+
+参考：[https://www.jianshu.com/p/ff05d467e145](https://www.jianshu.com/p/ff05d467e145)
+]]></description></item><item><title>微信内置浏览器中文竖排居中</title><link>http://www.cnblogs.com/teemwu/archive/2020/09/10/13644246.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 10 Sep 2020 02:20:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/09/10/13644246.html</guid><description><![CDATA[实现中文竖排通常情况下直接设置 `writing-mode: vertical-rl;` 即可，顶多加浏览器前缀，如下：
+```css
+-webkit-writing-mode: vertical-rl;
+-ms-writing-mode: tb-rl;
+writing-mode: vertical-rl;
+```
+在微信内置的浏览器下预览，中文是竖排显示了，可是文字方向却不对了，如图
+
+![](https://img2020.cnblogs.com/blog/831280/202009/831280-20200910095309442-1888405300.png)
+
+出现这种情况可能是微信内置的浏览器默认 `text-orientation` 属性跟英文显示一样，使用了 `sideways`，只要改为
+```css
+text-orientation: upright;
+```
+即可。此时，微信内置浏览器和其它浏览器显示的中文都一样竖排了，不过居中却还有差异，这里使用 flex 和 padding 做了下兼容，具体如下：
+```css
+-webkit-writing-mode: vertical-rl;
+-ms-writing-mode: tb-rl;
+writing-mode: vertical-rl;
+text-orientation: upright;
+width:10px;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: center;
+-ms-flex-pack: center;
+justify-content: center;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+padding:5px 2px 5px 0;
+```
+
+### text-orientation 可取值
+- mixed——将水平脚本的字符旋转90°。自然地表现垂直脚本的特征。默认值。
+
+- upright——自然地表现（竖直）水平脚本的字符以及垂直脚本的字形。请注意，此关键字会使所有字符被视为从左到右：使用的值direction被强制为ltr。
+
+- sideways——使字符按照水平放置的方式布置，但如果writing-mode是vertical-rl，则整行再向右旋转90°；如果writing-mode是vertical-lr，则整行向左旋转90°。为了兼容性而保留了sideways的别名sideways-right。
+
+- use-glyph-orientation——在SVG元素上，这个关键字会导致使用过时的SVG属性值glyph-orientation-vertical和glyph-orientation-horizontal
+
+## 参考
+[https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation](https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation)
+]]></description></item><item><title>webview 中获取微信发票抬头</title><link>http://www.cnblogs.com/teemwu/archive/2020/08/27/13574161.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 27 Aug 2020 13:39:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/08/27/13574161.html</guid><description><![CDATA[这些天在做开发票相关的功能模块，其中有个需求是调用微信来获取用户已经保存的发票抬头，将获取的发票抬头数据填充到自己的页面中。查看官方文档，通过 jsapi 接口在微信自带浏览器中是可以获取到发票抬头的，或者是在小程序中调用相关接口即可。
+如果想在小程序的 webview 中调用微信的发票抬头，这时在 H5 页面中使用 jsapi 接口是获取不到发票抬头信息，可能是小程序 webview 组件的限制吧，通过 ` wx.invoke `   方法总是弹出报错说没权限。试了很久，翻遍了微信开发者社区都没找到解决方案，正在一头雾水的状态，想起了小程序中 webview 组件貌似是可以和 H5 页面通信的。心想，如果在 H5 触发小程序去获取发票抬头信息，然后将获取到的值传到 H5 页面中，这不就行了吗？确实，这是可行的，具体操作如下：
+
+**H5 端核心代码**
+```javascript
+wx.miniProgram.postMessage({
+    data: 'Hi !' // 你要传给小程序的数据
+})
+
+wx.miniProgram.navigateTo({
+    url: '/pages/empty' // 要跳转到的小程序页面路径
+})
+```
+**小程序端核心代码**
+
+empty 页面 js
+```javascript
+    onLoad() {
+        const pages = getCurrentPages()
+        //  获取上一页面对象信息
+        const webviewPage = pages[pages.length - 2]
+        wx.chooseInvoiceTitle({
+          success(res) {
+            console.log('res:',res)
+            //  将值写到上一页对象信息中
+            webviewPage.setCallBack(JSON.stringify(res))
+            wx.navigateBack()
+          }
+        })
+     }
+```
+
+webview 页面 wxml
+```html
+  <web-view src="{{url}}"
+            wx:if="{{url&&!hideWebview}}"
+            bindmessage="handlePostMessage"></web-view>
+```
+webview 页面 js
+```javascript
+  onShow() {
+    // 重新激活 webview
+    // 也就是获取完数据后重新打开 H5 页面
+    if (this.data.shouldReattachWebview) {
+      this.setData({
+          hideWebview:true
+      })
+      setTimeout(()=>{
+          this.setData({
+                hideWebview:false
+                webviewReattached:true
+          })
+      },0)
+    }
+  },
+  //  webview 被销毁时触发
+  //  通过此方法获取 H5 传来的数据
+  handlePostMessage(e) {
+    const { data } = e.detail
+    console.log(data) // Hi ! 
+  },
+  //  在 empty 页面获取到发票抬头
+  //  调用此方法更新页面信息
+  //  重新进入此页面时触发 onShow 
+  setCallBack(weChatTitle){
+    this.setData({
+        shouldReattachWebview:true
+        weChatTitle:weChatTitle
+    })
+  }
+```
+*大致流程：H5 触发小程序页面跳转=》小程序 empty 页面，获取到发票抬头，返回上一页=》 wevbiew 页面重新访问 H5 =》H5 通过 query 获取到发票抬头数据*
+
+参考：
+- [https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/Quick_issuing/Interface_Instructions.html](https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/Quick_issuing/Interface_Instructions.html)
+- [https://segmentfault.com/a/1190000020122429](https://segmentfault.com/a/1190000020122429)
+- [https://juejin.im/post/6844903936306970632](https://juejin.im/post/6844903936306970632)
+]]></description></item><item><title>怎么监听页面某个 DOM 元素被修改</title><link>http://www.cnblogs.com/teemwu/archive/2020/08/14/13500513.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 14 Aug 2020 02:26:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/08/14/13500513.html</guid><description><![CDATA[## MutationObserver 监听 DOM 树的改变
+> [MutationObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver) 接口提供了监视对DOM树所做更改的能力。它被设计为旧的Mutation Events功能的替代品，该功能是DOM3 Events规范的一部分。
+
+将下面代码加入到 [Tampermonkey](https://www.tampermonkey.net/index.php)，刷新所需监听元素页面，查看断点信息即可查找到对应调用方法。
+
+```javascript
+new MutationObserver((mutations, observer) => {
+  const el = document.querySelector("your selector")
+  if (el != null) {
+    observer.disconnect()
+    new MutationObserver((mutations, observer) => {
+      debugger
+    }).observe(el, {childList: true, subtree: true})
+  }
+}).observe(document, {childList: true, subtree: true})
+```
+## Chrome 设置断点进行监听
+
+选中需要监听 DOM 元素的父级元素，右击选中 `Break on => subtree moditfications`，断点打上后刷新页面即可。
+
+![](https://img2020.cnblogs.com/blog/831280/202008/831280-20200814101234340-114689706.png)
+
+- subtree modifications 监听当前元素子级元素变化
+- attribute modifications 监听当前元素属性变化
+- node removal 监听当前元素被移除
+]]></description></item><item><title>HTML 中使用 SVG 的不常见问题</title><link>http://www.cnblogs.com/teemwu/archive/2020/08/12/13492264.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 12 Aug 2020 10:16:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/08/12/13492264.html</guid><description><![CDATA[## Flex 布局中 SVG 宽高不正常（存在空隙）
+HTML 中直接使用 svg 标签时，通过样式设置其宽高，正常情况下都是可控的，而如果父级标签设置 display 属性为 flex ，如果里面直接使用 svg 标签，如
+```html
+<div class="flex-box">
+      <svg>....</svg>
+</div>
+```
+此时设置 svg 的宽高，缩放界面时，chrome浏览器下其宽高并不固定，而 IE 个别版本却又正常显示。暂未找到具体原因，目前解决方法是直接给 svg 标签套上一个块级或者行内元素，比如
+```html
+<div class="flex-box">
+      <div>
+            <svg>....</svg>
+      </div>
+</div>
+```
+具体例子，如下：
+<iframe height="452" style="width: 100%;" scrolling="no" title="flexAndSVG" src="https://codepen.io/nooby/embed/YzqygrB?height=452&theme-id=light&default-tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/nooby/pen/YzqygrB'>flexAndSVG</a> by Teemwu
+  (<a href='https://codepen.io/nooby'>@nooby</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+## 宽度设置为 100%, SVG 自适应失效
+如下情况会导致 svg 不会自适应改变宽高
+```html
+<div>
+      <svg style="width:100%;height:auto">....</svg>
+</div>
+```
+将 height 设置一个固定值即可，比如：
+```html
+<div>
+      <svg style="width:100%;height:200px">....</svg>
+</div>
+```]]></description></item><item><title>JavaScript 实现重载(含 TypeScript )</title><link>http://www.cnblogs.com/teemwu/archive/2020/08/06/13449881.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 06 Aug 2020 15:57:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/08/06/13449881.html</guid><description><![CDATA[还记得第一次看到“重载”这个东西是在那本厚厚的犀牛书（《JavaScript权威指南》）中，当时刚自学 JavaScript， 看这书很多地方都跳过了，加上书里说 JavaScript 是没有“重载”的，从此就没理过这东西了。今天看《Java 编程思想》时看到了重载，突然就想起了 JavaScript，理解重载概念后，觉得其实 JavaScript 是可以手动去实现重载的。
+### 那么什么是重载呢？
+刚开始接触这个概念时，我认为的重载是~~同一个方法被“重新加载”的意思~~，而实际上并不是。实际上我认为把它叫作“多载”更合适]]></description></item><item><title>VSCode 搭建 Java 开发环境</title><link>http://www.cnblogs.com/teemwu/archive/2020/08/05/13437225.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 04 Aug 2020 16:17:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/08/05/13437225.html</guid><description><![CDATA[> 工欲善其事，必先利其器 -《论语·卫灵公》
+
+最近在看《代码整洁之道》一书，其示例代码均为 Java 语言所写。虽说编程语言有很多相通的，但作为一名没有写过 Java 的前端，看完大半后发现很难再继续读下去，其中一些思想还是不能理解。加上后面打算再看下《算法》红宝书，正因此，激发了我对 Java 这门语言的兴趣，打算花点时间来入门下 Java 的基础。试了用 Eclipse 和 Intellij 编辑器来写了些练习，发现还是 VSCode 操作顺手。或许有人说 Intellij 很强大，可对于我来说 VSCode 免费、轻量级，优势还是挺明显的，最终也还是选了 VSCode。 写了几天遇到些问题，记录下吧。
+
+### 扩展安装
+如果你是为了简单编写和调试 Java 代码，直接安装下面两个扩展就可以直接跑 Java 程序了。
+- [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java) Java 语言支持扩展
+- [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug) Java 调试相关的扩展
+
+若你不满足于此，可以直接安装 Java 全家桶扩展，一扩展搞定所有。
+- [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) Java 主流扩展集合
+
+### 遇到的问题
+#### 1. 怎么更改启动调试快捷键？（由于我使用的 Mac 键盘，每次调试都要同时按 `fn + F5` 着实影响调试心情）
+打开 VSCode 快捷键修改设置，路径 `Code=>Preferences=>KeyBoard Shortcuts`, 在设置的搜索框输入“Run”，找到相应的选项，点击编辑按钮，弹出快捷键录入框，按下你希望设置的组合键就好了
+
+![](https://img2020.cnblogs.com/blog/831280/202008/831280-20200804234642599-971632762.png)
+
+#### 2. 想忽略掉一些没意义的警告？（做练习时有些变量或方法暂时不用时，编辑器会出现黄色波浪线提醒，且输出警告信息）
+在项目根目录新建 `.settings` 文件夹(新建完如果在 VSCode 目录里看不到，则看[问题3](#Q3) )，并在此文件夹下新建 `org.eclipse.jdt.core.prefs` 文件，此文件里面可以加入以下内容：
+<details>
+      <summary>org.eclipse.jdt.core.prefs</summary>
+
+```
+eclipse.preferences.version=1
+org.eclipse.jdt.core.compiler.annotation.inheritNullAnnotations=disabled
+org.eclipse.jdt.core.compiler.annotation.missingNonNullByDefaultAnnotation=ignore
+org.eclipse.jdt.core.compiler.annotation.nonnull=org.eclipse.jdt.annotation.NonNull
+org.eclipse.jdt.core.compiler.annotation.nonnull.secondary=
+org.eclipse.jdt.core.compiler.annotation.nonnullbydefault=org.eclipse.jdt.annotation.NonNullByDefault
+org.eclipse.jdt.core.compiler.annotation.nonnullbydefault.secondary=
+org.eclipse.jdt.core.compiler.annotation.nullable=org.eclipse.jdt.annotation.Nullable
+org.eclipse.jdt.core.compiler.annotation.nullable.secondary=
+org.eclipse.jdt.core.compiler.annotation.nullanalysis=disabled
+org.eclipse.jdt.core.compiler.problem.APILeak=warning
+org.eclipse.jdt.core.compiler.problem.annotatedTypeArgumentToUnannotated=info
+org.eclipse.jdt.core.compiler.problem.annotationSuperInterface=warning
+org.eclipse.jdt.core.compiler.problem.autoboxing=ignore
+org.eclipse.jdt.core.compiler.problem.comparingIdentical=warning
+org.eclipse.jdt.core.compiler.problem.deadCode=warning
+org.eclipse.jdt.core.compiler.problem.deprecation=warning
+org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode=disabled
+org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod=disabled
+org.eclipse.jdt.core.compiler.problem.discouragedReference=warning
+org.eclipse.jdt.core.compiler.problem.emptyStatement=ignore
+org.eclipse.jdt.core.compiler.problem.explicitlyClosedAutoCloseable=ignore
+org.eclipse.jdt.core.compiler.problem.fallthroughCase=ignore
+org.eclipse.jdt.core.compiler.problem.fatalOptionalError=disabled
+org.eclipse.jdt.core.compiler.problem.fieldHiding=ignore
+org.eclipse.jdt.core.compiler.problem.finalParameterBound=warning
+org.eclipse.jdt.core.compiler.problem.finallyBlockNotCompletingNormally=warning
+org.eclipse.jdt.core.compiler.problem.forbiddenReference=error
+org.eclipse.jdt.core.compiler.problem.hiddenCatchBlock=warning
+org.eclipse.jdt.core.compiler.problem.includeNullInfoFromAsserts=disabled
+org.eclipse.jdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod=warning
+org.eclipse.jdt.core.compiler.problem.incompleteEnumSwitch=warning
+org.eclipse.jdt.core.compiler.problem.indirectStaticAccess=ignore
+org.eclipse.jdt.core.compiler.problem.localVariableHiding=ignore
+org.eclipse.jdt.core.compiler.problem.methodWithConstructorName=warning
+org.eclipse.jdt.core.compiler.problem.missingDefaultCase=ignore
+org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation=ignore
+org.eclipse.jdt.core.compiler.problem.missingEnumCaseDespiteDefault=disabled
+org.eclipse.jdt.core.compiler.problem.missingHashCodeMethod=ignore
+org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation=ignore
+org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotationForInterfaceMethodImplementation=enabled
+org.eclipse.jdt.core.compiler.problem.missingSerialVersion=warning
+org.eclipse.jdt.core.compiler.problem.missingSynchronizedOnInheritedMethod=ignore
+org.eclipse.jdt.core.compiler.problem.noEffectAssignment=warning
+org.eclipse.jdt.core.compiler.problem.noImplicitStringConversion=warning
+org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
+org.eclipse.jdt.core.compiler.problem.nonnullParameterAnnotationDropped=warning
+org.eclipse.jdt.core.compiler.problem.nonnullTypeVariableFromLegacyInvocation=warning
+org.eclipse.jdt.core.compiler.problem.nullAnnotationInferenceConflict=error
+org.eclipse.jdt.core.compiler.problem.nullReference=warning
+org.eclipse.jdt.core.compiler.problem.nullSpecViolation=error
+org.eclipse.jdt.core.compiler.problem.nullUncheckedConversion=warning
+org.eclipse.jdt.core.compiler.problem.overridingPackageDefaultMethod=warning
+org.eclipse.jdt.core.compiler.problem.parameterAssignment=ignore
+org.eclipse.jdt.core.compiler.problem.pessimisticNullAnalysisForFreeTypeVariables=warning
+org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment=ignore
+org.eclipse.jdt.core.compiler.problem.potentialNullReference=ignore
+org.eclipse.jdt.core.compiler.problem.potentiallyUnclosedCloseable=ignore
+org.eclipse.jdt.core.compiler.problem.rawTypeReference=warning
+org.eclipse.jdt.core.compiler.problem.redundantNullAnnotation=warning
+org.eclipse.jdt.core.compiler.problem.redundantNullCheck=ignore
+org.eclipse.jdt.core.compiler.problem.redundantSpecificationOfTypeArguments=ignore
+org.eclipse.jdt.core.compiler.problem.redundantSuperinterface=ignore
+org.eclipse.jdt.core.compiler.problem.reportMethodCanBePotentiallyStatic=ignore
+org.eclipse.jdt.core.compiler.problem.reportMethodCanBeStatic=ignore
+org.eclipse.jdt.core.compiler.problem.specialParameterHidingField=disabled
+org.eclipse.jdt.core.compiler.problem.staticAccessReceiver=warning
+org.eclipse.jdt.core.compiler.problem.suppressOptionalErrors=disabled
+org.eclipse.jdt.core.compiler.problem.suppressWarnings=enabled
+org.eclipse.jdt.core.compiler.problem.suppressWarningsNotFullyAnalysed=info
+org.eclipse.jdt.core.compiler.problem.syntacticNullAnalysisForFields=disabled
+org.eclipse.jdt.core.compiler.problem.syntheticAccessEmulation=ignore
+org.eclipse.jdt.core.compiler.problem.terminalDeprecation=warning
+org.eclipse.jdt.core.compiler.problem.typeParameterHiding=warning
+org.eclipse.jdt.core.compiler.problem.unavoidableGenericTypeProblems=enabled
+org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=warning
+org.eclipse.jdt.core.compiler.problem.unclosedCloseable=warning
+org.eclipse.jdt.core.compiler.problem.undocumentedEmptyBlock=ignore
+org.eclipse.jdt.core.compiler.problem.unhandledWarningToken=warning
+org.eclipse.jdt.core.compiler.problem.unlikelyCollectionMethodArgumentType=warning
+org.eclipse.jdt.core.compiler.problem.unlikelyCollectionMethodArgumentTypeStrict=disabled
+org.eclipse.jdt.core.compiler.problem.unlikelyEqualsArgumentType=info
+org.eclipse.jdt.core.compiler.problem.unnecessaryElse=ignore
+org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck=ignore
+org.eclipse.jdt.core.compiler.problem.unqualifiedFieldAccess=ignore
+org.eclipse.jdt.core.compiler.problem.unstableAutoModuleName=warning
+org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownException=ignore
+org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable=enabled
+org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference=enabled
+org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding=disabled
+org.eclipse.jdt.core.compiler.problem.unusedExceptionParameter=ignore
+org.eclipse.jdt.core.compiler.problem.unusedImport=ignore
+org.eclipse.jdt.core.compiler.problem.unusedLabel=warning
+org.eclipse.jdt.core.compiler.problem.unusedLocal=ignore
+org.eclipse.jdt.core.compiler.problem.unusedObjectAllocation=ignore
+org.eclipse.jdt.core.compiler.problem.unusedParameter=ignore
+org.eclipse.jdt.core.compiler.problem.unusedParameterIncludeDocCommentReference=enabled
+org.eclipse.jdt.core.compiler.problem.unusedParameterWhenImplementingAbstract=disabled
+org.eclipse.jdt.core.compiler.problem.unusedParameterWhenOverridingConcrete=disabled
+org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=ignore
+org.eclipse.jdt.core.compiler.problem.unusedTypeParameter=ignore
+org.eclipse.jdt.core.compiler.problem.unusedWarningToken=warning
+org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
+```
+
+</details>
+
+#### 3. 新建 `.settings` 文件夹后看不到？<a id="Q3"></a>
+在 VSCode 设置里加入下面配置就好（`Command + , ` 打开配置文件）
+```json
+{
+    "files.exclude": {
+        "**/.settings": false,
+    },
+}
+```
+]]></description></item><item><title>修改 jar 包中 class 文件</title><link>http://www.cnblogs.com/teemwu/archive/2020/07/31/13407550.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 30 Jul 2020 18:58:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/07/31/13407550.html</guid><description><![CDATA[做 Java 练习时，引用的第三方的 jar 包，其中有些方法冗余，在 IDEA 智能提示时总是排在第一个提示，影响开发效率，因此想修改 jar 包中 class 的方法。由于使用的是 macOS 系统，看了很多教程基本上是基于 Windows 的，不大适用，故整理下解决方法，方便遇到此问题的同学能顺利解决。
+
+现在假设我有一个第三方 jar 包 net.jar ，我要修改里面的 Print.class 类，具体操作步骤如下：
+### 反编译 jar 包
+使用 [JD-GUI](http://java-decompiler.github.io/) 这个工具就能解决，下载安装完打开软件将你的 jar 包拖进去，将你要修改的 class 保存成 .java 文件即可。这一步我们得到了 Print.java 文件。（当然，你也可以通过其它工具来反编译，网上说通过 vim 直接修改 class 文件的，我这边打开会乱码，故反编译后保存成 .java 文件再修改。）
+### 生成 class 
+得到了修改完的 .java 文件后，我们需要将它编译成 class 文件才能替换掉 jar 包里的 class ，直接改后缀名是无效的哦。现在假设 jar 包和 反编译后的 .java 文件在同一目录，执行以下命令即可生成可用的 class。
+```bash
+javac -cp net.jar Print.java
+```
+
+### 替换 class
+#### 1、以防万一，先拷贝 jar 包为 .zip 文件再进行操作
+```bash
+cp net.jar net.zip
+```
+#### 2、解压 net.zip 到 net-unzip 文件夹
+```bash
+unzip net.zip -d net-unzip/
+```
+
+进入解压后的文件夹，找到你要替换的类，并用之前生成的 Print.class  替换掉。
+#### 3、重新打包
+在 net-unzip 目录里执行以下命令，其中 META-INF 和 net 均为解压后就存在的目录
+```bash
+jar -cvfM0 net.jar META-INF net
+```
+重新打包完，此时当前目录应该多了个 net.jar 文件，至此整个修改 jar 包操作结束。
+
+### 参考
+- [https://www.cnblogs.com/grey-wolf/p/11291379.html#3083248972](https://www.cnblogs.com/grey-wolf/p/11291379.html#3083248972)
+- [https://blog.csdn.net/chy555chy/article/details/78460837](https://blog.csdn.net/chy555chy/article/details/78460837)
+]]></description></item><item><title>Windows10 解决偶尔切换输入法无效</title><link>http://www.cnblogs.com/teemwu/archive/2020/07/24/13370599.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 24 Jul 2020 02:34:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/07/24/13370599.html</guid><description><![CDATA[工作或者远程到 Windows 电脑上操作时，经常会遇到中文输入法无效，尽管显示是中文，可输出的却是英文，后来发现是输入法的任务关闭、或者失效了。
+找了下，整理了有三种方案。
+
+### 方案一：
+重新启动输入法任务，具体操作路径
+
+`计算机管理=》系统工具=》任务计划程序=》任务计划程序库=》Mirosoft=》Windows=》TextServicesFramework`
+
+右击任务重新启动下就好了。
+
+### 方案二：
+重启机器，一般重启机器会重新加载运行输入法的计划任务，最简单粗暴的方法。
+
+### 方案三：
+关闭一些正在运行的程序，或者换一个程序输入试下。]]></description></item><item><title>CSS文字两端对齐</title><link>http://www.cnblogs.com/teemwu/archive/2020/07/21/13354966.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 21 Jul 2020 06:43:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/07/21/13354966.html</guid><description><![CDATA[好记性不如烂笔头，写了几次都忘了，起个随笔加深下记忆。
+
+### HTML
+
+```html
+<div class="container">
+    <div><span>肆个字哦</span>：四个字啊</div>
+    <div><span>壹</span>：一</div>
+    <div><span>贰字</span>：两字</div>
+    <div><span>叁个字</span>：三个字</div>
+</div>
+```
+
+### 样式
+
+```css
+.container span {
+  width: 70px;
+  text-align: justify;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.container span:after {
+  content: " ";
+  display: inline-block;
+  width: 100%;
+  height: 0px;
+}
+```
+### 运行结果
+<iframe height="251" style="width: 100%;" scrolling="no" title="OJMrwrm" src="https://codepen.io/nooby/embed/OJMrwrm?height=251&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/nooby/pen/OJMrwrm'>OJMrwrm</a> by Teemwu
+  (<a href='https://codepen.io/nooby'>@nooby</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>]]></description></item><item><title>JavaScript 中 label 的理解与应用</title><link>http://www.cnblogs.com/teemwu/archive/2020/07/15/13304859.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 15 Jul 2020 04:36:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/07/15/13304859.html</guid><description><![CDATA[label 语句在之前写的代码中很少用到。最近重新看了基础，发现之前没有真的清楚其作用，开始只知道 label 是代码“跳转”到这个标签，什么时候应用才比较好呢？带着疑问，重新梳理了一下。
+在执行单层循环的时候，label 其实作用不明显，比如
+```javascript
+loopTop:
+for(let i = 0; i < 3; i++){
+      if(i === 2){
+            break loopTop;
+      }
+      console.log(i);
+}
+// 输出结果
+// 0
+// 1
+```
+和
+```javascript
+for(let i = 0; i < 3; i++){
+      if(i === 2){
+            break;
+      }
+      console.log(i);
+}
+// 输出结果
+// 0
+// 1
+```
+效果是一样的，故 label 在此时是多余的。
+不过，当我们遇到多层循环，想直接跳到最外层循环时，label 的作用就体现出来了，如下面的例子
+```javascript
+loopTop:
+for(let i = 0; i < 3; i++){
+    for(let j = 0; j < 3; j++){
+        if(i === 2 && j === 1) break loopTop;
+    }
+    console.log(i);
+}
+// 输出结果
+// 0
+// 1
+```
+如果没用 label 跳转
+```javascript
+for(let i = 0; i < 3; i++){
+    for(let j = 0; j < 3; j++){
+        if(i === 2 && j === 1) break;
+    }
+    console.log(i);
+}
+// 输出结果
+// 0
+// 1
+// 2
+```
+则 break 只是跳过了最里层的 for 循环，外层 for 循环依旧执行。
+所以如果遇到多层循环时，想跳出到指定位置时， label 是非常有用的。
+]]></description></item><item><title>修改 terminal 主机名和用户名显示</title><link>http://www.cnblogs.com/teemwu/archive/2020/07/10/13277082.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 09 Jul 2020 16:10:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/07/10/13277082.html</guid><description><![CDATA[macos 的终端默认显示主机名+用户名，这样显示太长，影响心情。Catalina 之前系统默认 shell 使用的是 bash ，之后则改成了 zsh ，所以网上很多修改终端输出信息的方法都失效了。。。
+当然，如果你想用回 bash ，只要在命令行运行以下命令重启终端即可
+```bash
+chsh -s /bin/bash
+```
+不过，这样每次打开终端总是会输出一段官方提示改用 zsh 的话，改回 zsh 通过下面命令即可
+```bash
+chsh -s /bin/zsh
+```
+恢复 zsh 后，我们可以打开 zsh 的配置文件
+```bash
+sudo vim /etc/zshrc
+```
+编辑时提示只可读的话，需要更改文件权限
+```bash
+sudo chmod 777 /etc/zshrc
+```
+改完再进行编辑即可
+找到 ` PS1="一堆奇怪的东西“ ` 这一行，将其修改为
+```bash
+PS1="[%T] %1~ %# "
+```
+保存一下，重启终端，一下子清爽了许多
+![](https://img2020.cnblogs.com/blog/831280/202007/831280-20200709234846668-363326094.png)
+需要说明下：
+|转义变量|描述|
+|----|----|
+| %T | 系统时间（24小时制：时:分） |
+| %* | 系统时间（24小时制：时:分:秒） |
+| %n | 你的用户名 |
+如果自个有其他自定义想法，可以查看 [Prompt-Expansion](http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html)
+
+### 参考资料
+- [https://apple.stackexchange.com/questions/387102/did-the-shell-terminal-change-in-catalina?answertab=votes#tab-top](https://apple.stackexchange.com/questions/387102/did-the-shell-terminal-change-in-catalina?answertab=votes#tab-top)
+- [http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html](http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html)]]></description></item><item><title>“There appears to be trouble with your network connection. Retrying”</title><link>http://www.cnblogs.com/teemwu/archive/2020/06/03/13037939.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 03 Jun 2020 07:42:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/06/03/13037939.html</guid><description><![CDATA[网上很多答案都说是代理问题，不过，设置了代理还是提示这个，后来删除了 `yarn.lock` 文件后重新 yarn 就好了。估计是 yarn.lock 中包的路径有错，所以一直加载失败。出现此问题可能是 npm 和 yarn 混用导致的。当然，也有可能真的是网络问题。
+
+删了 `yarn.lock` 文件依然无效可以试下设置代理镜像
+```bash
+yarn config set registry https://registry.npm.taobao.org
+```]]></description></item><item><title>Nignx 处理异常操作流程</title><link>http://www.cnblogs.com/teemwu/archive/2020/05/10/12862526.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Sun, 10 May 2020 03:08:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/05/10/12862526.html</guid><description><![CDATA[很久没弄 nginx ，最近安装 cms 时 发现 nginx 映射出错，外网访问域名异常，经过很久才确定错误源，因此想整理下基本的排错流程，以便日后使用
+### 1、检测是否开启 nginx
+```bash
+ps -ef | grep nginx
+```
+输出类似如下信息则说明已经开启成功
+```bash
+root      1763     1  0 May09 ?        00:00:00 nginx: master process nginx
+www-data  1863  1763  0 May09 ?        00:00:00 nginx: worker process
+root      4631  4617  0 10:30 pts/1    00:00:00 grep nginx
+```
+否则，去到 nginx 的安装目录进行启动（ 默认安装目录：` /usr/sbin/nginx `），如若找不到安装目录可以用如下命令查找
+```bash
+whereis nginx
+```
+进入到 ` /usr/sbin/ ` 目录，然后自行以下命令
+```bash
+./nginx
+```
+如果开启不成功，则需要根据报错信息另找原因
+
+### 2、检测 nginx 配置是否正确
+```bash
+nginx -t
+```
+如果输出类似以下成功信息，则说明配置成功
+```bash
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+否则，需要到 nginx 的配置目录进行配置排查
+
+### 3、nginx 错误日志查看
+默认存放错误日志的目录在 `/var/log/nginx`，到达目录可以通过以下命令查看错误信息
+```bash
+tail -f error.log
+```
+根据错误日志进行排查即可]]></description></item><item><title>"...do not match previously installed version; ignoring!"</title><link>http://www.cnblogs.com/teemwu/archive/2020/05/06/12835079.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 06 May 2020 03:01:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/05/06/12835079.html</guid><description><![CDATA[小米手机开启 USB 调试时，安装应用保存，根据网上的方法尝试了没有解决，后来想起是自己在 `手机分身` 系统里安装了要调试的应用，而在主系统调试则会报此错误
+
+解决方法：卸载 `手机分身` 系统里的调试应用即可
+
+其它方法：
+
+1. 删除项目下的 build 文件夹，或者通过命令行来进行清除
+```bash
+flutter clean
+```
+2. 关闭 `开发者选项 => 启用 MIUI 优化` (小米手机)
+]]></description></item><item><title> 文档对象模型（DOM）</title><link>http://www.cnblogs.com/teemwu/archive/2020/05/01/12812632.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 01 May 2020 01:51:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/05/01/12812632.html</guid><description><![CDATA[### DOM 定义
+
+1. 全称为 Document Object Model 
+2. 针对 XML 但经过扩展用于 HTML 的应用编程接口
+3. DOM 会把整个页面映射为一个多层节点结构
+4. HTML 或 XML 页面中每个组成部分都是某种类型的节点，这些节点又包含不同类型的数据
+
+注意：DOM 是独立的实体，并非专属 JavaScript 语言，也可以通过其他语言实现
+	
+### DOM 级别
+
+1. DOM1
+   a. DOM Core （规定如何映射基于 XML 的文档结构）
+   b. DOM HTML（添加了针对 HTML 的对象和方法）
+2. DOM2
+   a. DOM Views（定义了跟踪不同文档视图的接口）
+   b. DOM Events（定义了事件和事件处理的接口）
+   c. DOM Style（定义了基于 CSS 为元素应用样式的接口）
+   d. DOM Traversal and Range（定义了遍历和操作文档的接口）
+3. DOM3
+   a. DOM Load and Save（统一加在和保存文档的方法）
+   b. DOM Validation（验证文档的方法）
+
+### 其他 DOM 标准
+
+1. SVG（Scalable Vector Graphic，可伸缩矢量图）
+2. MathML（Mathematical Markup Language，数学标记语言）
+]]></description></item><item><title>Parsing error Expression expected.</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/30/12807960.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 30 Apr 2020 03:57:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/30/12807960.html</guid><description><![CDATA[之前的项目模块拷贝粘贴到现有项目中， eslint 报 "Parsing error: Expression expected. " 错误，网上没找到解决方法，自己摸索一番已解决。
+```javascript
+    // 省略无用代码...
+    hammer.on('doubletap', e => {
+      const c = this.rawCenter(e)
+      this.zoomAround(2, c.x, c.y)
+    })
+    // 省略无用的代码
+```
+编辑器在 `const` 处提示报错， 将花括号里的代码提取到单独的函数中，再引用此函数此处提示就好了吧。。。
+```javascript
+  // 省略无用代码...
+  doubletapHandle(e) {
+    const c = this.rawCenter(e)
+    this.zoomAround(2, c.x, c.y)
+  }
+  hammer.on('doubletap', e => this.doubletapHandle(e))
+  // 省略无用的代码
+```
+不过，后面省略处的代码继续报此错误，可是后面的代码反复查看都是没有错的，那只有一种可能，eslint 在某行监测到错误，然而不知道啥原因没有显示那一行的错误，反而在后面无错代码上提示报错了！
+
+***最终解决方法：将代码都注释掉，一行一行找错，Good Luck To You ！***
+]]></description></item><item><title>让人抓狂的缩进冲突(eslint)</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/20/12739722.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 20 Apr 2020 10:53:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/20/12739722.html</guid><description><![CDATA[![](https://img2020.cnblogs.com/blog/831280/202004/831280-20200420184920893-1983292400.png)
+
+原本在开开心心地写着代码，然鹅格式化后居然有一处 eslint 提示报错，说我的缩进有问题，删除多余的缩进后，再格式化又变成了之前那样！其它地方都没问题，为啥就那一小块会报错呢？项目使用了 prettier 进行自动格式化，eslint 来进行检查报错，可是这俩貌似有世仇，不能好好相处。。。废话不多说了，直接上配置代码吧，找了好久才找到的方法，根据代码自己调整下就好，有些项不一定用得上，希望对看官管用吧。
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  root: true,
+  env: {
+    node: true,
+  },
+  'extends': [
+    'plugin:vue/strongly-recommended'
+  ],
+  rules: {
+    'indent': ['error', 2],
+    'vue/script-indent': [
+      'error',
+      2,
+      { 'baseIndent': 1 }
+    ],
+  },
+  'overrides': [
+    {
+      'files': ['*.vue'],
+      'rules': {
+        'indent': 'off'
+      }
+    }
+  ]
+};
+```
+项目中我注释掉了 `vue/script-indent` 如果开启这个会报其它错误，使用时自个看看。 
+
+### 参考
+- [https://github.com/vuejs/eslint-plugin-vue/issues/362#issuecomment-406586699](https://github.com/vuejs/eslint-plugin-vue/issues/362#issuecomment-406586699)]]></description></item><item><title>【VS Code】 常用快捷键</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/16/10920871.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 16 Apr 2020 14:10:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/16/10920871.html</guid><description><![CDATA[#### 光标移动
+| Mac | Windows | 说明 |
+| :----: | :----------: | :-----: |
+| Cmd + ← | Home | 光标移动到当前行最左侧 |
+| Cmd + → | End    | 光标移动到当前行最右侧 |
+| Cmd + ↑   | Ctrl + Home | 光标移动到文章的第一行 |
+| Cmd + ↓   | Ctrl +End     | 光标移动到文章的最后一行 |
+
+#### 选择字符
+| Mac | Windows | 说明 |
+| :----: | :----------: | :-----: |
+| 
+
+### 官方文档
+
+- [Mac](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+- [Windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)]]></description></item><item><title>【VS Code】编写我的第一个扩展</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/16/10747964.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 16 Apr 2020 14:10:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/16/10747964.html</guid><description><![CDATA[# 前言
+ 
+使用 vscode 不知不觉已经有一年多了，不断丰富的 vscode 插件给自己提高了不少工作效率，随着自身对此工具的深入使用，发现有些插件和功能还是不能满足自身开发的需求的。比如，为了少写些代码，就需要各种 snippet 插件，当然，你可以在本地自建一个 snippet 使用。本着饮水思源的原则及现有不满足自身需求的是前提，决定自己来写一个 snippet 插件并发布到线上插件库，好啦，我们开始吧。
+
+# 基础环境
+
+1. 必备 node，git 想必这些你都准备好了（没准备的，自行谷歌之。。）
+2. 安装 (Yeoman)[https://yeoman.io/] 和 (VS Code Extension Generator)[https://www.npmjs.com/package/generator-code]
+
+# 安装
+
+```sh
+npm install -g yo generator-code
+```
+
+运行 `yo code` 根据自己所需，选择脚手架类型，这里我选 ‘Code Snippet’
+
+![](https://img2020.cnblogs.com/blog/831280/202004/831280-20200412110529384-2034167178.png)
+
+
+填写完信息，脚手架就创建完成啦，需要注意的是不要和自己下载的扩展重名，否则会报错。
+
+![](https://img2020.cnblogs.com/blog/831280/202004/831280-20200412111036212-1908358968.png)
+
+# 编写
+
+其实 snippet 扩展和我们本地创建 snippet 代码块自己使用差不多，只是多了打包发布到扩展市场而已。我们要做的是生成 snippet 代码块的 json 文件，格式如下：
+
+```json
+{
+  "anchor": {
+    "prefix": "ianchor",
+    "scope": "vue, html, vue-html",
+    "body": [
+      "<Anchor show-ink>",
+      "  <AnchorLink href=\"#$1\" title=\"$2\" />",
+      "</Anchor>"
+    ],
+    "description": "iview anchor"
+  },
+  // ...
+}
+```
+
+具体项目目录结构和实现方法，可参考我写的 [例子](https://github.com/Teemwu/iview-snippet)
+
+# 调试
+
+VS Code 打开你的扩展项目直接按 F5 键进入调试，或者在菜单栏》Run》Start Debugging
+
+# 打包发布
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 参考
+
+- https://code.visualstudio.com/api/get-started/your-first-extension]]></description></item><item><title>工厂构造函数实现单例模式并传参</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/16/12716171.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 16 Apr 2020 14:02:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/16/12716171.html</guid><description><![CDATA[Flutter 封装请求方法类时使用了工厂构造函数的单例模式，在调试时为了按需控制请求打印日志，最好的方法就是往请求体中传参数控制，可是想了好久都不晓得怎么个传参法，后来查看 GitHub 时得到了解决方法，具体如下。
+```dart
+class NetUtil {
+  static final NetUtil _instance = NetUtil._internal();
+  static bool showLog = false;
+
+  factory NetUtil([bool isShowLog = false]) {
+    showLog = isShowLog;
+    return _instance;
+  }
+
+  NetUtil._internal() {
+    if (showLog) {
+      // 省略无关代码
+    }
+  }
+
+  Future get(String url) async {}
+
+  Future post(String url) async {}
+}
+
+main() {
+  // 调用
+  NetUtil(true).get('');
+}
+```
+
+### 参考
+
+[https://gist.github.com/theburningmonk/6401183#gistcomment-2903680](https://gist.github.com/theburningmonk/6401183#gistcomment-2903680)]]></description></item><item><title>The resource could not be loaded because the App Transport Security policy requires the use of a secure connection.</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/16/12709775.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 15 Apr 2020 16:23:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/16/12709775.html</guid><description><![CDATA[Flutter 使用 webview 访问 `http://localhost:8080` 时报错，此错误应为 iOS11 禁止本地http的访问。
+
+解决方法：
+在 `ios/Runner/Info.plist' 文件中添加
+
+```xml
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true />
+    <key>NSAllowsLocalNetworking</key>
+    <true />
+    <key>NSExceptionDomains</key>
+    <dict>
+        <key>localhost</key>
+        <dict>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true />
+            <key>NSExceptionRequiresForwardSecrecy</key>
+            <false />
+            <key>NSIncludesSubdomains</key>
+            <true />
+            <!-- Optional: Specify minimum TLS version -->
+            <key>NSTemporaryExceptionMinimumTLSVersion</key>
+            <string>TLSv1.1</string>
+            <key>NSRequiresCertificateTransparency</key>
+            <false />
+        </dict>
+    </dict>
+</dict>
+```
+需要注意的是：此段代码必须放在 plist 里面。
+```xml
+<plist version="1.0">
+	<dict>
+            <!-- 上面那段代码放这 -->
+        </dict>
+</plist>
+```
+保存好文件，执行 `flutter clean` ，再重新运行即可。
+]]></description></item><item><title>keep-alive include 加了 name 也无效</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/15/12707238.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 15 Apr 2020 10:37:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/15/12707238.html</guid><description><![CDATA[今修改一个比较老的 Vue 项目，参考[网上的答案](https://segmentfault.com/q/1010000009117672)，在export 加了 name 还是无效，找了半天原因，发现项目中用了三层 router-view ，keep-alive 加在了第二层 router-view 中，难怪无效。。。
+
+```html
+<!-- App.vue -->
+<router-view />
+    <!-- Layout.vue -->
+    <router-view />
+        <!-- Companent.vue -->
+        <keep-alive include="字符串|数组|正则">
+              <router-view />
+        </keep-alive>
+```
+
+**注意：keep-alive 必须加在组件直接关联的 router-view 上！**]]></description></item><item><title>Flutter 开发必备扩展(vscode)</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/12/12683963.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Sun, 12 Apr 2020 02:20:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/12/12683963.html</guid><description><![CDATA[### Dart
+VS Code 对 dart 语言的支持，初次打开会提示安装，选择安装即可。
+
+### Flutter
+运行 Flutter 项目必须，和 dart 一样，初次用 VS Code 打开 Flutter 项目会提示安装，选安装即可。
+
+### Flutter tree
+通过简单的语法，自动快速构建 widget 树，有点像前端 Emmet。 
+![](https://img2020.cnblogs.com/blog/831280/202004/831280-20200412115930609-264365827.gif)
+
+### Pubspec Assist
+在 pubspec.yaml 文件下快速搜索、添加需要安装项目所需要的依赖，不必打开浏览器去获取插件和插件版本信息。
+![](https://img2020.cnblogs.com/blog/831280/202004/831280-20200412120023156-566608416.gif)
+
+### Awesome Flutter Snippets
+Flutter 常用类和方法的代码集合，通过简短的输入即可自动填充所需代码块，提高开发效率。
+
+### Bracket Pair Colorizer 2
+
+---
+#### [2021-10-08] 更新
+
+vscode 1.61.0 版本原生支持改插件，只要在 `设置` 中配置:
+```json
+{
+    "editor.guides.bracketPairs": true,
+    "editor.bracketPairColorization.enabled": true
+}
+```
+即可，无需再安装第三方扩展。
+
+---
+
+不同的颜色显示代码块括号范围，其实这插件不仅在 Flutter 项目开发中能用。
+![](https://img2020.cnblogs.com/blog/831280/202004/831280-20200412101713322-1395982864.png)
+
+值得注意的是，在开发时可能由于 Flutter 组件的层级嵌套较深，为了方便查看代码，你可能需要在 setting.json 中添加 `"dart.previewFlutterUiGuides": true,`，开启组件层级预览，效果如上图虚线的效果。
+补充一下，如果开启后没效果，查看 Dart 扩展安装和开启了没，如果扩展安装了开启还是没效果，重启 VS Code 再试试吧，祝好运！
+]]></description></item><item><title>将数字转成 'k'结尾的字符串</title><link>http://www.cnblogs.com/teemwu/archive/2020/04/06/12640349.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Sun, 05 Apr 2020 18:26:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/04/06/12640349.html</guid><description><![CDATA[有时候数字过大，为了方便查看，在不需要过度精确的情况下，我们往往会将其转换 ‘k’ 结尾的字符串，如 1k，1.2k等等。原本想找个 Dart 版本的，奈何找了很久都没找到，于是参考了 Javscript 版本的方法进行了更改和优化。其实，Dart 和 Javascript 的正则差不多，只是 Dart 并没有 `$1~$9` 的[子串匹配符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/n)(不推荐使用)，且各自一些方法存在写法的差异。
+```dart
+nFormatter(dynamic num, [int digits = 1]) {
+  var si = [
+    {'value': 1, 'symbol': ''},
+    {'value': 1e3, 'symbol': 'k'},
+    {'value': 1e6, 'symbol': 'M'},
+    {'value': 1e9, 'symbol': 'G'},
+    {'value': 1e12, 'symbol': 'T'},
+    {'value': 1e15, 'symbol': 'P'},
+    {'value': 1e18, 'symbol': 'E'},
+  ];
+  var rx = RegExp(r'\.0+$|(\.[0-9]*[1-9])0+$');
+  var i;
+  for (i = si.length - 1; i > 0; i--) {
+    if (num.abs() >= si[i]['value']) {
+      break;
+    }
+  }
+  return (num / si[i]['value']).toStringAsFixed(digits).replaceAll(rx, '') + si[i]['symbol'];
+}
+
+void main() {
+  print(nFormatter(600)); // 600
+  print(nFormatter(1000)); // 1k
+  print(nFormatter(1122, 1)); // 1.1k
+  print(nFormatter(1122, 2)); // 1.12k
+  print(nFormatter(-1122, 2)); // -1.12k
+}
+```
+
+### 参考
+[https://stackoverflow.com/a/9462382](https://stackoverflow.com/a/9462382)]]></description></item><item><title>比较好用的鼠标手势工具</title><link>http://www.cnblogs.com/teemwu/archive/2020/03/27/12584610.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 27 Mar 2020 13:51:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/03/27/12584610.html</guid><description><![CDATA[最近在敲键盘时发现手指关节有点酸痛，可能整天都在敲代码，手指过劳了。为了减少手指敲击键盘次数，想起之前 chrome 上有用过一个鼠标手势工具，简单的手势能免去鼠标繁琐的移动和点击，也不用几个手指去组合地按快捷键。由于当时用的是 Chrome 上的扩展，比较局限，一直想找一款能够全局使用的鼠标手势工具，最好是能够 macOS 和 Windows 都能支持的。问题总是有办法解决的。经过对比，macOS 下使用 `Better And Better` 和 Windows 下使用 `MouseInc` 能完美在在各自系统中使用相同的手势进行各种操作。
+
+## [MacStroke](https://github.com/mtjo/MacStroke)
+MacOS 系统下使用的鼠标手势工具。自卸载 better and better 后找到的又一款 macOS 下的手势工具，目前用得还不错，代码还开源，赞👍
+
+![MacStroke](https://raw.githubusercontent.com/mtjo/MacStroke/release/MacStroke.gif)
+
+## ~~[Better And Better](https://www.better365.cn/bab.html)~~
+其实 `Better And Better` 是一个工具集软件，鼠标手势只是其中一个模块，目前使用自行添加手势时，修改备注时总会卡住，~~不过不影响使用~~。经过一周的使用，发现此软件长时间使用会有明显的卡顿，看了官网讨论一直没有很好的解决方案，后来卸载了。
+
+![Better And Better](https://13315641.s21i.faiusr.com/4/1/ABUIABAEGAAg8IXO3AUoiIfAKDDuCziACQ!1500x1500.png)
+
+## [MouseInc](https://shuax.com/project/mouseinc/)
+Windows 系统下使用的鼠标手势工具。工具的设置界面使用了前端框架 iview 来写的，看起来还不错，只是需要注意的是每次修改完还需要要手动执行保存才会生效。
+
+![MouseInc](https://docs.shuax.com/MouseInc/image/1.gif)
+
+![MouseInc](https://img2020.cnblogs.com/blog/831280/202003/831280-20200327214031873-33887550.png)
+
+## [Mos](https://mos.caldis.me/)
+
+这个工具并不是鼠标手势工具，但对于 macOS 下使用鼠标来说，这个工具真的是必不可少。如果 macOS 连接了非苹果的鼠标，其鼠标的滚轮方向和触摸板的方向是一致的，且不会自动转换！想必 macOS 用户都会遇到这个问题，这个软件还对滚动事件做了优化，使滚动时如同触摸板滚动般丝滑。目前在 Windows 下还没找到相似的软件，希望知道的朋友能推荐下。
+
+![Mos](https://mos.caldis.me/resources/image/cn/PreferencesGeneral.png)]]></description></item><item><title>Wepy 格式化和语法高亮(vscode)</title><link>http://www.cnblogs.com/teemwu/archive/2020/03/16/12505071.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 16 Mar 2020 09:11:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/03/16/12505071.html</guid><description><![CDATA[
+wepy2.0 使用了 config 标签，用旧的方法解析可能会有问题，故推荐禁用 vetur 扩展，安装第三方 [Wepy](https://marketplace.visualstudio.com/items?itemName=mengj.wepy) 扩展
+
+***
+
+今天修改一个比较早的小程序项目，项目使用的是 wepy 1.x 框架，打开项目代码中直接各种标红警告，看了下发现是 vetur 扩展的报错，setting 中直接配置 vetur 即可。
+```json
+// .vscode/setting.json
+{
+    "files.associations": {
+        "*.wpy": "vue"
+    },
+    "vetur.completion.autoImport": false,
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "vetur.format.defaultFormatter.js": "prettier-eslint",
+    "vetur.validation.template": false,
+    "vetur.validation.style": false,
+    "vetur.validation.script": false
+}
+```
+]]></description></item><item><title>Cannot read property '_wrapper' of undefined</title><link>http://www.cnblogs.com/teemwu/archive/2020/03/11/12461045.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 11 Mar 2020 03:04:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/03/11/12461045.html</guid><description><![CDATA[这个报错是因为 Vue 中使用了未声明的方法，认真检查下！]]></description></item><item><title>Vue 自定义事件传参</title><link>http://www.cnblogs.com/teemwu/archive/2020/03/06/12426663.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 06 Mar 2020 07:07:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/03/06/12426663.html</guid><description><![CDATA[项目中使用 vant 的上传组件进行文件上传，通过其自定义事件返回要上传文件的同时，想传一个参数到方法里,原生事件使用 $event 就好，而这是自定义事件，不管用。
+
+
+官方示例：
+```html
+<van-uploader :after-read="afterRead" />
+```
+afterRead 方法会默认返回上传的文件 file，而我想同时传一个 id，参考了网上的方法可解
+
+实测管用：
+```html
+<van-uploader :after-read="file=>afterRead(file,'ID')" />
+```
+### 参考
+[https://github.com/vuejs/vue/issues/5735#issuecomment-438656657](https://github.com/vuejs/vue/issues/5735#issuecomment-438656657)]]></description></item><item><title>Uncaught (in promise) undefined</title><link>http://www.cnblogs.com/teemwu/archive/2020/01/19/12213468.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Sun, 19 Jan 2020 06:13:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2020/01/19/12213468.html</guid><description><![CDATA[Vue-router >= 3.1.0  版本在使用 push 和 replace 进行跳转时控制台会抛出异常，其主要原因是 vue-router 3.1.0 版本以后 router.push('/path') 返回了 promise ，而当路由跳转异常时便会抛出错误，此前版本没有报错是因为 vue-router 根本没有返回错误信息，所以之前我们一直无法捕获异常，而并非异常不存在。当然，很多时候这些报错我们不用关心，除非有些地方需要特殊处理。下面给出些解决方法。
+
+使用时进行错误拦截：
+```javascript
+router.push('/path').catch(err => {})
+```
+全局进行错误拦截：
+```javascript
+const routerMethods = ['push', 'replace']
+routerMethods.forEach(method => {
+  const originalCall = VueRouter.prototype[method]
+  VueRouter.prototype[method] = function(location, onResolve, onReject) {
+    if (onResolve || onReject) {
+      return originalCall.call(this, location, onResolve, onReject)
+    }
+    return originalCall.call(this, location).catch(err => err)
+  }
+})
+```
+
+### 参考
+[https://github.com/vuejs/vue-router/issues/2881](https://github.com/vuejs/vue-router/issues/2881)]]></description></item><item><title>Flutter 常用命令</title><link>http://www.cnblogs.com/teemwu/archive/2019/12/27/12105672.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 27 Dec 2019 01:41:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/12/27/12105672.html</guid><description><![CDATA[### 新建项目
+
+```bash
+flutter create project_name
+```
+
+### 安装所需包
+如果使用 vscode 开发，安装了相关插件的话，改动 pubspec.yaml 文件就会自动增删包。
+
+```bash
+flutter packages get
+```
+
+或者
+
+```bash
+flutter pub get
+```
+
+### 打包app
+
+```bash
+// Android
+flutter build apk
+
+// ios
+flutter build ios
+```
+
+###  发布版本调试
+
+```bash
+flutter run  --release
+```
+发布版本测试需要连接真机方能调试。
+
+### 更新 Flutter 版本
+
+```bash
+flutter upgrade
+```
+
+国内需要设置镜像，否则更新下载失败，[参考](https://flutter.cn/community/china)
+
+mac下终端输入： 
+```bash
+open ~/.bash_profile 
+```
+
+添加镜像设置：
+```bash
+export PUB_HOSTED_URL=https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+```
+]]></description></item><item><title>File ignored by default.  Use a negated ignore pattern (like "--ignore-pattern '!'") to override.</title><link>http://www.cnblogs.com/teemwu/archive/2019/12/17/12055028.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 17 Dec 2019 07:59:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/12/17/12055028.html</guid><description><![CDATA[### 说明
+使用 vue-cli 创建工程，将 eslint 的配置单独出 .eslintrc.js 文件时，出现此警告
+
+![](https://img2018.cnblogs.com/blog/831280/201912/831280-20191217155549754-696472232.png)
+
+### 解决方法
+项目根目录增加文件名为 .eslintignore 的文件，并在此文件中添加
+
+```
+!.eslintrc.js
+```
+
+### 参考
+
+[https://github.com/eslint/eslint/blob/d31f3370396ec4868722bdc044aa697b135ac183/.eslintignore#L13](https://github.com/eslint/eslint/blob/d31f3370396ec4868722bdc044aa697b135ac183/.eslintignore#L13)]]></description></item><item><title>Echart 配置项合并</title><link>http://www.cnblogs.com/teemwu/archive/2019/12/17/12053248.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 17 Dec 2019 02:57:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/12/17/12053248.html</guid><description><![CDATA[最近使用 echart 做数据可视化，遇到一个需求，就是需要将默认配置项和后台返回的数据项合并。第一时间是想到直接使用原生 JavaScript 的 [Object.assign](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)来处理，echart 的配置项层级较深，用 Object.assign 不适合。在网上找了一大堆方法，都没能解决一个问题，就是对象下数组的合并都没能保留数组的字段对比。
+
+后来，想起了强大的 [lodash](https://lodash.com/)，其 [merge](https://lodash.com/docs/4.17.15#merge)方法完全符合自己的需求。
+
+只想单独使用 merge 方法，可以直接安装 lodash.merge 包
+
+```bash
+npm i lodash.merge
+```
+
+使用
+```javascript
+import merge from 'lodash.merge'
+// ......
+merge({},defaultOption,otherOption,dataOption)
+// ......
+```
+注：将所有配置项合并到 {} ，不用 defaultOption 作为源，是防止合并后 defaultOption 被改变，]]></description></item><item><title>MacOS 在终端打开 vscode</title><link>http://www.cnblogs.com/teemwu/archive/2019/12/02/11969276.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 02 Dec 2019 02:39:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/12/02/11969276.html</guid><description><![CDATA[### 用vscode打开当前文件夹
+
+```bash
+code .
+```
+如果提示没有该命令，怎需要添加一下 PATH 指向，具体如下：
+`打开VSCode –> command+shift+p –> 输入shell command –> 点击提示Shell Command: Install ‘code’ command in PATH运行`
+### 打开vscode
+
+```bash
+open -a 'Visual Studio Code.app' [要用vscode打开的文件夹或文件名称]
+```
+
+### 相关命令
+```bash
+open -h
+```
+输出结果
+```bash
+Usage: open [-e] [-t] [-f] [-W] [-R] [-n] [-g] [-h] [-s <partial SDK name>][-b <bundle identifier>] [-a <application>] [filenames] [--args arguments]
+Help: Open opens files from a shell.
+      By default, opens each file using the default application for that file.  
+      If the file is in the form of a URL, the file will be opened as a URL.
+Options: 
+      -a                Opens with the specified application.
+      -b                Opens with the specified application bundle identifier.
+      -e                Opens with TextEdit.
+      -t                Opens with default text editor.
+      -f                Reads input from standard input and opens with TextEdit.
+      -F  --fresh       Launches the app fresh, that is, without restoring windows. Saved persistent state is lost, excluding Untitled documents.
+      -R, --reveal      Selects in the Finder instead of opening.
+      -W, --wait-apps   Blocks until the used applications are closed (even if they were already running).
+          --args        All remaining arguments are passed in argv to the application's main() function instead of opened.
+      -n, --new         Open a new instance of the application even if one is already running.
+      -j, --hide        Launches the app hidden.
+      -g, --background  Does not bring the application to the foreground.
+      -h, --header      Searches header file locations for headers matching the given filenames, and opens them.
+      -s                For -h, the SDK to use; if supplied, only SDKs whose names contain the argument value are searched.
+                        Otherwise the highest versioned SDK in each platform is used.
+```]]></description></item><item><title>开发微信小程序环境配置(vscode)</title><link>http://www.cnblogs.com/teemwu/archive/2019/10/31/11764850.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 31 Oct 2019 04:05:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/10/31/11764850.html</guid><description><![CDATA[### 插件
+- [minapp](https://marketplace.visualstudio.com/items?itemName=qiu8310.minapp-vscode)
+    微信小程序标签、属性的智能补全（同时支持原生小程序、mpvue 和 wepy 框架，并提供 snippets)
+- [wechat-snippet](https://marketplace.visualstudio.com/items?itemName=ChandZhang.wechat-snippet)
+    微信小程序代码辅助,代码片段自动完成
+- [wepy snippets](https://marketplace.visualstudio.com/items?itemName=wleven.wepy-snippets)
+    微信小程序 wepy 框架, wepy 框架代码片段
+
+### 文件解析语言类型设置
+ - wxml
+    通过 html 进行解析，setting.json 中添加
+ ```json
+// 禁止内联样式报错
+"html.validate.styles": false 
+// 强制属性换行对其
+"html.format.wrapAttributes": "force-aligned"
+```
+- wxs
+    直接设置 JavaScript 作为解析语言]]></description></item><item><title>利用 switch 语句进行范围判断(javascript)</title><link>http://www.cnblogs.com/teemwu/archive/2019/10/30/11763445.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 30 Oct 2019 02:42:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/10/30/11763445.html</guid><description><![CDATA[```javascript
+const x = this.dealer;
+switch (true) {
+    case (x < 5):
+        alert("less than five");
+        break;
+    case (x < 9):
+        alert("between 5 and 8");
+        break;
+    case (x < 12):
+        alert("between 9 and 11");
+        break;
+    default:
+        alert("none");
+        break;
+}
+```
+
+### 参考
+[https://stackoverflow.com/a/5619997](https://stackoverflow.com/a/5619997)]]></description></item><item><title>nginx + php + https 配置</title><link>http://www.cnblogs.com/teemwu/archive/2019/10/10/11651336.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 10 Oct 2019 15:23:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/10/10/11651336.html</guid><description><![CDATA[```apache
+server {
+        listen 80;
+        server_name   你的域名或IP;
+        rewrite ^(.*)$  https://$host$1 permanent;
+}
+
+server {
+        listen 443 ssl;
+        server_name 你的域名或IP;
+        root 站点文件路径;
+        index index.php index.html;
+
+        ssl_certificate   证书.pem文件路径;
+        ssl_certificate_key  证书.key文件路径;
+
+        location ~ \.php$ {
+                fastcgi_pass   127.0.0.1:9000;
+                fastcgi_index  index.php;
+                fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include        fastcgi_params;
+        }
+}
+```
+更改保存后需要重新加载下 nginx 配置文件
+```apache
+nginx -s reload
+```]]></description></item><item><title>日期获取的特殊情况(javascript)</title><link>http://www.cnblogs.com/teemwu/archive/2019/07/22/11227647.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 22 Jul 2019 10:34:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/07/22/11227647.html</guid><description><![CDATA[### 月份的获取
+``` javascript
+
+new Date(2019,07,22).getMonth()
+// 返回 7
+
+new Date('2019-07-22').getMonth()
+// 返回 6
+
+```
+
+### iOS 系统下‘ yyyy-MM-dd '写法兼容
+```javascript
+new Date('2019-07-22T18:00')
+```
+
+### ios 下多了8个小时
+需要将 ‘-’ 替换成 ‘/’
+```javascript
+new Date('2020/06/18')
+```]]></description></item><item><title>Windows10 下 vscode  remote-ssh 连接阿里云 ECS 云主机</title><link>http://www.cnblogs.com/teemwu/archive/2019/06/10/10996600.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 10 Jun 2019 03:08:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/06/10/10996600.html</guid><description><![CDATA[使用 Linux 服务器对我来说一直有个痛点，就是要用 **Vi** 或者 **Vim** 来编辑文件，在没有进行定制和对操作命令熟悉前，完全是懵逼的，使用惯现代化编辑器，突然间没有语法高亮，不能自动提醒，简直让人没脾气。。。还好，如今 vscode 可以实现本地编辑了。在预览版 vscode 上就想试一下了，可没时间弄，如今稳定版全面支持，所以花了点时间来整理下，中间遇到挺多坑的，主要是太久没搞 SSH 了，参照官方文档，总的下来还是比较顺利的，下面记录下配置过程。
+
+### 具体操作
+
+1. ECS 云主机需要开启 ssh 服务，此处假设你已准备妥当，略。
+2. 检测本地命令行是否具备 ssh 访问远程服务器的能力（本人使用 MobaXterm 进行 SSH ，故命令行里是不具备 ssh 访问远程服务器能力的，需要按照以下步骤配置）
+    2.1. ` Win + X ` 然后 ` A ` 键，以管理者权限运行 powershell 
+    2.2. 执行 ` ssh 登陆名@服务器IP地址 `（如果成功登陆服务器则可以跳过以下步骤）
+    2.3. 安装本地运行 ssh 环境，命令行执行 ` Get-WindowsCapability -Online | ? Name -like 'OpenSSH*' `
+    2.4. 若没报错则继续执行 ` Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0 `，否则参考文末相关链接或搜索引擎解决
+    2.5. 重复执行步骤 2.2
+    2.6. 如果连接时[登陆错误](https://help.aliyun.com/knowledge_detail/41471.html)，在本地 .ssh 配置中找到 ` known_hosts ` 文件删除即可（默认安装路径 ` C:\Users\你的本机用户名\.ssh `）
+    2.7. 重新连接，选 yes ，输入密码即可
+3. vscode 安装 [remote-ssh](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) 扩展
+    3.1. 安装完毕，在 vscode ` setting `里搜索 ` remote.SSH.showLoginTerminal ` 配置项，并开启它（倘若此项没开启，连接服务器时将会一直停留在连接状态）
+    3.2. vscode 中` F1 `或者` Ctrl + Shift + P ` 打开命令查找，输入 `Remote-SSH:Open Configuration File `，选择打开 ` C:\Users\你的本机用户名\.ssh\config ` 文件
+
+              // config 文件
+             Host AliServer2 // AliServer2 只是远程服务器的一个别名，随意起
+             HostName XXX.XX.XX.XXX // 你的服务器公网IP
+             User root // 登陆服务器的用户名
+
+    3.3. 再次打开命令查找，输入` Remote-SSH:Connect Current Window to Host ` ，选择刚配置好的远程服务 ` AliServer2 `，等待连接
+    3.4. 如果出现 **Host key verification failed **报错，可参考步骤 2.6 解决 ![](https://img2018.cnblogs.com/blog/831280/201906/831280-20190610103558585-736906839.png) 
+    3.5. 连接成功在 vscode 的 TEMINAL （<kbd>Ctrl + `</kbd> 可快速打开）中会提示输入登陆密码，回车即可
+4. 执行以上步骤后，会重新打开一个 vscode 窗口，可能需要多次输入登陆密码（不想频繁输入密码，可参照 [文档](https://code.visualstudio.com/docs/remote/troubleshooting#_enabling-alternate-ssh-authentication-methods) 自行配置），连接成功后在 vscode 文件管理目录（` Ctrl + Shift + E `快捷键打开），点击 **Open Folder** 按钮，至此，我们就可以在 vscode 本地编辑远程服务器上的文件了。
+
+
+### 参考
+
+- [ttps://code.visualstudio.com/docs/remote/ssh](https://code.visualstudio.com/docs/remote/ssh)
+- [https://docs.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse](https://docs.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse)]]></description></item><item><title>扩展源码获取(chrome)</title><link>http://www.cnblogs.com/teemwu/archive/2019/05/28/10939817.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 28 May 2019 11:48:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/05/28/10939817.html</guid><description><![CDATA[平时在使用别人的 chrome 扩展时总是觉得有些地方觉得做得不好，不过总体来说这个扩展对自己来说又必不可少，所以萌生了想改这个扩展的念头。
+
+参考网友经验，可以通过以下几个步骤获取扩展源码：
+- "chrome://version/" ->个人资料路径 (获取已安装扩展的目录路径)
+
+- “chrome://extensions/”-> ID:XXXXXXXXXX(找到插件的ID)
+
+- 根据目录和 ID 就可以找到扩展源码了]]></description></item><item><title>async/await、promise 遍历</title><link>http://www.cnblogs.com/teemwu/archive/2019/05/23/10910484.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 23 May 2019 02:34:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/05/23/10910484.html</guid><description><![CDATA[### for 遍历语句
+
+```javascript
+
+async function run() {
+  for (let i = 0; i < 2; i++) {
+    for (let j = 0; j < 2; j++) {
+      await new Promise(resolve => {
+        setTimeout(async () => {
+          await new Promise(resolve => {
+            setTimeout(() => {
+              console.log(1)
+              resolve()
+            }, 3000)
+          })
+          console.log(2)
+          resolve()
+        }, 2000)
+      })
+    }
+  }
+  console.log(3)
+}
+run()
+console.log(0)
+
+// 输出顺序
+// 0
+// 1
+// 2
+// 1
+// 2
+// 1
+// 2
+// 1
+// 2
+// 3
+
+```
+需要注意的是，async 的影响范围只在其作用函数方法内，所以先输出 ‘0’；再则根据 await 一层一层地往里面执行，resolve 不能改名，且必须要在执行完各项操作后返回，否则会中断其后所有操作！
+
+### forEach 方法遍历
+
+```javascript
+
+async function run() {
+  let arr = []
+  let target = [1, 2]
+  target.forEach(i => {
+    arr.push(
+      new Promise(resolve => {
+        setTimeout(() => {
+          console.log(1)
+          resolve()
+        })
+      })
+    )
+  })
+  await Promise.all(arr).then(val => {
+    console.log(2)
+  })
+  console.log(3)
+}
+run()
+console.log(0)
+
+// result
+// 0
+// 1
+// 1
+// 2
+// 3
+
+```]]></description></item><item><title>正则表达式批量替换路径(vscode)</title><link>http://www.cnblogs.com/teemwu/archive/2019/04/11/10691529.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 11 Apr 2019 10:29:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/04/11/10691529.html</guid><description><![CDATA[由于项目文件目录整改，需要将文件中所有的引用路径进行更改，比较快捷的方法便是使用 vscode 的正则匹配进行批量查找、替换。
+
+原本文件路径为 `../../assets/图片名.png`
+
+现在想改为 `../../assets/img/图片名.png`
+
+查找的正则表达式：`..\/assets\/(.*).png`
+
+替换的表达式：`../assets/img/$1.png`
+
+![](https://img2018.cnblogs.com/blog/831280/201904/831280-20190411182605715-250856227.png)
+
+可能存在的问题，vscode 会提示开启开启 PCRE2 搜索引擎，在设置中开启即可。]]></description></item><item><title>The process cannot access the file because it is being used by another process</title><link>http://www.cnblogs.com/teemwu/archive/2019/04/09/10678693.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 09 Apr 2019 10:06:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/04/09/10678693.html</guid><description><![CDATA[在用 electron-builder 打包时，时常会出现 “The process cannot access the file because it is being used by another process.” 这个报错，字面意思是因另外一个进程在使用文件，所以现在不能操作此文件。报错如图：
+
+![](https://img2018.cnblogs.com/blog/831280/201904/831280-20190409175329086-660735822.png)
+
+由于这个报错是偶尔发生的，排除了很久才解决，故做下笔记。
+
+### 网上的方法
+
+vscode "设置" 里排除掉 "win-unpacked" 文件夹的监测
+
+```json
+{
+  "files.watcherExclude": {
+    "**/build/win-unpacked/**": true
+  }
+}
+````
+理由是 vscode 会检测项目文件的变化，然而按照此方法设置了依旧还是会报错。所以根本原因不在此。。
+
+### 解决
+
+***不要启用 “live server” 插件！***
+
+因为项目要做自动更新，图个方便，开启了 “live server” 服务，由于此插件就像一个服务器，已开启就会检测项目的根目录，开启后，即使再关闭，其检测文件的进程依旧存在，这是就需要重启 vscode 了。]]></description></item><item><title>对象深拷贝(javascript)</title><link>http://www.cnblogs.com/teemwu/archive/2019/04/03/10646905.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 03 Apr 2019 01:48:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/04/03/10646905.html</guid><description><![CDATA[### 一、` JSON.parse`  &  ` JSON.stringify ` 【ES5】
+
+```javascript
+const cloneObj=JSON.parse(JSON.stringify(originObj))
+```
+
+### 二、` ... ` 延展操作符 【ES8】
+
+```javascript
+const cloneObj={...originObj}
+```
+
+### 三、]]></description></item><item><title>Eslint 自动格式化(vscode)</title><link>http://www.cnblogs.com/teemwu/archive/2019/04/01/10635620.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 01 Apr 2019 06:11:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/04/01/10635620.html</guid><description><![CDATA[###  设置中搜索关键词 “semicolon” 
+
+新版本 vscode 在设置那可以根据关键词来进行搜索，找到相关配置进行勾选设置，如图，将勾勾去掉保存设置即可
+
+![](https://img2018.cnblogs.com/blog/831280/201904/831280-20190401115700919-357821569.png)
+
+###  直接在 "settings.json" 文件中修改
+
+```json
+    {
+      "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+       "prettier.semi": false,
+       "typescript.format.insertSpaceAfterSemicolonInForStatements": false
+    }
+```
+
+### 在 “.prettierrc" 文件中设置
+
+```json
+    {
+      "singleQuote": true,
+      "semi": false
+    }
+```
+
+这里要注意的是，”Prettier - Code formatter“ 这个插件是先判断项目根目录是否存在 ".prettierrc" 配置文件，如果存在则不再读取 “settings.json" 中 prettier 的相关配置了。
+因此，如果根目录的 ”.prettierrc" 没有设置 ` "semi": false ` 则在 “settings.json" 里设置 `  "prettier.semi": false ` 无效。
+
+### 自动格式化
+
+```json 
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+    },
+```]]></description></item><item><title>苹果重置安全问题</title><link>http://www.cnblogs.com/teemwu/archive/2019/01/18/10286452.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 18 Jan 2019 02:48:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/01/18/10286452.html</guid><description><![CDATA[## 起因
+
+注册的苹果账号很久没登录，注册时安全问题乱填的，现在安全问题完全不记得了。尝试拨打客服电话寻求帮助，客服态度都很好，然而给我转了三趟客服都没解决（真的让人无力吐槽）。我的设备是 Ipad ，客服让我开启 “双重验证” 就好了，可是 Ipad 上点击 “ 双重验证” 还是回提示要核对安全提示问题。纠结好久，后来完美开启了 ”双重验证“ ！
+
+## 解决
+
+- 找来一台 iPhone 手机
+- 登录自个的 appleId 账号
+- ”设置“ 里找到 ”双重验证“ 点击 ”开启双重验证“
+- 发送短信到手机
+- 成功
+
+## 总结
+
+实质上安全问题应该是没用被重置，只是换了一种更高权限的验证方式而已。
+
+## 参考
+
+[重设Apple安全问题时，显示没有足够信息以重设您的安全提示问题](https://www.zhihu.com/question/53828586)]]></description></item><item><title>个人博客搭建(hexo)</title><link>http://www.cnblogs.com/teemwu/archive/2019/01/13/10262335.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Sun, 13 Jan 2019 05:01:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/01/13/10262335.html</guid><description><![CDATA[老早就想搭建一个属于自己的个人博客了，之前也弄过一个，后台到前端完全原生自主编写，可是终究还是太年轻，很多东西都不会，也不懂得坚持，慢慢就荒废了。加上几次的服务器变更，再加上工作没精力打理，之前的个人博客已经完全荒废了。经过2018年一年时间的沉淀，决定再次搭建一个属于自己的博客了，之前一直在 [博客园](https://www.cnblogs.com/fiy-noob/) 潜水，平时也没怎么输出，记录几个随笔。2019年，决定好好地写一下博客。计划每周写一篇吧，以周为单位，不断吸取新的东西，整理输出。
+
+<!-- more -->
+
+## 开始前
+
+本篇主要记录如何将 hexo 博客部署到服务端，因此 git 和 node 的安装和配置需要自行准备。
+
+### 操作系统&环境
+
+- 本地：Windows10
+- ECS服务器：Ubuntu18.04（阿里云）
+- 安装 git
+- 安装 node
+
+### Hexo 安装
+
+```bash
+$ npm install -g hexo-cli
+$ hexo init <folder>
+$ cd <folder>
+$ npm install
+```
+
+## 部署到服务器
+
+hexo 安装和配置好主题之后便是日常的写作发布了，可是要怎么才能比较优雅地写作及发布呢？参考了网上的做法以及考虑到后期自己需要 DIY 的需求，决定在本地环境生成博客静态文件，然后通过 git 推送到服务器 git 仓库，再设置 git-hooks 来进行自动部署。具体思路如图：
+
+![hexo-deploy](https://raw.githubusercontent.com/Teemwu/images/master/blog/hexo-deploy.png)
+
+### 服务器端配置
+
+由于自个的 Linux 和 git 都不是很好，因此在这一块耗了很长时间（在此立个flag，要认真研究一下！）。好啦，下面将会是一堆命令操作，用惯 Windows 可能会不大适应~_~不要紧，按顺序一步一步来。
+
+```bash
+mkdir -p /var/www/blog // 创建存放博客静态文件的目录
+useradd git // Linux增加一个 git 用户
+passwd git // 设置 git 用户的密码
+su git // 切换到 git 用户
+cd /home/git/ // 如果没有 /home/git 目录则自行创建
+mkdir repos && cd repos
+git init --bare blog.git // 创建一个 git 裸库
+cd blog.git/hooks
+vi post-receive // 创建hook钩子函数，并输入以下内容
+```
+post-receive:
+
+```bash
+#!/bin/sh
+git --work-tree=/var/www/blog --git-dir=/home/git/repos/blog.git checkout -f
+```
+
+保存完毕后继续以下命令
+
+```bash
+chmod +x post-receive // 赋予执行权限
+exit // 退出 git 用户
+chown -R git /home/git/repos/blog.git // 将 blog.git 文件夹及文件夹下所有文件所有者设置为 git 用户
+chown -R git ~/.ssh // 原理同上句，如果没有 .ssh 文件夹请自行创建
+```
+上面就是服务端所要的配置，在执行命令的时候可能会报错，可以参考文末“参考”部分解决。
+
+### Windows 本地配置
+打开 "Git Bash" 命令行工具，执行以下命令
+
+```bash
+ssh-copy-id -i C:/Users/yourname/.ssh/id_rsa.pub git@server_ip // 将公钥复制到服务器上
+ssh git@server_ip //测试是否无需密码登录
+```
+
+如果没有报错就可以打开 hexo 博客项目，否则按照报错提示去找解决方法。
+在博客跟目录打开 _config.yml 主配置文件找到 deploy 属性进行以下配置：
+
+```yaml
+deploy:
+  type: git
+  repo: git@server_ip:/home/git/repos/blog.git
+  branch: master
+```
+
+然后在博客根目录执行以下命令
+
+```bash
+hexo g // 生成静态页面文件
+hexo d // 部署到服务器
+```
+
+至此个人博客已经上传到ECS云服务器上了，至于要怎么给外界访问，就要使用 Nginx、Apache 等 web 服务器软件咯。具体配置自行搜索咯。
+
+## 参考
+
+- [Hexo 官方文档](https://hexo.io/docs/deployment)
+- [带你跳过各种坑，一次性把 Hexo 博客部署到自己的服务器](https://juejin.im/post/5b70d68ae51d45665d383281)
+- [自定义 Git - Git 钩子](https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)
+- [linux修改文件所有者和文件所在组](https://www.cnblogs.com/DawaTech/p/7249734.html)
+- [裸库? git init 和 git init --bare 的区别](https://segmentfault.com/q/1010000004683286/a-1020000004684388)
+- [git is not in the sudoers file.  This incident will be reported.](https://www.cnblogs.com/felixzh/p/5062082.html)
+- [如何优雅地发布Hexo博客](https://www.jianshu.com/p/68e727dda16d)]]></description></item><item><title>远程桌面共享多个显示屏(windows10)</title><link>http://www.cnblogs.com/teemwu/archive/2019/01/10/10251567.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 10 Jan 2019 10:05:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2019/01/10/10251567.html</guid><description><![CDATA[## 起因
+
+平时时喜欢用自己的笔记本电脑远程桌面到公司的工作电脑主机进行工作，公司分配的工作机配置方面都挺好的，主要还是喜欢用自己的笔记本敲代码。然而，有时候觉得自己笔记一个显示屏不大够用，想做屏幕扩展投影，可以外置显示器。常理来说，Windows10直接连上外置显示器再“Windows键+P键”就能进行扩展投影了，可是怎么将远程桌面内的桌面进行扩展投影呢？这个问题困扰了我好久，由于需求不大所以一直没理会，今天刚好有空，整理一番。
+
+### 解决
+
+其实这个很简单，直接将本地在远程桌面那设置 “将我的所有监视器用于远程会话" 就好了,如图
+
+
+![](https://img2018.cnblogs.com/blog/831280/201901/831280-20190110180439606-1982536283.png)]]></description></item><item><title>设置窗口默认最大化、全屏(electron)</title><link>http://www.cnblogs.com/teemwu/archive/2018/12/11/10100548.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 11 Dec 2018 01:47:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/12/11/10100548.html</guid><description><![CDATA[<h3>一、默认最大化</h3>
+<div class="cnblogs_code">
+<pre>win = <span style="color: #0000ff;">new</span> BrowserWindow({show: <span style="color: #0000ff;">false</span><span style="color: #000000;">})
+win.maximize()
+win.show()</span></pre>
+</div>
+<h3>二、默认全屏</h3>
+<div class="cnblogs_code">
+<pre>win = <span style="color: #0000ff;">new</span> BrowserWindow({fullscreen: <span style="color: #0000ff;">true</span>})</pre>
+</div>
+<p><strong>参考：</strong></p>
+<ol>
+<li><a href="https://electronjs.org/docs/api/browser-window#browserwindow-setfullscreen-flag" target="_blank">https://electronjs.org/docs/api/browser-window#browserwindow-setfullscreen-flag</a></li>
+<li><a href="https://github.com/electron/electron/issues/7076" target="_blank">https://github.com/electron/electron/issues/7076</a></li>
+<li><a href="https://stackoverflow.com/questions/39062131/electron-set-fullscreen-onclick" target="_blank">https://stackoverflow.com/questions/39062131/electron-set-fullscreen-onclick</a></li>
+</ol>]]></description></item><item><title>Failed to write coverage reports ERROR Error EEXIST file already exists, mkdir...</title><link>http://www.cnblogs.com/teemwu/archive/2018/12/04/10065445.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 04 Dec 2018 09:27:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/12/04/10065445.html</guid><description><![CDATA[<p>配置 vue 的 jest 单元测试时报错如下：</p>
+<div class="cnblogs_code">
+<pre> Failed to <span style="color: #0000ff;">write</span><span style="color: #000000;"> coverage reports:
+        ERROR: Error: EEXIST: </span><span style="color: #0000ff;">file</span> already exists, <span style="color: #0000ff;">mkdir</span> <span style="color: #800000;">'</span><span style="color: #800000;">xxx\tests\coverage\vue-cli-3\dist\js</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        STACK: Error: EEXIST: </span><span style="color: #0000ff;">file</span> already exists, <span style="color: #0000ff;">mkdir</span> <span style="color: #800000;">'</span><span style="color: #800000;">xxx\tests\coverage\vue-cli-3\dist\js</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    at Object.mkdirSync (fs.js:</span><span style="color: #800080;">738</span>:<span style="color: #800080;">3</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">71</span>:<span style="color: #800080;">13</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">77</span>:<span style="color: #800080;">24</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">78</span>:<span style="color: #800080;">17</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">78</span>:<span style="color: #800080;">17</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">78</span>:<span style="color: #800080;">17</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">78</span>:<span style="color: #800080;">17</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">78</span>:<span style="color: #800080;">17</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">78</span>:<span style="color: #800080;">17</span><span style="color: #000000;">)
+    at </span><span style="color: #0000ff;">sync</span> (xxx\node_modules\mkdirp\index.js:<span style="color: #800080;">78</span>:<span style="color: #800080;">17</span>)</pre>
+</div>
+<p>百度、谷歌没有无果。后来修改了&nbsp;jest.config.js 里的&nbsp;collectCoverageFrom 匹配规格解决问题。</p>
+<p>将</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> jest.config.js</span>
+model.export=<span style="color: #000000;">{
+  </span><span style="color: #008000;">//</span><span style="color: #008000;"> ...</span>
+<span style="color: #000000;">    collectCoverageFrom: [
+    　　</span>'**/*.{js,vue}'<span style="color: #000000;">,
+    　　</span>'!**/node_modules/**'<span style="color: #000000;">
+  　],
+  </span><span style="color: #008000;">//</span><span style="color: #008000;"> ...      </span>
+}</pre>
+</div>
+<p>改成</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> jest.config.js</span>
+model.export=<span style="color: #000000;">{
+  </span><span style="color: #008000;">//</span><span style="color: #008000;"> ...</span>
+<span style="color: #000000;">    collectCoverageFrom: [
+    　  </span>'src/**/*.{js,vue}'<span style="color: #000000;">,
+        </span>'!src/main.js'<span style="color: #000000;">,
+        </span>'!src/router/index.js'<span style="color: #000000;">,
+        </span>'!**/node_modules/**'<span style="color: #000000;">
+  　],
+  </span><span style="color: #008000;">//</span><span style="color: #008000;"> ...      </span>
+}</pre>
+</div>
+<p>&nbsp;</p>]]></description></item><item><title>"Cannot read property 'fileCoverage' of undefined..."</title><link>http://www.cnblogs.com/teemwu/archive/2018/12/04/10065273.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 04 Dec 2018 09:10:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/12/04/10065273.html</guid><description><![CDATA[<div class="cnblogs_code">
+<pre>Failed to collect coverage from xxx<span style="color: #000000;">.js
+ERROR: Cannot read property </span><span style="color: #800000;">'</span><span style="color: #800000;">fileCoverage</span><span style="color: #800000;">'</span><span style="color: #000000;"> of undefined
+STACK: TypeError: Cannot read property </span><span style="color: #800000;">'</span><span style="color: #800000;">fileCoverage</span><span style="color: #800000;">'</span><span style="color: #000000;"> of undefined
+    at Instrumenter.instrumentSync (xxx</span>.js:<span style="color: #800080;">148</span>:<span style="color: #800080;">40</span><span style="color: #000000;">)
+    at exports.default (xxx</span>.js:<span style="color: #800080;">32</span>:<span style="color: #800080;">18</span><span style="color: #000000;">)
+    at Object.worker (xxx</span>.js:<span style="color: #800080;">52</span>:<span style="color: #800080;">80</span><span style="color: #000000;">)
+    at execMethod (xxx</span>.js:<span style="color: #800080;">90</span>:<span style="color: #800080;">29</span><span style="color: #000000;">)
+    at process.on (xxx</span>.js:<span style="color: #800080;">40</span>:<span style="color: #800080;">7</span><span style="color: #000000;">)
+    at process.emit (events.js:</span><span style="color: #800080;">182</span>:<span style="color: #800080;">13</span><span style="color: #000000;">)
+    at emit (internal</span>/child_process.js:<span style="color: #800080;">811</span>:<span style="color: #800080;">12</span><span style="color: #000000;">)
+    at process._tickCallback (internal</span>/process/next_tick.js:<span style="color: #800080;">63</span>:<span style="color: #800080;">19</span>)</pre>
+</div>
+<p>在用 jest 进行项目的代码覆盖率测试的时候报以上错误，经排查，是项目之前使用了 Babel 的<a href="https://yarnpkg.com/zh-Hans/package/istanbul" target="_blank">&nbsp;istanbul</a>&nbsp;代码覆盖率插件，如果再开启 jest 的 &ldquo;&nbsp;collectCoverage: true &rdquo; 时就会造成冲突。</p>
+<p>解决：在 babel 的配置文件&nbsp;.babelrc 里去掉插件 istanbul 的配置</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> .babelrc</span>
+<span style="color: #000000;">{
+  ...
+  </span>"env"<span style="color: #000000;">: {
+    </span>"test"<span style="color: #000000;">: {
+      </span>"plugins": [ "istanbul" ] <span style="color: #008000;">//</span><span style="color: #008000;"> 去掉 istanbul</span>
+<span style="color: #000000;">    }
+  }
+}</span></pre>
+</div>]]></description></item><item><title>修改 hosts</title><link>http://www.cnblogs.com/teemwu/archive/2018/12/04/10063842.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 04 Dec 2018 06:15:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/12/04/10063842.html</guid><description><![CDATA[<p>最近发现 medium 访问不了，即使开了梯子也不行，后来修改了host能正常访问。</p>
+<h3>具体操作：</h3>
+<ol>
+<li>找到系统使用的host文件用编辑器打开（我用VS code）</li>
+<li>将下载host文件打开复制到系统的host里</li>
+<li>保存host文件并刷新dns配置<br /><br /></li>
+
+
+</ol>
+<h3>host文件路径：</h3>
+<h5>Windows</h5>
+<div class="cnblogs_code">
+<pre>C:\Windows\System32\drivers\etc\hosts</pre>
+</div>
+<h5><a id="user-content-mac-osx" class="anchor" href="https://github.com/highsea/Hosts#mac-osx"></a>macOS &amp; linux</h5>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">sudo</span> vi /etc/hosts</pre>
+</div>
+<h3>&nbsp;</h3>
+<h3>刷新dns配置：</h3>
+<h5>Windows</h5>
+<div class="cnblogs_code">
+<pre>ipconfig /flushdns</pre>
+</div>
+<h5>macOS</h5>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">sudo</span> dscacheutil -flushcache</pre>
+</div>
+<p>&nbsp;</p>
+<h3><em>hosts</em>文件下载：</h3>
+<p><a href="https://github.com/googlehosts/hosts/tree/master/hosts-files" target="_blank">https://github.com/googlehosts/hosts/tree/master/hosts-files</a></p>
+<p>&nbsp;</p>]]></description></item><item><title>JS数组去重方法</title><link>http://www.cnblogs.com/teemwu/archive/2018/11/26/10021511.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 26 Nov 2018 09:14:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/11/26/10021511.html</guid><description><![CDATA[<p><strong>方法一、&nbsp;<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter" target="_blank">Array.filter()</a></strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> arr=[1,2,1,2,3<span style="color: #000000;">]
+</span><span style="color: #0000ff;">var</span> uniqueArray=arr.filter(<span style="color: #0000ff;">function</span><span style="color: #000000;">(item,pos){
+   </span><span style="color: #0000ff;">return</span> arr.indexOf(item)==<span style="color: #000000;">pos 
+})<br />console.log( uniqueArray ) //[1,2,3]</span></pre>
+</div>
+<p><strong>&nbsp;方法二、<code><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Set" target="_blank">Set.prototype</a></code></strong></p>
+<div class="cnblogs_code">
+<pre>const set1 = <span style="color: #0000ff;">new</span> Set([1, 2, 3, 2, 1<span style="color: #000000;">])
+
+console.log(set1) </span><span style="color: #008000;">//</span><span style="color: #008000;"> [1,2,3]</span></pre>
+</div>
+<p><strong>&nbsp;方法三、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" target="_blank">Array.prototype.reduce()</a></strong></p>
+<div class="cnblogs_code">
+<pre>let arr=[1,2,1,2,3<span style="color: #000000;">]
+const uniqueArray</span>=arr.sort().reduce((init,current)=&gt;<span style="color: #000000;">{
+   </span><span style="color: #0000ff;">if</span>(init.legnth===0||init[init.length-1]===<span style="color: #000000;">current){
+       init.push(current) 
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> init
+},[])<br />console.log(uniqueArray) // [1,2,3]</span></pre>
+</div>
+<p>&nbsp;</p>
+<div class="document-actions">&nbsp;</div>
+<p>参考：</p>
+<ol>
+<li><a href="https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array" target="_blank">https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array</a></li>
+<li>https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter</li>
+</ol>]]></description></item><item><title>矩阵乘积</title><link>http://www.cnblogs.com/teemwu/archive/2018/11/15/9961766.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 15 Nov 2018 01:47:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/11/15/9961766.html</guid><description><![CDATA[<p>在 codewars 做练习题时遇到&nbsp;<a href="https://www.codewars.com/kata/matrix-multiplier/train/javascript" target="_blank">一道矩阵相关的题目</a>，一开始挺懵逼的，因为相关的的概念忘得差不多了，于是查了一下&nbsp;<a href="https://baike.baidu.com/item/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/5446029" target="_blank">资料</a>&nbsp;</p>
+<p>可知矩阵 A、B 乘积 ( C=AB ) 满足的条件是：</p>
+<blockquote>
+<div class="para">1、当矩阵A的列数等于矩阵B的行数时，A与B可以相乘。</div>
+<div class="para">2、矩阵C的行数等于矩阵A的行数，C的列数等于B的列数。</div>
+<div class="para">3、乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和&nbsp;</div>
+</blockquote>
+<div class="para">根据已知条件和题目要求可解：</div>
+<div class="para">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">function</span><span style="color: #000000;"> getMatrixProduct(a, b) {
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">If a and b can be multiplied, returns the product of a and b as a two-dimensional array. Otherwise returns -1.</span>
+    <span style="color: #0000ff;">if</span>(a[0].length!==b.length) <span style="color: #0000ff;">return</span> -1<span style="color: #000000;">
+    let aRows</span>=<span style="color: #000000;">a.length
+    let aCols</span>=a[0<span style="color: #000000;">].length
+    let bRows</span>=<span style="color: #000000;">b.length
+    let bCols</span>=b[0<span style="color: #000000;">].length
+    let result</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> Array(aRows)
+    </span><span style="color: #0000ff;">for</span>(let i=0;i&lt;aRows;i++<span style="color: #000000;">){
+      result[i]</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> Array(bCols)
+      </span><span style="color: #0000ff;">for</span>(let j=0;j&lt;bCols;j++<span style="color: #000000;">){
+        result[i][j]</span>=0
+        <span style="color: #0000ff;">for</span>(let k=0;k&lt;aCols;k++<span style="color: #000000;">){
+          result[i][j]</span>+=a[i][k]*<span style="color: #000000;">b[k][j]
+        }
+      }
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> result
+};</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>]]></description></item><item><title>console.log中复制打印的对象</title><link>http://www.cnblogs.com/teemwu/archive/2018/10/12/9776973.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 12 Oct 2018 03:07:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/10/12/9776973.html</guid><description><![CDATA[<p style="text-align: justify;">在使用console.log()打印我们的内容时，时常需要将打印的内容复制粘贴使用，然而控制台打印出来的对象是经过格式化处理且直接选择粘贴会有格式问题，此时我们可以通过控制台的<strong> copy()</strong>&nbsp;方法来进行打印结果的复制，如图所示：</p>
+<p style="text-align: justify;"><img src="https://img2018.cnblogs.com/blog/831280/201810/831280-20181012110410732-1868324189.gif" alt="" /></p>
+<p>当复copy执行完，内容已经放在系统粘贴板中，ctrl+v 粘贴就好。</p>
+<p>参考：<a href="https://stackoverflow.com/questions/10305365/javascript-chrome-how-to-copy-an-object-from-the-webkit-inspector-as-code" target="_blank">https://stackoverflow.com/questions/10305365/javascript-chrome-how-to-copy-an-object-from-the-webkit-inspector-as-code</a></p>]]></description></item><item><title>Eslint 忽略部分提示</title><link>http://www.cnblogs.com/teemwu/archive/2018/09/18/9668625.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Tue, 18 Sep 2018 06:15:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/09/18/9668625.html</guid><description><![CDATA[## 一、忽略JS中某一行错误提示
+
+在行末添加一下注释，其中 “错误类型” 为 eslint 提示的报错类型
+
+```ini
+// eslint-disable-line [错误类型]
+
+```
+
+如图（printJS 定义的是全局的，引入时是通过 _**import 'print-js'**_ 来引入，所以使用时 eslint 检测为未定义）
+
+![](https://img2018.cnblogs.com/blog/831280/201809/831280-20180918135232549-1892397420.png)
+
+解决：
+
+```
+printJS(this.cImg, 'image') // eslint-disable-line no-undef
+
+```
+
+## 二、忽略某些不常规的闭合标签报错
+
+在使用 iview 的 `<Col></Col>` 组件时会在 `</Col>` 提示错误，此时可以通过设置eslint配置文件(.eslintrc.js)的rules选项来解决
+
+```json
+//...
+rules:{
+'vue/no-parsing-error': [2, { 
+        "x-invalid-end-tag": false
+}
+}
+//...
+```
+
+如果用的是 VSCode 编辑器可能还要设置 `settings.json` 才能生效
+
+```ini
+//settings.json
+"vetur.validation.template": false
+```
+
+## 三、忽略 template 中的三元运算符使用小于号（<）时报错
+
+![](https://img2018.cnblogs.com/blog/831280/201809/831280-20180918141335019-289679511.png)
+
+解决：在 eslint 配置文件中设置 **_"invalid-first-character-of-tag-name": false_**
+
+```yaml
+ rules: {
+      'vue/no-parsing-error': [2, { 
+        "x-invalid-end-tag": false,
+        "invalid-first-character-of-tag-name": false
+     }]
+    }
+
+```
+
+ 相关讨论：[https://github.com/vuejs/eslint-plugin-vue/issues/370](https://github.com/vuejs/eslint-plugin-vue/issues/370)
+
+## 四、修改配置文件忽略关键字
+
+在遇到全局需要使用的 “ 未定义 ”变量（如微信小程序的 wx ）时，使用 _// eslint-disable-line no-undef_  显然不合理，所以我们应该在全局配置入手，可以在配置文件中的gobal下进行全局忽略变量
+
+```javascript
+// ...
+rules: {
+    'vue/no-parsing-error': [2, {
+      "x-invalid-end-tag": false,
+      "invalid-first-character-of-tag-name": false
+    }]
+  },
+  globals: {
+    wx: null
+  }
+// ...
+
+```
+
+## 五、忽略整个文件
+
+在文件内第一行添加 _/\* eslint-disable no-undef \*/_ 注释，需要注意的是，文件后缀为 .vue 等文件，需要加在 script 标签后方才生效。]]></description></item><item><title>Windows10开启Linux子系统</title><link>http://www.cnblogs.com/teemwu/archive/2018/09/10/9623452.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 10 Sep 2018 14:04:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/09/10/9623452.html</guid><description><![CDATA[<p>　　先说明下，本人之前基本上没接触过Linux，对Linux完全小白的那种。深知学习Linux的重要性，所以趁着最近工作不是很忙，找点时间来学习学习。顺便记录下吧，如果有错的地方欢迎指出~</p>
+<p>　　&ldquo; 工欲善其事，必利其器 &rdquo;，这句话用在这里可能不大恰当，总之就是先把环境搭好先，后续各种练习各种骚操作才能进行嘛。</p>
+<p>　　经过各种考量，最终选了使用Windows10的Linux子系统的功能，在微软应用商店下了 &rdquo; Ubuntu 18.04 &ldquo;</p>]]></description></item><item><title>解决微信小程序placeholder文字悬浮问题</title><link>http://www.cnblogs.com/teemwu/archive/2018/08/16/9489354.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 16 Aug 2018 11:23:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/08/16/9489354.html</guid><description><![CDATA[<h2><strong>方法一：</strong></h2>
+<p>在弹出层显示时隐藏input或者textarea组件，测试发现只有设置&rdquo;display:none&ldquo;才生效，设置"opacity:0"真机测试placeholder的文字依旧存在。当然也可以设置wx:if或hidden来显示隐藏，只不过这些做法都影响布局，<span style="text-decoration: line-through;">不推荐</span>。</p>
+<p>后来再想了下，其实可以在隐藏textarea的时候用view来模拟textarea显示内容，这样既不改变布局，也能合理地展示内容。</p>
+<h2><strong>方法二：</strong></h2>
+<p>通过&ldquo;<a href="https://developers.weixin.qq.com/miniprogram/dev/component/cover-view.html" target="_blank">cover-view</a>&rdquo;组件来写弹出层，不修改placeholder。</p>
+<p>官方原话：</p>
+<blockquote>
+<p>覆盖在原生组件之上的文本视图，可覆盖的原生组件包括<code>map</code>、<code>video</code>、<code>canvas</code>、<code>camera</code>、<code>live-player</code>、<code>live-pusher</code>，只支持嵌套<code>cover-view</code>、<code>cover-image</code>，可在<code>cover-view</code>中使用<code>button</code>。</p>
+</blockquote>
+<p>　这个做法适合在弹出层层级比较单一的时候，倘若弹出层是一个自定义的日历，且日历的每个组件都要使用coever-view，cover-image代替，其渲染性能会大大减弱。（其实picker组件也是可以在cover-view中使用的，具体是将其显示的值用cover-view包裹即可）</p>
+<h2><strong>方法三：</strong></h2>
+<p>通过控制&ldquo;placeholder-style"或者&rdquo;placeholder-class"来设置placeholder的颜色来显示或隐藏placeholder文字。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">textarea </span><span style="color: #ff0000;">placeholder-style</span><span style="color: #0000ff;">="color: transparent"</span><span style="color: #ff0000;"> placeholder</span><span style="color: #0000ff;">="请输入"</span><span style="color: #0000ff;">/&gt;</span></pre>
+</div>
+<p>&nbsp;</p>]]></description></item><item><title>微信小程序ios下禁用默认滚动事件</title><link>http://www.cnblogs.com/teemwu/archive/2018/08/10/9456774.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 10 Aug 2018 10:29:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/08/10/9456774.html</guid><description><![CDATA[<p>在微信小程序ios下，如果有一个scroll-view滚动列表，开始触摸点点在滚动列表外，向列表里拖拽列表是不会滚动的，这很正常，因为开始触摸点点在了滚动列表外。可是不正常的是ios下会出现&ldquo;反应不过来&rdquo;的现象，这很难表述，看下图</p>
+<p><img src="https://images2018.cnblogs.com/blog/831280/201808/831280-20180810175905946-38335818.png" alt="" /></p>
+<p>图中view：A用了fixed主要是防止ios下拉时系统自带的 &ldquo; 橡皮筋 &rdquo; 效果出现。手指从p1点滑动到p2点，scroll-view的滚动事件是不触发的，滑动到p2松开手快速在scroll-view里滑动，正常来说scroll-view内滚动事件已经触发了，可是ios下会出现卡住的现象，scroll-view内滚动事件依旧没触发，应该还是触发了系统的下拉事件。没找到什么好的解决方法，目前解决方法是给view：B的catchtouchmove加个空方法，' catch '是<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html?search-key=catchtouchmove" target="_blank">阻止事件冒泡</a>。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:html;gutter:true;">&lt;view class="viewA"&gt;
+    &lt;view class="viewB" catchtouchmove="handleMove"&gt;&lt;/view&gt;
+    &lt;scroll-view scroll-y&gt;&lt;/scroll-view&gt;
+&lt;/view&gt;
+</pre>
+</div>
+<p>　　</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">handleMove(e){
+//不做任何处理
+}
+</pre>
+</div>
+<p>　　</p>]]></description></item><item><title>【JavaScript数据结构】--栈</title><link>http://www.cnblogs.com/teemwu/archive/2018/08/06/9432928.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 06 Aug 2018 13:05:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/08/06/9432928.html</guid><description><![CDATA[<p>　　大学期间有轻微接触数据结构这门课程，当时基本上是听不懂的。还记得老师为了调动课堂积极性，分别给每个小组分配了任务，由小组派出一名代表来讲解特定一种数据结构。我讲的是&ldquo;二叉树&rdquo;，原本以为自己是理解的，可是站上讲台讲的时候就懵逼了~ ~，主要还是太偏理论性了，没有动手实践，也没能找到人一起讨论，导致有些地方自认为的理解是对的，其实不然。</p>
+<p>　　最近看完JavaScript版本的数据结构《学习&nbsp;JavaScript&nbsp;数据结构与算法》一书，虽然有动手去敲代码实现，然而还是不够的，感觉还是要深刻理解才行。因此，想尝试把自己理解的写下来，单纯地想记录一下吧。也希望对无意翻到的人有点帮助，写错的地方欢迎指正哈~</p>
+<p>&nbsp;</p>]]></description></item><item><title>JS获取对象键名</title><link>http://www.cnblogs.com/teemwu/archive/2018/08/06/9378381.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Mon, 06 Aug 2018 12:33:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/08/06/9378381.html</guid><description><![CDATA[<p>　　在开发的时候不时需要获取某个对象的键名集，以下为常用的两种获取对象键名的方法。</p>
+<p>一、<strong>通过 for&nbsp;in</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">var obj={a:1,b:2,c:3},key;
+
+for(key in obj){
+    console.log(key);  //分别输出a b c
+}
+</pre>
+</div>
+<p>　　</p>
+<p>二、<strong>通过Object.keys</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">const obj={a:1,b:2,c:3};
+
+console.log(Object.keys(obj));//["a","b","c"]
+</pre>
+</div>
+<p>　注意：此方法虽然很方便，但需要浏览器支持ES5+。</p>
+<p>三、<strong>兼容写法　</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">if(!Object.keys) Object.keys = function(o){
+     if (o !== Object(o))
+          throw new TypeError('Object.keys called on non-object');
+     var ret=[],p;
+     for(p in o) if(Object.prototype.hasOwnProperty.call(o,p)) ret.push(p);
+     return ret;
+}
+</pre>
+</div>
+<p>　　</p>
+<p>参考：</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys" target="_blank">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys</a></p>
+<p><a href="https://stackoverflow.com/questions/6268679/best-way-to-get-the-key-of-a-key-value-javascript-object" target="_blank">https://stackoverflow.com/questions/6268679/best-way-to-get-the-key-of-a-key-value-javascript-object</a></p>
+<p>&nbsp;</p>]]></description></item><item><title>vue中使用引入外部样式</title><link>http://www.cnblogs.com/teemwu/archive/2018/07/25/9364113.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 25 Jul 2018 01:28:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/07/25/9364113.html</guid><description><![CDATA[<p>一、使用<strong>@import &lsquo;样式路径&rsquo;;</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:css;gutter:true;">&lt;style lang="scss" scoped&gt;
+@import './index.scss';
+&lt;/style&gt;
+</pre>
+</div>
+<p>　　</p>]]></description></item><item><title>微信小程序Android真机下wx.previewImage黑屏</title><link>http://www.cnblogs.com/teemwu/archive/2018/07/04/9264181.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 04 Jul 2018 09:04:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/07/04/9264181.html</guid><description><![CDATA[<p>之前貌似都ok的，可是最近发现Android下一直黑屏，搜了下官方论坛，遇到黑屏的不少。</p>
+<p>不过试了都没解决，最后把图片地址http协议改成https协议头预览正常，记录下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">      wx.previewImage({
+        current:&lsquo;https开头的图片路径&rsquo;, // 当前显示图片链接
+        urls:[图片路径数组], // 需要预览的图片链接列表
+        complete:res=&gt;{
+          console.log('pre:',res);
+        }
+      });
+</pre>
+</div>
+<p>　<strong>　注：一定要用网络地址，不能用本地路径。</strong></p>]]></description></item><item><title>A hook (`orm`) failed to load!</title><link>http://www.cnblogs.com/teemwu/archive/2018/06/28/9237473.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 28 Jun 2018 02:37:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/06/28/9237473.html</guid><description><![CDATA[<p><strong>启动sails时报错：</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:bash;gutter:true;">error: A hook (`orm`) failed to load!
+error: Could not tear down the ORM hook.  Error details: Error: Consistency violation: Attempting to tear down a datastore (`default`) which is not currently registered with this adapter.  This is usually due to a race condition in userland code (e.g. attempting to tear down the same ORM instance more than once), or it could be due to a bug in this adapter.  (If you get stumped, reach out at http://sailsjs.com/support.)
+</pre>
+</div>
+<p><strong>原因：</strong>数据库服务关闭了，sails连接不上数据库。</p>
+<p><strong>解决：</strong>重启数据库服务&ldquo; windows + R "--&gt;" services.msc "找到数据库服务&rdquo; 启动 &ldquo;。<strong><br /></strong></p>]]></description></item><item><title>微信小程序上拉加载和下拉刷新（wepy）</title><link>http://www.cnblogs.com/teemwu/archive/2018/06/15/9188844.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Fri, 15 Jun 2018 12:08:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/06/15/9188844.html</guid><description><![CDATA[<p><strong>2018/07/16更新</strong></p>
+<p>&nbsp;经过测试发现，wepy列表上拉加载更多时出现渲染延迟或者渲染不全，造成这个原因是page过渡动画中设置了<span style="background-color: #ffffff;"><strong>animation-fill-mode: both</strong></span>;这个属性，去掉之后渲染正常。应该不是兼容性问题，因为在原生上测试加上这一属性是渲染正常的，不明所以。。。</p>
+<p></p>
+<hr />
+<p>&nbsp;</p>
+<p><strong>这篇随笔主要是记录在用wepy写小程序下拉刷新和上拉加载功能时遇到的数据显示不完全的问题及解决方法。</strong></p>
+<p>网上很多关于小程序的上拉加载和下拉刷新的文章的实现方法，无非两种，一是用<a href="https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html" target="_blank">scroll-view</a>组件，另一种则是使用<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page.html?search-key=onReachBottom" target="_blank">onReachBottom</a>()和onPullDownRefresh()两个页面事件处理函数。</p>
+<p>scroll-view实现不好的是不能使用onPullDownRefresh，只能检测滚动到顶部触发刷新或者其它动画操作，以及在其内部使用<code>textarea</code>、<code>map</code>、<code>canvas</code>、<code>video等组件会有各种不适。</code></p>
+<p>所以，最理想的方法是检测onReachBottom来进行更多数据加载和改变加载动画，检测onPullDownReFresh进行数据更新（官方支持动画）。</p>
+<h2>方案一（scroll-view）：</h2>
+<div class="cnblogs_Highlighter">
+<pre class="brush:html;gutter:true;">&lt;scroll-view @scroll="handleScroll"
+              @scrolltoupper="upper"
+              @scrolltolower="loadMore"
+              scroll-top="{{scrollTop}}"
+              scroll-y
+              scroll-with-animation="{{true}}"
+              style="height: 100%;"&gt;
+  &lt;view wx:for="{{data}}" wx:key="{{index}}"&gt;
+    &lt;!--复杂的内容条目--&gt;
+  &lt;/view&gt;
+  &lt;!--加载动画&amp;提示切换--&gt;
+  &lt;view&gt;
+    &lt;view hidden="{{!hasNext}}"&gt;&lt;/view&gt;
+    &lt;view&gt;{{hasNext?'正在加载':'无更多数据'}}&lt;/view&gt;
+  &lt;/view&gt;
+&lt;/scroll-view&gt;
+</pre>
+</div>
+<p>　　</p>
+<p>这个方案如果不要求有下拉动画是挺好的，至少数据渲染时正常。</p>
+<h2><strong>方案二（page页面事件函数）：</strong></h2>
+<div class="cnblogs_Highlighter">
+<pre class="brush:html;gutter:true;">　　 &lt;view wx:for="{{dataList}}"
+          wx:key="{{index}}"&gt;
+      &lt;!--复杂内容填充--&gt;
+    &lt;/view&gt;
+    &lt;view  wx:if="{{hasNext}}" style="padding: 5px;text-align: center"&gt;
+      正在加载
+    &lt;/view&gt;
+</pre>
+</div>
+<p>　　相关方法：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">    onPullDownRefresh() {
+      //请求数据更新
+    }
+    onReachBottom(event) {
+      //请求更多数据
+    }
+</pre>
+</div>
+<p>　　上面这样子是渲染正常的，但如果&ldquo;正在加载&rdquo;换成方案一那种较复杂的判断，在安卓下则会出现渲染不完全。查看元素是已经渲染的了，可是就是有半截没显示，由于用的是wepy所以不确定是小程序本身问题，还是wepy&nbsp;脏检的问题。后续再写原生测下。</p>
+<p>　　<strong>注意：用方案二可能ios下会滚动卡顿的问题，参考：<a href="https://www.cnblogs.com/fiy-noob/p/8624898.html" target="_blank">微信小程序ios端overflow:auto滚动卡顿</a></strong></p>
+<p>&nbsp;</p>]]></description></item><item><title>canvas download时显示“网络错误”</title><link>http://www.cnblogs.com/teemwu/archive/2018/05/03/8986932.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 03 May 2018 10:42:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/05/03/8986932.html</guid><description><![CDATA[<p>&nbsp;在使用html2canvas截取页面的时候发现图片死活保存不到本地，chrome一直报&ldquo;网络错误&rdquo;，百度、谷歌无果。</p>
+<p>后来想想，html2canvas生成的也是canvas对象，所以按这个关键字找到了解决方法。</p>
+<p><a href="https://stackoverflow.com/questions/37135417/download-canvas-as-png-in-fabric-js-giving-network-error" target="_blank">解决链接</a>:https://stackoverflow.com/questions/37135417/download-canvas-as-png-in-fabric-js-giving-network-error</p>
+<p>主要出现这个问题是canvas保存图片到本地时各个浏览器像素的限制不同，所以将图片数据转换成Blob数据流下载下来就行了。</p>
+<p>主要代码如下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">//....前面省略      
+dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime});
+      },
+      downloadCanvas(){
+        var link = document.createElement("a");
+        var imgData =canvas.toDataURL({format: 'png', multiplier: 4});
+        var strDataURI = imgData.substr(22, imgData.length);
+        var blob = this.dataURLtoBlob(imgData);
+        var objurl = URL.createObjectURL(blob);
+
+        link.download = this.cName+".png";
+
+        link.href = objurl;
+
+        link.click();
+      }
+//省略后面...
+</pre>
+</div>
+<p>　　</p>]]></description></item><item><title>微信小程序“瀑布流”各种实现方式</title><link>http://www.cnblogs.com/teemwu/archive/2018/04/16/8857277.html</link><dc:creator>风刮起的猪</dc:creator><author>风刮起的猪</author><pubDate>Mon, 16 Apr 2018 09:43:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/04/16/8857277.html</guid><description><![CDATA[<p><strong>&nbsp;MUTIL-COLUMN的实现方式</strong></p>
+<div class="cnblogs_code">
+<pre>　<span style="color: #008000;">&lt;!--</span><span style="color: #008000;">HTML</span><span style="color: #008000;">--&gt;</span>　
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="masonry"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="item animated fadeInUp"</span><span style="color: #ff0000;"> v-for</span><span style="color: #0000ff;">="(item,index) in dataList"</span><span style="color: #ff0000;"> :key</span><span style="color: #0000ff;">="index"</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="item__content"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">img </span><span style="color: #ff0000;">:src</span><span style="color: #0000ff;">="item"</span><span style="color: #ff0000;"> style</span><span style="color: #0000ff;">="width:100%"</span><span style="color: #ff0000;"> mode</span><span style="color: #0000ff;">="widthFix"</span><span style="color: #ff0000;"> @tap</span><span style="color: #0000ff;">="previewGif(index)"</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+      <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">/*</span><span style="color: #008000;">STYLE</span><span style="color: #008000;">*/</span><span style="color: #800000;">
+.masonry </span>{<span style="color: #ff0000;">
+  width</span>:<span style="color: #0000ff;"> 100%</span>;<span style="color: #ff0000;">
+  column-count</span>:<span style="color: #0000ff;"> 3</span>;<span style="color: #ff0000;">
+  column-gap</span>:<span style="color: #0000ff;"> 0</span>;<span style="color: #ff0000;">
+  counter-reset</span>:<span style="color: #0000ff;"> item-counter</span>;
+}<span style="color: #800000;">
+
+.item </span>{<span style="color: #ff0000;">
+  box-sizing</span>:<span style="color: #0000ff;"> border-box</span>;<span style="color: #ff0000;">
+  break-inside</span>:<span style="color: #0000ff;"> avoid</span>;<span style="color: #ff0000;">
+  padding</span>:<span style="color: #0000ff;"> 5px</span>;<span style="color: #ff0000;">
+  counter-increment</span>:<span style="color: #0000ff;"> item-counter</span>;<span style="color: #ff0000;">
+  background-color</span>:<span style="color: #0000ff;"> #fff</span>;
+}<span style="color: #800000;">
+.item__content </span>{<span style="color: #ff0000;">
+  position</span>:<span style="color: #0000ff;"> relative</span>;<span style="color: #ff0000;">
+  display</span>:<span style="color: #0000ff;"> flex</span>;<span style="color: #ff0000;">
+  flex-direction</span>:<span style="color: #0000ff;"> column</span>;<span style="color: #ff0000;">
+  justify-content</span>:<span style="color: #0000ff;"> center</span>;<span style="color: #ff0000;">
+  align-items</span>:<span style="color: #0000ff;"> center</span>;<span style="color: #ff0000;">
+  box-sizing</span>:<span style="color: #0000ff;"> border-box</span>;
+}</pre>
+</div>
+<p><iframe style="width: 100%;" title="geNjej" src="//codepen.io/nooby/embed/geNjej/?height=265&amp;theme-id=light&amp;default-tab=result&amp;embed-version=2" frameborder="no" scrolling="no" width="320" height="265"></iframe></p>]]></description></item><item><title>微信小程序ios端overflow:auto滚动卡顿</title><link>http://www.cnblogs.com/teemwu/archive/2018/03/22/8624898.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 22 Mar 2018 08:56:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/03/22/8624898.html</guid><description><![CDATA[<p><strong><span style="font-size: 18px;">解决方法一：</span></strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:css;gutter:true;">view{
+overflow:auto;
+-webkit-overflow-scrolling: touch;
+}
+</pre>
+</div>
+<p>　　这种方法虽然可以让列表滚动，但会伴随副作用（比如fixed元素会跟随滚动再恢复位置），不推荐。</p>
+<p><span style="font-size: 18px;"><strong>解决方法二：</strong></span></p>
+<p>直接使用微信小程序提供的 &ldquo;<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/component/scroll-view.html" target="_blank"> scroll-view</a> " 组件。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:html;gutter:true;"> &lt;scroll-view scroll-y style="height: 200px;"&gt;
+      &lt;!--你要滚动的内容--&gt;
+&lt;/scroll-view&gt;
+</pre>
+</div>
+<p><strong>注意：　必须要设置scroll-view的高度height</strong></p>
+<p>&nbsp;</p>]]></description></item><item><title>微信小程序跳转无效</title><link>http://www.cnblogs.com/teemwu/archive/2018/02/28/8481971.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 28 Feb 2018 01:40:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2018/02/28/8481971.html</guid><description><![CDATA[<p><span style="font-size: 16px;"><strong>原因</strong></span></p>
+<blockquote>
+<pre class="hljs lsl"><code><span class="hljs-number">1.检查你要跳转的位置是否在app.js中注册过。
+<span class="hljs-number">2.检查你要跳转的地址是否有误。经常都是因为少写或者多写使得跳转无效。
+<span class="hljs-number">3.检查你要跳转的位置是否位于TabBar中，如果是的话，要使用wx.switchTab 来跳转界面。</span></span></span></code></pre>
+</blockquote>
+<p><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/api/ui-navigate.html" target="_blank"><span style="font-size: 16px;"><strong>原生</strong></span></a></p>
+<div class="cnblogs_code">
+<pre>wx.navigateTo(OBJECT) <span style="color: #008000;">//</span><span style="color: #008000;">不会销毁当前页面，仅仅是将其hide，使用wx.navigateBack可以返回到原页面。</span>
+wx.redirectTo(OBJECT) <span style="color: #008000;">//</span><span style="color: #008000;">销毁当前页面，跳转到应用内的其他页面。</span>
+wx.switchTab()</pre>
+</div>
+<p><a href="https://tencent.github.io/wepy/document.html#/api?id=wepypage-class" target="_blank"><span style="font-size: 16px;"><strong>wepy</strong></span></a></p>
+<div class="cnblogs_code">
+<pre> <span style="color: #0000ff;">this</span>.$navigate(url:String|<span style="color: #000000;">Object, [params:Object])
+ </span><span style="color: #0000ff;">this</span>.$redirect(url:String|<span style="color: #000000;">Object, [params:Object])
+ </span><span style="color: #0000ff;">this</span>.$<span style="color: #0000ff;">switch</span>(url:String|Object)</pre>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;"><strong>参考</strong></span></p>
+<p><a href="http://blog.csdn.net/zgmu/article/details/72123335" target="_blank"><span style="font-size: 16px;"><strong>　　http://blog.csdn.net/zgmu/article/details/72123335</strong></span></a></p>
+<pre class="hljs lsl"></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p></p>]]></description></item><item><title>微信开发调试，常见问题&amp;解决</title><link>http://www.cnblogs.com/teemwu/archive/2017/11/23/7884739.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Thu, 23 Nov 2017 10:18:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2017/11/23/7884739.html</guid><description><![CDATA[<h3><strong>2018-08-01更新</strong></h3>
+<p>　　最近一直在写小程序，公众号开发很少弄了。由于线上公众号项目要调整，所以又要捣腾公众号的开发环境。因为微信开发者工具已经集成了&ldquo;公众号开发&rdquo;和&ldquo;小程序开发&rdquo;两大开发环境，所以直接下载安装开发者工具打开选择&ldquo;公众号网页项目&rdquo;就好。</p>
+<p>　　在设置跨域的时候发现按照之前的方法不行，后来发现是要关闭后配置重启搞定。</p>
+<blockquote>
+<p>--disable-web-security --user-data-dir</p>
+</blockquote>
+<hr />
+<p>&nbsp;</p>
+<p>　　在web开发的时候调试这一环是很重要的，之前日常调试主要使用chrome浏览器，不过，最近在进行微信公众号开发的时候，直接使用chrome进行调试总是感觉很麻烦，因为涉及到微信验证及跨域等问题。当然，在此之前试了很多其它的调试方法，不过感觉还是微信官方提供的调试工具来得实在。下面记录下，以便自己以后查看。</p>
+<p><span style="font-size: 18px;"><strong>下载&amp;安装</strong></span></p>
+<p><span style="font-size: 18px;"><strong>　　<span style="font-size: 14px;">微信开发者工具：<a title="微信web开发工具" href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1455784140" target="_blank">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1455784140</a></span></strong></span></p>
+<p><span style="font-size: 18px;"><strong><span style="font-size: 14px;">　　&nbsp; 微信小程序开发者工具：<a title="微信小程序开发者工具" href="https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html?t=2017119" target="_blank">https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html?t=2017119</a></span></strong></span></p>
+<p>　　上面是获取安装包的地址，选择自己需要的版本进行下载安装。其实这两个工具都是微信官方出的工具，应该是不同的版本，暂且叫&ldquo;微信开发者工具&rdquo;和&ldquo;微信小程序开发者工具&rdquo;吧。其不同是&ldquo;微信开发者工具&rdquo;主要是对公众号web的调试，在chrome的基础上进行修改的，可以通过usb链接电脑进行真机调试。而微信小程序开发者工具则涵括了公众号开发调试和微信小程序开发调试，不过试了下，公众号开发调试的时候不能通过usb连接调试。</p>
+<p>　　安装时候要注意的是，这两个工具要安装在不同目录，不然会提示安装失败。并且要注意的是安装第二个的时候要把桌面已安装的快捷图标改名，否则会被覆盖。</p>
+<p><span style="font-size: 18px;"><strong>设置跨域</strong></span></p>
+<p><span style="font-size: 14px;">　　&ldquo;<strong>微信开发者工具</strong>&rdquo;在安装成功后，桌面找到新增的快捷图标右击&rdquo;属性-&gt;快捷方式-&gt;目标(T)"&nbsp;在最后加上&nbsp;&nbsp;<strong>--disable-web-security --user-data-dir&nbsp;</strong>前面记得留空格！</span></p>
+<p><span style="font-size: 14px;">　　&ldquo;<strong>微信小程序开发者工具</strong>&rdquo;跨域的话，在开发小程序的模式下可以设置允许跨域，具体操作：打开小程序项目-&gt;微信小程序开发工具界面上方&ldquo;设置&rdquo;-&gt;"项目设置&ldquo;-&gt;右边弹出&rdquo;项目设置&ldquo;-&gt;勾选&rdquo;不校验安全域名、TLS 版本以及 HTTPS 证书&ldquo;, ok!&nbsp;如果在公众号网页调试的模式下要允许跨域的话，暂时没找到设置方法，找到再补充。</span></p>
+<p><span style="font-size: 18px;"><strong>连接真机调试</strong></span></p>
+<p><span style="font-size: 14px;">　　还是在&ldquo;<strong>微信开发者工具</strong>&rdquo;的基础上连接调试，具体步骤如下：</span></p>
+<p><span style="font-size: 14px;">　　1、手机端设置允许&ldquo;USB调试&rdquo;，</span></p>
+<p><span style="font-size: 14px;">　　2、按照提示的步骤走，如图</span></p>
+<p>　　<img src="http://images2017.cnblogs.com/blog/831280/201711/831280-20171123175522211-1735550875.png" alt="" /></p>
+<p>　　3、点击&ldquo;开始调试&rdquo;后会打开新的页面，显示连接情况，如果没有显示连接设备，可以重插usb或者刷新微信公众号页面看看，如图：</p>
+<p>　　<img src="http://images2017.cnblogs.com/blog/831280/201711/831280-20171123180054336-1988529581.png" alt="" /></p>
+<p>　　4、点击&ldquo;inspect&rdquo;会打开调试页面，跟平常在chrome下调试一样，只是最近打开却发现为空白页面，后来查了下，是因为被墙了的原因，试着看能打开<a href="https://chrome-devtools-frontend.appspot.com/" rel="nofollow">https://chrome-devtools-frontend.appspot.com</a>&nbsp;不，如果不行就是被墙或者公司ip屏蔽了，科学上网可以上github找下，挺多的，这里不推荐了。当然，也可以试下清除缓存：chrome://appcache-internals/# ，只是微信开发者工具里好像打不开chrome://appcache-internals/# 。</p>
+<p>&nbsp;</p>]]></description></item><item><title>用CSS3的transform来做一个立方体</title><link>http://www.cnblogs.com/teemwu/archive/2015/11/18/4974278.html</link><dc:creator>_fn</dc:creator><author>_fn</author><pubDate>Wed, 18 Nov 2015 05:41:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2015/11/18/4974278.html</guid><description><![CDATA[<p>　　更新下：好久没用博客园了，今天为了点赞别人的文章又登录了，谢谢chrome帮我记住了账号密码，下面这个效果之前自己已经实现了，分享个演示地址：<a title="codepen演示地址" href="https://codepen.io/nooby/pen/vKogZB" target="_blank">https://codepen.io/nooby/pen/vKogZB</a></p>
+<hr />
+<p>&nbsp;</p>
+<p>　　有一次上数据结构课老师布置了一个用队列的思想通过js和Html来做一个&ldquo;跳舞配对&rdquo;的网页，当时那个跳舞的部分用了css3里面transform的相关属性做了个个让图片无限翻转的效果，可能正是由于这个效果，让我想到了--可以不可以通过transform来弄个3D的立方体呢？后来慢慢的去做，遇到好多问题，下面把这次小尝试记录下，等到日后有灵感再去弄。。。</p>
+<p>　　代码如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 2</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html </span><span style="color: #ff0000;">lang</span><span style="color: #0000ff;">="en"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 3</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">charset</span><span style="color: #0000ff;">="UTF-8"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 5</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 6</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">style</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 7</span> <span style="background-color: #f5f5f5; color: #800000;">        #main</span><span style="background-color: #f5f5f5; color: #000000;">{</span>
+<span style="color: #008080;"> 8</span> <span style="background-color: #f5f5f5; color: #ff0000;">            width</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> 500px</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;"> 9</span> <span style="background-color: #f5f5f5; color: #ff0000;">            height</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> 500px</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">10</span> <span style="background-color: #f5f5f5; color: #ff0000;">            margin</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;">150px auto</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">11</span> <span style="background-color: #f5f5f5; color: #ff0000;">            position</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> absolute</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">12</span> <span style="background-color: #f5f5f5; color: #ff0000;">            transform-style</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> preserve-3d</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">13</span> <span style="background-color: #f5f5f5; color: #ff0000;">            left</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;">40%</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">14</span> <span style="background-color: #f5f5f5; color: #ff0000;">            perspective</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> 1500px</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">15</span>         <span style="background-color: #f5f5f5; color: #000000;">}</span>
+<span style="color: #008080;">16</span> <span style="background-color: #f5f5f5; color: #800000;">        img</span><span style="background-color: #f5f5f5; color: #000000;">{</span>
+<span style="color: #008080;">17</span> <span style="background-color: #f5f5f5; color: #ff0000;">            width</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;">240px</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">18</span> <span style="background-color: #f5f5f5; color: #ff0000;">            height</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;">150px</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">19</span> <span style="background-color: #f5f5f5; color: #ff0000;">            position</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> absolute</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">20</span>         <span style="background-color: #f5f5f5; color: #000000;">}</span>
+<span style="color: #008080;">21</span> <span style="background-color: #f5f5f5; color: #800000;">        img:nth-child(1)</span><span style="background-color: #f5f5f5; color: #000000;">{</span>
+<span style="color: #008080;">22</span> <span style="background-color: #f5f5f5; color: #ff0000;">            transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;">rotateY(30deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">23</span> <span style="background-color: #f5f5f5; color: #ff0000;">            -webkit-transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> rotateY(30deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">24</span> <span style="background-color: #f5f5f5; color: #ff0000;">            -moz-transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> rotateY(30deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">25</span>         <span style="background-color: #f5f5f5; color: #000000;">}</span>
+<span style="color: #008080;">26</span> <span style="background-color: #f5f5f5; color: #800000;">        img:nth-child(2)</span><span style="background-color: #f5f5f5; color: #000000;">{</span>
+<span style="color: #008080;">27</span> <span style="background-color: #f5f5f5; color: #ff0000;">            transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;">rotateY(120deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">28</span> <span style="background-color: #f5f5f5; color: #ff0000;">            -webkit-transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> rotateY(120deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">29</span> <span style="background-color: #f5f5f5; color: #ff0000;">            -moz-transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> rotateY(120deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">30</span>         <span style="background-color: #f5f5f5; color: #000000;">}</span>
+<span style="color: #008080;">31</span> <span style="background-color: #f5f5f5; color: #800000;">        img:nth-child(3)</span><span style="background-color: #f5f5f5; color: #000000;">{</span>
+<span style="color: #008080;">32</span> <span style="background-color: #f5f5f5; color: #ff0000;">            transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;">rotateY(210deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">33</span> <span style="background-color: #f5f5f5; color: #ff0000;">            -webkit-transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> rotateY(210deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">34</span> <span style="background-color: #f5f5f5; color: #ff0000;">            -moz-transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> rotateY(210deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">35</span>         <span style="background-color: #f5f5f5; color: #000000;">}</span>
+<span style="color: #008080;">36</span> <span style="background-color: #f5f5f5; color: #800000;">        img:nth-child(4)</span><span style="background-color: #f5f5f5; color: #000000;">{</span>
+<span style="color: #008080;">37</span> <span style="background-color: #f5f5f5; color: #ff0000;">            transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;">rotateY(300deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">38</span> <span style="background-color: #f5f5f5; color: #ff0000;">            -webkit-transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> rotateY(300deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">39</span> <span style="background-color: #f5f5f5; color: #ff0000;">            -moz-transform</span><span style="background-color: #f5f5f5; color: #000000;">:</span><span style="background-color: #f5f5f5; color: #0000ff;"> rotateY(300deg) translateZ(120px)</span><span style="background-color: #f5f5f5; color: #000000;">;</span>
+<span style="color: #008080;">40</span>         <span style="background-color: #f5f5f5; color: #000000;">}</span>
+<span style="color: #008080;">41</span>     <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">style</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">42</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">43</span>        <span style="background-color: #f5f5f5; color: #008000;">//</span><span style="background-color: #f5f5f5; color: #008000;"> var r=120 / Math.tan(45/ 180 * Math.PI);//计算translate的值</span>
+<span style="color: #008080;">44</span>        <span style="background-color: #f5f5f5; color: #008000;">/*</span><span style="background-color: #f5f5f5; color: #008000;">window.onload=function f(){
+</span><span style="color: #008080;">45</span> <span style="background-color: #f5f5f5; color: #008000;">            var oImg=document.getElementsByTagName("img");
+</span><span style="color: #008080;">46</span> <span style="background-color: #f5f5f5; color: #008000;">            for(var i=0;i&lt;oImg.length;i++){
+</span><span style="color: #008080;">47</span> <span style="background-color: #f5f5f5; color: #008000;">                oImg[i].style.transform=rotateY(0,30+i*90+'deg');
+</span><span style="color: #008080;">48</span> <span style="background-color: #f5f5f5; color: #008000;">            }
+</span><span style="color: #008080;">49</span> <span style="background-color: #f5f5f5; color: #008000;">        }</span><span style="background-color: #f5f5f5; color: #008000;">*/</span>
+<span style="color: #008080;">50</span>     <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">51</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">52</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">53</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="main"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">54</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">img </span><span style="color: #ff0000;">src</span><span style="color: #0000ff;">="Images/a.jpg"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">55</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">img </span><span style="color: #ff0000;">src</span><span style="color: #0000ff;">="Images/f.jpg"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">56</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">img </span><span style="color: #ff0000;">src</span><span style="color: #0000ff;">="Images/c.jpg"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">57</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">img </span><span style="color: #ff0000;">src</span><span style="color: #0000ff;">="Images/d.jpg"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">58</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">59</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">60</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>　　问题1、在chrome浏览器里面和ie浏览器里面的效果不同</p>
+<p>　　问题2、不知道怎么加上两个&ldquo;盖子&rdquo;</p>
+<p>　　问题3、想通过js来控制rotateY()以实现转动变换的效果，发现用普通获取属性的方法获取不了rotateY（）（见注释处）</p>
+<p>　　。。。</p>
+<p>　　希望知道上面的问题怎么解决的博友们不吝赐教哈，谢谢！</p>
+<p>&nbsp;</p>]]></description></item><item><title>刚开通的博客</title><link>http://www.cnblogs.com/teemwu/archive/2015/11/08/4946833.html</link><dc:creator>fly_525</dc:creator><author>fly_525</author><pubDate>Sat, 07 Nov 2015 21:52:00 GMT</pubDate><guid>http://www.cnblogs.com/teemwu/archive/2015/11/08/4946833.html</guid><description><![CDATA[<p>刚开通的博客，不知道为啥一时冲动就注册了，或许这是一个新的起点，记录自己的点点滴滴，不管如何，加油！</p>]]></description></item></channel></rss>
