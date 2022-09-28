@@ -8,7 +8,7 @@ const sidebar: DefaultTheme.Sidebar = {}
 if (files && files.length) {
 	files.reverse().forEach(({ name, path }) => {
 		const { isPublished, title } = matter(matter.read(path)).data
-		console.log('title:', title)
+
 		if (!isPublished) return
 
 		name = name.replace('.md', '')
@@ -48,8 +48,6 @@ if (files && files.length) {
 	})
 }
 
-
-
-console.dir(sidebar, { depth: null })
+// console.dir(sidebar, { depth: null })
 
 export { sidebar }
