@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs && node ./build/create-sitemap.js",
-    "docs:serve": "vitepress serve docs"
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "build:sitemap": "node ./build/create-sitemap.js"
   },
   "keywords": [],
   "author": "teemwu",
