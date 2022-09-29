@@ -220,3 +220,4 @@ export default DefaultTheme
 - [Vite 官方文档](https://github.com/vitejs/vite/tree/main/docs/.vitepress/theme/styles) - 参考样式编写
 - [Windicss 官方文档](https://github.com/windicss/docs/tree/main/.vitepress/config) - 配置目录结构参考
 - [查尔斯的知识库](https://github.com/Charles7c/charles7c.github.io) - 通过此博客知道部分自定义参考地址
+- [pnpm install doesn't refresh lock file](https://github.com/pnpm/pnpm/issues/2807#issuecomment-682471525) - 解决发布时包异常

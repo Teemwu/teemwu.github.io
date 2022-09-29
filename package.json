@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "docs:build": "vitepress build docs && node ./build/create-sitemap.js",
     "docs:serve": "vitepress serve docs"
   },
   "keywords": [],
@@ -27,6 +27,7 @@
     "path": "^0.12.7",
     "postcss": "^8.4.16",
     "sass": "^1.55.0",
+    "sitemap": "^7.1.1",
     "tailwindcss": "^3.1.8",
     "vitepress": "1.0.0-alpha.17",
     "vue": "^3.2.40"
