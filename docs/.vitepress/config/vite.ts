@@ -3,8 +3,9 @@ import { UserConfig } from 'vitepress'
 export const vite: UserConfig['vite'] = {
 	server: {
 		open: true,
-		// hmr: {
-		// 	protocol: 'ws'
-		// }
+		host: '0.0.0.0',
+		hmr: {
+			protocol: 'https'
+		}
 	}
 }
