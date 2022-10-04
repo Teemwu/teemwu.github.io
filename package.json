@@ -14,10 +14,11 @@
   "devDependencies": {
     "@types/encodeurl": "^1.0.0",
     "@types/fs-extra": "^9.0.13",
-    "@types/node": "^18.7.23",
+    "@types/node": "^18.8.1",
     "autoprefixer": "^10.4.12",
     "chalk": "4.1.2",
-    "commander": "^9.4.0",
+    "commander": "^9.4.1",
+    "dotenv-flow": "^3.2.0",
     "fs-extra": "^10.1.0",
     "handlebars": "^4.7.7",
     "html-to-md": "^0.6.0",
@@ -25,11 +26,11 @@
     "node-html-parser": "^6.1.1",
     "ora": "5.4.1",
     "path": "^0.12.7",
-    "postcss": "^8.4.16",
+    "postcss": "^8.4.17",
     "sass": "^1.55.0",
     "sitemap": "^7.1.1",
     "tailwindcss": "^3.1.8",
-    "vitepress": "1.0.0-alpha.17",
+    "vitepress": "1.0.0-alpha.19",
     "vue": "^3.2.40"
   },
   "dependencies": {

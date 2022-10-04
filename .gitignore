@@ -6,3 +6,4 @@ pnpm-global
 package-lock.json
 CNBlogs_BlogBackup_131_201511_202209.xml
 TODO.md
+*.local
