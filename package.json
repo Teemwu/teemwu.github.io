@@ -12,18 +12,12 @@
   "author": "teemwu",
   "license": "ISC",
   "devDependencies": {
-    "@types/encodeurl": "^1.0.0",
     "@types/fs-extra": "^9.0.13",
-    "@types/node": "^18.8.1",
+    "@types/node": "^18.8.2",
     "autoprefixer": "^10.4.12",
     "chalk": "4.1.2",
-    "commander": "^9.4.1",
     "dotenv-flow": "^3.2.0",
     "fs-extra": "^10.1.0",
-    "handlebars": "^4.7.7",
-    "html-to-md": "^0.6.0",
-    "moment": "^2.29.4",
-    "node-html-parser": "^6.1.1",
     "ora": "5.4.1",
     "path": "^0.12.7",
     "postcss": "^8.4.17",
@@ -35,11 +29,9 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.3.0",
-    "axios": "^0.27.2",
     "dayjs": "^1.11.5",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
-    "markdown-it-anchor": "^8.6.5",
     "store2": "^2.14.2"
   }
 }
