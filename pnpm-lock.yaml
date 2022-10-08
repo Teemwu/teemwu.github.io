@@ -11,6 +11,7 @@ specifiers:
   fast-glob: ^3.2.12
   fs-extra: ^10.1.0
   gray-matter: ^4.0.3
+  husky: ^8.0.1
   ora: 6.1.2
   path: ^0.12.7
   postcss: ^8.4.17
@@ -35,6 +36,7 @@ devDependencies:
   chalk: 5.1.0
   dotenv-flow: 3.2.0
   fs-extra: 10.1.0
+  husky: 8.0.1
   ora: 6.1.2
   path: 0.12.7
   postcss: 8.4.17
@@ -925,6 +927,12 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+    dev: true
+
+  /husky/8.0.1:
+    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /ieee754/1.2.1:
