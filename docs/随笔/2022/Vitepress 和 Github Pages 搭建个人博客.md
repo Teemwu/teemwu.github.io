@@ -42,9 +42,9 @@ mkdir docs && echo '# Hello VitePress' > docs/index.md
 {
   ...
   "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "serve": "vitepress serve docs"
   },
   ...
 }
@@ -119,7 +119,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm docs:build
+        run: pnpm build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

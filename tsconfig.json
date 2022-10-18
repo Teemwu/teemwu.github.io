@@ -1,12 +1,15 @@
 {
 	"compilerOptions": {
 		"resolveJsonModule": true,
-		"isolatedModules": true,
+		"isolatedModules": false,
 		"esModuleInterop": true,
+		"skipLibCheck": true,
 		"jsx": "preserve"
 	},
 	"include": [
 		"docs/.vitepress/**/*.ts",
-		"docs/.vitepress/**/*.vue"
+		"docs/.vitepress/**/*.vue",
+		"build/*.mjs",
+		"lib/*.mjs"
 	]
 }
