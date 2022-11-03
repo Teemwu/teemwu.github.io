@@ -1,10 +1,14 @@
 
-import { computed, onMounted, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useData, useRouter } from 'vitepress'
 import { useScriptTag } from '@vueuse/core'
-import { getCurrentTheme, observerThemeChange } from '../utils/index'
+import { setCommentTheme, getCommentTheme } from '../utils/index'
 
 export function useGiscus() {
+	const router = useRouter()
+	const { isDark, page } = useData()
+	const hideCommentRef = computed(() => page.value.frontmatter.hideComment)
+	console.log('getCommentTheme(isDark.value):', isDark.value)
 	const { load, unload } = useScriptTag('https://giscus.app/client.js', undefined, {
 		manual: true,
 		attrs: {
@@ -17,16 +21,19 @@ export function useGiscus() {
 			'data-reactions-enabled': '1',
 			'data-emit-metadata': '0',
 			'data-input-position': 'top',
-			'data-theme': getCurrentTheme(),
+			'data-theme': getCommentTheme(isDark.value),
 			'data-lang': 'zh-CN',
 			'crossorigin': 'anonymous',
 			'async': 'true'
 		}
 	})
 
-	const router = useRouter()
-	const data = useData()
-	const hideCommentRef = computed(() => data.page.value.frontmatter.hideComment)
+
+
+	watch(isDark, (newIsDark) => {
+		setCommentTheme(newIsDark)
+		console.log('newIsDark:', newIsDark)
+	}, { immediate: true })
 
 	watch(
 		() => router.route.path,
@@ -38,8 +45,6 @@ export function useGiscus() {
 		},
 		{ immediate: true }
 	)
-
-	onMounted(() => observerThemeChange())
 
 	return { hideCommentRef }
 }

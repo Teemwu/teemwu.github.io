@@ -16,8 +16,8 @@
     "@types/fs-extra": "9.0.13",
     "@types/inquirer": "9.0.2",
     "@types/inquirer-autocomplete-prompt": "3.0.0",
-    "@types/node": "18.11.5",
-    "autoprefixer": "10.4.12",
+    "@types/node": "18.11.9",
+    "autoprefixer": "10.4.13",
     "chalk": "5.1.2",
     "cnblog2md": "1.9.0",
     "dotenv-flow": "3.2.0",
@@ -33,14 +33,13 @@
     "sass": "1.55.0",
     "sitemap": "7.1.1",
     "tailwindcss": "3.2.1",
-    "vitepress": "1.0.0-alpha.22",
+    "vitepress": "1.0.0-alpha.26",
     "vue": "3.2.41"
   },
   "dependencies": {
-    "@vueuse/core": "9.3.1",
+    "@vueuse/core": "9.4.0",
     "dayjs": "1.11.6",
     "fast-glob": "3.2.12",
-    "gray-matter": "4.0.3",
-    "store2": "2.14.2"
+    "gray-matter": "4.0.3"
   }
 }
