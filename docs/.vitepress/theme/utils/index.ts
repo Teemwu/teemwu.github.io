@@ -1,5 +1,6 @@
 
 export const sendMessage = message => {
+	if (typeof window === 'undefined') return
 	const iframe = document.querySelector('iframe.giscus-frame') as any
 	if (!iframe) return
 	iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')

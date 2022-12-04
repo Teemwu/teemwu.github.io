@@ -8,7 +8,6 @@ export function useGiscus() {
 	const router = useRouter()
 	const { isDark, page } = useData()
 	const hideCommentRef = computed(() => page.value.frontmatter.hideComment)
-	console.log('getCommentTheme(isDark.value):', isDark.value)
 	const { load, unload } = useScriptTag('https://giscus.app/client.js', undefined, {
 		manual: true,
 		attrs: {
@@ -28,11 +27,8 @@ export function useGiscus() {
 		}
 	})
 
-
-
 	watch(isDark, (newIsDark) => {
 		setCommentTheme(newIsDark)
-		console.log('newIsDark:', newIsDark)
 	}, { immediate: true })
 
 	watch(
