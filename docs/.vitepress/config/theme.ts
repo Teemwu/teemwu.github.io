@@ -23,11 +23,11 @@ export const themeConfig: DefaultTheme.Config = {
 		message: 'Released under the MIT License.',
 		copyright: 'Copyright © 2022-present Teemwu'
 	},
-	algolia: {
-		appId: 'DSW8O07XW5',
-		apiKey: 'a2f6b81f63d5da048c4124158af8ebc1',
-		indexName: 'dev_teemwu'
-	},
+	// algolia: {
+	// 	appId: 'DSW8O07XW5',
+	// 	apiKey: 'a2f6b81f63d5da048c4124158af8ebc1',
+	// 	indexName: 'dev_teemwu'
+	// },
 	editLink: {
 		pattern: 'https://github.com/Teemwu/teemwu.github.io/edit/main/docs/:path',
 		text: '编辑'
