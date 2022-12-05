@@ -20,7 +20,7 @@ if (files && files.length) {
 		if (names.length > 1) {
 			if (!names[2] && names[1].indexOf('index') !== -1 && names[names.length - 1].indexOf('.md') === -1) return
 			const key = `/${names[0]}/`
-			const link = `/${encodeURI(path)}.html`
+			const link = `/${encodeURI(path)}`
 			const text = removeIndex(title || names[1])
 			const name1 = removeIndex(names[2] ? names[1] : names[0])
 
