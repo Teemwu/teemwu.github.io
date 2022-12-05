@@ -49,6 +49,6 @@ if (files && files.length) {
 	})
 }
 
-console.dir(sidebar, { depth: null })
+// console.dir(sidebar, { depth: null })
 
 export { sidebar }
