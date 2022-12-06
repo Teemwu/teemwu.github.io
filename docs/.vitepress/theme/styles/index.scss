@@ -34,3 +34,16 @@
 	background-color: rgba(47, 47, 47, 0.75) !important;
 	border: 1px solid rgba(255, 255, 255, 0.125) !important;
 }
+
+.vp-doc div[class*='language-'] {
+	margin: unset;
+	border-radius: 4px;
+	margin-top: 16px;
+}
+
+.vp-doc div[class*='language-']+div[class*='language-'],
+.vp-doc div[class$='-api']+div[class*='language-'],
+.vp-doc div[class*='language-']+div[class$='-api']>div[class*='language-'] {
+	margin: unset;
+	margin-top: 8px;
+}
