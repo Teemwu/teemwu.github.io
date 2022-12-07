@@ -1,13 +1,14 @@
 ---
 title: Vue 自定义事件传参
 author: teemwu
-date: 2020/03/06 15:07
+date: '2020/03/06 15:07'
 isPublished: true
 categories:
   - Vue
 tags:
   - vant
   - vue
+wordCount: 136
 ---
 
 # Vue 自定义事件传参

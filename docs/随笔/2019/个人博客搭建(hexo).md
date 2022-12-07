@@ -1,13 +1,14 @@
 ---
 title: 个人博客搭建(hexo)
 author: teemwu
-date: 2019/01/13 13:01
+date: '2019/01/13 13:01'
 isPublished: true
 categories:
   - 工具
   - 服务器
 tags:
   - hexo
+wordCount: 1076
 ---
 
 # 个人博客搭建(hexo)

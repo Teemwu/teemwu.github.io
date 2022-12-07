@@ -1,12 +1,13 @@
 ---
 title: 远程桌面共享多个显示屏(windows10)
 author: teemwu
-date: 2019/01/10 18:05
+date: '2019/01/10 18:05'
 isPublished: true
 categories:
   - 系统
 tags:
   - windows
+wordCount: 242
 ---
 
 # 远程桌面共享多个显示屏(windows10)

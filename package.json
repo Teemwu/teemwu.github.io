@@ -13,6 +13,7 @@
   "author": "teemwu",
   "license": "ISC",
   "devDependencies": {
+    "@arco-design/web-vue": "^2.39.2",
     "@types/fs-extra": "9.0.13",
     "@types/inquirer": "9.0.3",
     "@types/inquirer-autocomplete-prompt": "3.0.0",
@@ -30,16 +31,19 @@
     "path": "0.12.7",
     "pinyin-engine": "1.2.2",
     "postcss": "8.4.19",
+    "sanitize-html": "^2.7.3",
     "sass": "1.56.1",
     "sitemap": "7.1.1",
     "tailwindcss": "3.2.4",
+    "unplugin-auto-import": "^0.12.0",
+    "unplugin-vue-components": "^0.22.11",
     "vitepress": "1.0.0-alpha.30",
     "vue": "3.2.45"
   },
   "dependencies": {
     "@giscus/vue": "^2.2.4",
     "@vueuse/core": "9.6.0",
-    "dayjs": "1.11.6",
+    "dayjs": "1.11.7",
     "fast-glob": "3.2.12",
     "gray-matter": "4.0.3",
     "medium-zoom": "^1.0.8"

@@ -1,11 +1,12 @@
 ---
 title: JavaScript 中 label 的理解与应用
 author: teemwu
-date: 2020/07/15 12:36
+date: '2020/07/15 12:36'
 isPublished: true
 categories:
   - Javascript
-tags:
+tags: null
+wordCount: 331
 ---
 
 # JavaScript 中 label 的理解与应用

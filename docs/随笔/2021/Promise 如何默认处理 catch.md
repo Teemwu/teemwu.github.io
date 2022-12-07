@@ -1,11 +1,12 @@
 ---
 title: Promise 如何默认处理 catch
 author: teemwu
-date: 2021/01/18 17:56
+date: '2021/01/18 17:56'
 isPublished: true
 categories:
   - Javascript
-tags:
+tags: null
+wordCount: 351
 ---
 
 # Promise 如何默认处理 catch

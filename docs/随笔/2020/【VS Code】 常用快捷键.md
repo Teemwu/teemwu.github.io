@@ -1,11 +1,12 @@
 ---
 title: 【VS Code】 常用快捷键
 author: teemwu
-date: 2020/04/16 22:10
+date: '2020/04/16 22:10'
 isPublished: false
-categories:
+categories: null
 tags:
   - vscode
+wordCount: 102
 ---
 
 # 【VS Code】 常用快捷键

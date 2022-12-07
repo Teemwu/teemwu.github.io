@@ -1,12 +1,13 @@
 ---
 title: 项目 NodeJS 版本锁定及自动切换
 author: teemwu
-date: 2021/08/24 17:33
+date: '2021/08/24 17:33'
 isPublished: true
 categories:
   - Webpack
   - 服务器
-tags:
+tags: null
+wordCount: 897
 ---
 
 # 项目 NodeJS 版本锁定及自动切换

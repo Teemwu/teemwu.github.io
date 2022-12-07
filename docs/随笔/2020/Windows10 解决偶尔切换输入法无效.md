@@ -1,12 +1,13 @@
 ---
 title: Windows10 解决偶尔切换输入法无效
 author: teemwu
-date: 2020/07/24 10:34
+date: '2020/07/24 10:34'
 isPublished: true
 categories:
   - 系统
 tags:
   - windows
+wordCount: 198
 ---
 
 # Windows10 解决偶尔切换输入法无效

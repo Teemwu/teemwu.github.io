@@ -1,11 +1,14 @@
 ---
-title: File ignored by default.  Use a negated ignore pattern (like "--ignore-pattern '!'") to override.
+title: >-
+  File ignored by default.  Use a negated ignore pattern (like "--ignore-pattern
+  '!'") to override.
 author: teemwu
-date: 2019/12/17 15:59
+date: '2019/12/17 15:59'
 isPublished: true
 categories:
   - 报错
-tags:
+tags: null
+wordCount: 98
 ---
 
 # File ignored by default.  Use a negated ignore pattern (like "--ignore-pattern '!'") to override.

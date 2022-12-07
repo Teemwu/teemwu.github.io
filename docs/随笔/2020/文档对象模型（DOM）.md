@@ -1,12 +1,13 @@
 ---
 title: 文档对象模型（DOM）
 author: teemwu
-date: 2020/05/01 09:51
+date: '2020/05/01 09:51'
 isPublished: true
 categories:
   - 读书笔记
 tags:
   - JavaScript高级程序设计
+wordCount: 283
 ---
 
 # 文档对象模型（DOM）

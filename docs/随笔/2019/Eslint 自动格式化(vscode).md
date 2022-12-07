@@ -1,12 +1,13 @@
 ---
 title: Eslint 自动格式化(vscode)
 author: teemwu
-date: 2019/04/01 14:11
+date: '2019/04/01 14:11'
 isPublished: true
 categories:
   - VS Code
   - 工具
-tags:
+tags: null
+wordCount: 192
 ---
 
 # Eslint 自动格式化(vscode)

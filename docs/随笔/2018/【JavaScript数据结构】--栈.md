@@ -1,10 +1,11 @@
 ---
 title: 【JavaScript数据结构】--栈
 author: teemwu
-date: 2018/08/06 21:05
+date: '2018/08/06 21:05'
 isPublished: false
-categories:
-tags:
+categories: null
+tags: null
+wordCount: 255
 ---
 
 # 【JavaScript数据结构】--栈

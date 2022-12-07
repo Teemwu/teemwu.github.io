@@ -1,12 +1,13 @@
 ---
 title: 设置窗口默认最大化、全屏(electron)
 author: teemwu
-date: 2018/12/11 09:47
+date: '2018/12/11 09:47'
 isPublished: true
 categories:
   - Electron
 tags:
   - electron
+wordCount: 95
 ---
 
 # 设置窗口默认最大化、全屏(electron)

@@ -1,11 +1,12 @@
 ---
 title: 解决微信小程序placeholder文字悬浮问题
 author: teemwu
-date: 2018/08/16 19:23
+date: '2018/08/16 19:23'
 isPublished: true
 categories:
   - 微信小程序
-tags:
+tags: null
+wordCount: 335
 ---
 
 # 解决微信小程序placeholder文字悬浮问题

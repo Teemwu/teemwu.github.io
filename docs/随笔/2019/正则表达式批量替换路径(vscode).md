@@ -1,12 +1,13 @@
 ---
 title: 正则表达式批量替换路径(vscode)
 author: teemwu
-date: 2019/04/11 18:29
+date: '2019/04/11 18:29'
 isPublished: true
 categories:
   - VS Code
 tags:
   - vscode
+wordCount: 142
 ---
 
 # 正则表达式批量替换路径(vscode)

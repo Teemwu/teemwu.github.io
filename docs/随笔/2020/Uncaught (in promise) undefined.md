@@ -1,12 +1,13 @@
 ---
 title: Uncaught (in promise) undefined
 author: teemwu
-date: 2020/01/19 14:13
+date: '2020/01/19 14:13'
 isPublished: true
 categories:
   - Javascript
   - 报错
-tags:
+tags: null
+wordCount: 232
 ---
 
 # Uncaught (in promise) undefined

@@ -1,10 +1,11 @@
 ---
 title: vue中使用引入外部样式
 author: teemwu
-date: 2018/07/25 09:28
+date: '2018/07/25 09:28'
 isPublished: false
-categories:
-tags:
+categories: null
+tags: null
+wordCount: 18
 ---
 
 # vue中使用引入外部样式

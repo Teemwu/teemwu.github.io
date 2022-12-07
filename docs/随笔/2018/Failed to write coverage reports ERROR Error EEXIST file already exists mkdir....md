@@ -1,11 +1,14 @@
 ---
-title: Failed to write coverage reports ERROR Error EEXIST file already exists, mkdir...
+title: >-
+  Failed to write coverage reports ERROR Error EEXIST file already exists,
+  mkdir...
 author: teemwu
-date: 2018/12/04 17:27
+date: '2018/12/04 17:27'
 isPublished: true
 categories:
   - 报错
-tags:
+tags: null
+wordCount: 206
 ---
 
 # Failed to write coverage reports ERROR Error EEXIST file already exists, mkdir...

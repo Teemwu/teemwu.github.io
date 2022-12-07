@@ -1,11 +1,12 @@
 ---
 title: 【VS Code】编写我的第一个扩展
 author: teemwu
-date: 2020/04/16 22:10
+date: '2020/04/16 22:10'
 isPublished: false
-categories:
+categories: null
 tags:
   - vscode
+wordCount: 440
 ---
 
 # 【VS Code】编写我的第一个扩展

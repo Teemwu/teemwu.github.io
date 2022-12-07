@@ -1,13 +1,14 @@
 ---
 title: Flutter 开发必备扩展(vscode)
 author: teemwu
-date: 2020/04/12 10:20
+date: '2020/04/12 10:20'
 isPublished: true
 categories:
   - VS Code
   - Flutter
 tags:
   - vscode
+wordCount: 387
 ---
 
 # Flutter 开发必备扩展(vscode)

@@ -1,12 +1,13 @@
 ---
 title: Wepy 格式化和语法高亮(vscode)
 author: teemwu
-date: 2020/03/16 17:11
+date: '2020/03/16 17:11'
 isPublished: true
 categories:
   - 微信小程序
   - 报错
-tags:
+tags: null
+wordCount: 154
 ---
 
 # Wepy 格式化和语法高亮(vscode)

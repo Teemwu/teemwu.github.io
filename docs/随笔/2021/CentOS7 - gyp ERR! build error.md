@@ -1,13 +1,14 @@
 ---
 title: CentOS7 - "gyp ERR! build error"
 author: teemwu
-date: 2021/04/20 11:23
+date: '2021/04/20 11:23'
 isPublished: true
 categories:
   - 报错
   - 服务器
 tags:
   - centos7
+wordCount: 514
 ---
 
 # CentOS7 - "gyp ERR! build error"

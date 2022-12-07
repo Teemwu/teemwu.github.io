@@ -1,12 +1,13 @@
 ---
 title: 小程序 - Unexpected token 'var'
 author: teemwu
-date: 2021/08/18 18:40
+date: '2021/08/18 18:40'
 isPublished: true
 categories:
   - 微信小程序
   - 报错
-tags:
+tags: null
+wordCount: 193
 ---
 
 # 小程序 - Unexpected token 'var'

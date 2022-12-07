@@ -1,12 +1,13 @@
 ---
 title: Flutter 常用命令
 author: teemwu
-date: 2019/12/27 09:41
+date: '2019/12/27 09:41'
 isPublished: true
 categories:
   - Flutter
 tags:
   - flutter
+wordCount: 150
 ---
 
 # Flutter 常用命令

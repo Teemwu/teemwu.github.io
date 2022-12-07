@@ -1,12 +1,15 @@
 ---
-title: The resource could not be loaded because the App Transport Security policy requires the use of a secure connection.
+title: >-
+  The resource could not be loaded because the App Transport Security policy
+  requires the use of a secure connection.
 author: teemwu
-date: 2020/04/16 00:23
+date: '2020/04/16 00:23'
 isPublished: true
 categories:
   - 报错
   - Flutter
-tags:
+tags: null
+wordCount: 106
 ---
 
 # The resource could not be loaded because the App Transport Security policy requires the use of a secure connection.

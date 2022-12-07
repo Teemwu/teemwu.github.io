@@ -1,11 +1,12 @@
 ---
 title: 开发微信小程序环境配置(vscode)
 author: teemwu
-date: 2019/10/31 12:05
+date: '2019/10/31 12:05'
 isPublished: true
 categories:
   - 微信小程序
-tags:
+tags: null
+wordCount: 171
 ---
 
 # 开发微信小程序环境配置(vscode)

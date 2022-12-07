@@ -1,10 +1,11 @@
 ---
 title: axios 封装及 API 接口管理
 author: teemwu
-date: 2021/09/23 12:12
+date: '2021/09/23 12:12'
 isPublished: true
-categories:
-tags:
+categories: null
+tags: null
+wordCount: 2048
 ---
 
 # axios 封装及 API 接口管理

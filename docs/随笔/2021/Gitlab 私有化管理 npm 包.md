@@ -1,11 +1,12 @@
 ---
 title: Gitlab 私有化管理 npm 包
 author: teemwu
-date: 2021/02/03 18:16
+date: '2021/02/03 18:16'
 isPublished: true
-categories:
+categories: null
 tags:
   - gitlab
+wordCount: 232
 ---
 
 # Gitlab 私有化管理 npm 包

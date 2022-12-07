@@ -1,11 +1,12 @@
 ---
 title: console.log中复制打印的对象
 author: teemwu
-date: 2018/10/12 11:07
+date: '2018/10/12 11:07'
 isPublished: true
 categories:
   - Javascript
-tags:
+tags: null
+wordCount: 170
 ---
 
 # console.log中复制打印的对象

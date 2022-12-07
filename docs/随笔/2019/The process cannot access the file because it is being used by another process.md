@@ -1,12 +1,13 @@
 ---
 title: The process cannot access the file because it is being used by another process
 author: teemwu
-date: 2019/04/09 18:06
+date: '2019/04/09 18:06'
 isPublished: true
 categories:
   - Electron
 tags:
   - electron
+wordCount: 260
 ---
 
 # The process cannot access the file because it is being used by another process

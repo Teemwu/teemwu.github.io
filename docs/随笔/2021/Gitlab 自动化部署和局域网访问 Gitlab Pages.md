@@ -1,11 +1,12 @@
 ---
 title: Gitlab 自动化部署和局域网访问 Gitlab Pages
 author: teemwu
-date: 2021/03/03 21:54
+date: '2021/03/03 21:54'
 isPublished: true
-categories:
+categories: null
 tags:
   - gitlab
+wordCount: 801
 ---
 
 # Gitlab 自动化部署和局域网访问 Gitlab Pages

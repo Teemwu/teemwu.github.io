@@ -1,13 +1,14 @@
 ---
 title: Windows10 下 vscode  remote-ssh 连接阿里云 ECS 云主机
 author: teemwu
-date: 2019/06/10 11:08
+date: '2019/06/10 11:08'
 isPublished: true
 categories:
   - 系统
   - 服务器
 tags:
   - vscode
+wordCount: 853
 ---
 
 # Windows10 下 vscode  remote-ssh 连接阿里云 ECS 云主机

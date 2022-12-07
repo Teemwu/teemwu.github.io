@@ -1,12 +1,13 @@
 ---
 title: CSS文字两端对齐
 author: teemwu
-date: 2020/07/21 14:43
+date: '2020/07/21 14:43'
 isPublished: true
 categories:
   - CSS
   - HTML
-tags:
+tags: null
+wordCount: 135
 ---
 
 # CSS文字两端对齐

@@ -1,12 +1,13 @@
 ---
 title: 微信小程序ios下禁用默认滚动事件
 author: teemwu
-date: 2018/08/10 18:29
+date: '2018/08/10 18:29'
 isPublished: true
 categories:
   - 微信小程序
   - 兼容
-tags:
+tags: null
+wordCount: 288
 ---
 
 # 微信小程序ios下禁用默认滚动事件

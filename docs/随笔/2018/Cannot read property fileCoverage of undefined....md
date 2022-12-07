@@ -1,11 +1,12 @@
 ---
-title: "Cannot read property 'fileCoverage' of undefined..."
+title: Cannot read property 'fileCoverage' of undefined...
 author: teemwu
-date: 2018/12/04 17:10
+date: '2018/12/04 17:10'
 isPublished: true
 categories:
   - 报错
-tags:
+tags: null
+wordCount: 180
 ---
 
 # "Cannot read property 'fileCoverage' of undefined..."

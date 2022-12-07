@@ -1,12 +1,13 @@
 ---
 title: canvas download时显示“网络错误”
 author: teemwu
-date: 2018/05/03 18:42
+date: '2018/05/03 18:42'
 isPublished: true
 categories:
   - Javascript
   - 报错
-tags:
+tags: null
+wordCount: 248
 ---
 
 # canvas download时显示“网络错误”

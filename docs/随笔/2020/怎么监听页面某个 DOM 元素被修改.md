@@ -1,12 +1,13 @@
 ---
 title: 怎么监听页面某个 DOM 元素被修改
 author: teemwu
-date: 2020/08/14 10:26
+date: '2020/08/14 10:26'
 isPublished: true
 categories:
   - Javascript
 tags:
   - 调试
+wordCount: 242
 ---
 
 # 怎么监听页面某个 DOM 元素被修改

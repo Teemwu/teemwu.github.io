@@ -1,12 +1,13 @@
 ---
 title: 微信小程序上拉加载和下拉刷新（wepy）
 author: teemwu
-date: 2018/06/15 20:08
+date: '2018/06/15 20:08'
 isPublished: true
 categories:
   - 微信小程序
 tags:
   - wepy
+wordCount: 559
 ---
 
 # 微信小程序上拉加载和下拉刷新（wepy）

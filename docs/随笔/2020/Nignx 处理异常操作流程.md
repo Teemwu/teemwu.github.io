@@ -1,13 +1,14 @@
 ---
 title: Nignx 处理异常操作流程
 author: teemwu
-date: 2020/05/10 11:08
+date: '2020/05/10 11:08'
 isPublished: true
 categories:
   - 报错
   - 服务器
 tags:
   - nginx
+wordCount: 340
 ---
 
 # Nignx 处理异常操作流程

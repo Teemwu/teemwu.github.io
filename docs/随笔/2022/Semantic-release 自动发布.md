@@ -1,7 +1,8 @@
 ---
 title: Semantic-release 自动发布
 author: teemwu
-date: 2022/09/29 15:03
+date: '2022/09/29 15:03'
+wordCount: 38
 ---
 
 # Semantic-release 自动发布

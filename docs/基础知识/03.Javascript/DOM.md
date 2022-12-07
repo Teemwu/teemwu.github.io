@@ -1,10 +1,11 @@
 ---
 title: DOM
 author: Teemwu
-date: 2022/09/27 21:29
+date: '2022/09/27 21:29'
 isPublished: true
-categories:
-tags:
+categories: null
+tags: null
+wordCount: 253
 ---
 
 # DOM 定义 

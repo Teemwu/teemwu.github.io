@@ -1,12 +1,13 @@
 ---
 title: Echart 配置项合并
 author: teemwu
-date: 2019/12/17 10:57
+date: '2019/12/17 10:57'
 isPublished: true
 categories:
   - Javascript
 tags:
   - 数据可视化
+wordCount: 227
 ---
 
 # Echart 配置项合并

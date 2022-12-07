@@ -1,13 +1,14 @@
 ---
 title: VSCode 搭建 Java 开发环境
 author: teemwu
-date: 2020/08/05 00:17
+date: '2020/08/05 00:17'
 isPublished: true
 categories:
   - VS Code
   - 工具
 tags:
   - Java
+wordCount: 1448
 ---
 
 # VSCode 搭建 Java 开发环境

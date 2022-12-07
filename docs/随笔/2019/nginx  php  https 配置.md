@@ -1,7 +1,7 @@
 ---
 title: nginx + php + https 配置
 author: teemwu
-date: 2019/10/10 23:23
+date: '2019/10/10 23:23'
 isPublished: true
 categories:
   - 服务器
@@ -9,6 +9,7 @@ tags:
   - nginx
   - php
   - https
+wordCount: 98
 ---
 
 # nginx + php + https 配置

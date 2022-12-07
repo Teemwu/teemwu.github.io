@@ -1,12 +1,13 @@
 ---
 title: A hook (`orm`) failed to load!
 author: teemwu
-date: 2018/06/28 10:37
+date: '2018/06/28 10:37'
 isPublished: true
 categories:
   - Sails
   - 报错
-tags:
+tags: null
+wordCount: 134
 ---
 
 # A hook (`orm`) failed to load!

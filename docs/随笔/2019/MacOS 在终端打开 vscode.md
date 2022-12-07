@@ -1,11 +1,12 @@
 ---
 title: MacOS 在终端打开 vscode
 author: teemwu
-date: 2019/12/02 10:39
+date: '2019/12/02 10:39'
 isPublished: true
 categories:
   - 系统
-tags:
+tags: null
+wordCount: 325
 ---
 
 # MacOS 在终端打开 vscode

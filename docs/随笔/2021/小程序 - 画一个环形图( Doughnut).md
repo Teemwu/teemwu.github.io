@@ -1,12 +1,13 @@
 ---
 title: 小程序 - 画一个环形图( Doughnut)
 author: teemwu
-date: 2021/06/30 16:58
+date: '2021/06/30 16:58'
 isPublished: true
 categories:
   - 微信小程序
   - Javascript
-tags:
+tags: null
+wordCount: 2080
 ---
 
 # 小程序 - 画一个环形图( Doughnut)

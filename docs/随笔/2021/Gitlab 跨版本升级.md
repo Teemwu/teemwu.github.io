@@ -1,11 +1,12 @@
 ---
 title: Gitlab 跨版本升级
 author: teemwu
-date: 2021/02/26 16:17
+date: '2021/02/26 16:17'
 isPublished: true
-categories:
+categories: null
 tags:
   - gitlab
+wordCount: 1271
 ---
 
 # Gitlab 跨版本升级

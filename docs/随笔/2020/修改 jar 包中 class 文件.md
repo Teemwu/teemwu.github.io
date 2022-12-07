@@ -1,11 +1,12 @@
 ---
 title: 修改 jar 包中 class 文件
 author: teemwu
-date: 2020/07/31 02:58
+date: '2020/07/31 02:58'
 isPublished: true
-categories:
+categories: null
 tags:
   - Java
+wordCount: 540
 ---
 
 # 修改 jar 包中 class 文件

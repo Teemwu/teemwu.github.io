@@ -1,12 +1,13 @@
 ---
 title: 微信小程序Android真机下wx.previewImage黑屏
 author: teemwu
-date: 2018/07/04 17:04
+date: '2018/07/04 17:04'
 isPublished: true
 categories:
   - 微信小程序
   - 兼容
-tags:
+tags: null
+wordCount: 136
 ---
 
 # 微信小程序Android真机下wx.previewImage黑屏

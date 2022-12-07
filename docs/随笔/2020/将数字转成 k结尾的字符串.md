@@ -1,12 +1,13 @@
 ---
 title: 将数字转成 'k'结尾的字符串
 author: teemwu
-date: 2020/04/06 02:26
+date: '2020/04/06 02:26'
 isPublished: true
 categories:
   - Dart
 tags:
   - Dart
+wordCount: 271
 ---
 
 # 将数字转成 'k'结尾的字符串

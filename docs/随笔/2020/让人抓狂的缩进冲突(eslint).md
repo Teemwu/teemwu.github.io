@@ -1,12 +1,13 @@
 ---
 title: 让人抓狂的缩进冲突(eslint)
 author: teemwu
-date: 2020/04/20 18:53
+date: '2020/04/20 18:53'
 isPublished: true
 categories:
   - 报错
 tags:
   - eslint
+wordCount: 266
 ---
 
 # 让人抓狂的缩进冲突(eslint)

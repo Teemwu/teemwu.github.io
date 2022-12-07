@@ -1,13 +1,22 @@
 import { sync } from 'fast-glob'
 import { DefaultTheme } from 'vitepress/theme'
 import matter from 'gray-matter'
+import { countWord } from '../theme/utils'
+import { outputFileSync } from 'fs-extra'
 
 const files = sync(['docs/**/*.md', '!docs/.vitepress', '!docs/public'], { objectMode: true })
 const sidebar: DefaultTheme.Sidebar = {}
 
 if (files && files.length) {
 	files.reverse().forEach(({ name, path }) => {
-		const { isPublished, title } = matter(matter.read(path)).data
+		const { data, content } = matter(matter.read(path))
+		const { isPublished, title, wordCount } = data
+		const _wordCount = countWord(content)
+
+		if (title && wordCount !== _wordCount) {
+			const _content = matter.stringify(content, Object.assign({}, data, { wordCount: _wordCount }))
+			outputFileSync(path, _content, { encoding: 'utf-8' })
+		}
 
 		if (!isPublished) return
 
@@ -27,7 +36,7 @@ if (files && files.length) {
 
 			const _item = {
 				text: name1,
-				collapsed: false,
+				collapsed: true,
 				collapsible: true,
 				items: [{ text, link }]
 			}

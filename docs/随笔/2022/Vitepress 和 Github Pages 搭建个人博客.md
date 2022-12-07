@@ -1,7 +1,7 @@
 ---
 title: Vitepress 和 Github Pages 搭建个人博客
 author: Teemwu
-date: 2020/10/02 21:29
+date: '2020/10/02 21:29'
 isPublished: true
 categories:
   - Java基础快速入门
@@ -9,7 +9,8 @@ tags:
   - Java
   - Java基础
   - JDK
-  - 
+  - null
+wordCount: 908
 ---
 
 # Vitepress 和 Github Pages 搭建个人博客

@@ -1,10 +1,11 @@
 ---
 title: Eslint 忽略部分提示
 author: teemwu
-date: 2018/09/18 14:15
+date: '2018/09/18 14:15'
 isPublished: true
-categories:
-tags:
+categories: null
+tags: null
+wordCount: 440
 ---
 
 # Eslint 忽略部分提示

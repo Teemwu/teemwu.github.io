@@ -1,13 +1,14 @@
 ---
 title: 在 template 中使用 sass 变量
 author: teemwu
-date: 2021/01/09 11:09
+date: '2021/01/09 11:09'
 isPublished: true
 categories:
   - Javascript
   - Vue
 tags:
   - sass
+wordCount: 363
 ---
 
 # 在 template 中使用 sass 变量

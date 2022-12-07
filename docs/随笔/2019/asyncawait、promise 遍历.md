@@ -1,11 +1,12 @@
 ---
 title: async/await、promise 遍历
 author: teemwu
-date: 2019/05/23 10:34
+date: '2019/05/23 10:34'
 isPublished: true
 categories:
   - Javascript
-tags:
+tags: null
+wordCount: 204
 ---
 
 # async/await、promise 遍历

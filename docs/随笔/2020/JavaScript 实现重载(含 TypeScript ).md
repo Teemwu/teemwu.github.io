@@ -1,10 +1,11 @@
 ---
 title: JavaScript 实现重载(含 TypeScript )
 author: teemwu
-date: 2020/08/06 23:57
+date: '2020/08/06 23:57'
 isPublished: false
-categories:
-tags:
+categories: null
+tags: null
+wordCount: 180
 ---
 
 # JavaScript 实现重载(含 TypeScript )

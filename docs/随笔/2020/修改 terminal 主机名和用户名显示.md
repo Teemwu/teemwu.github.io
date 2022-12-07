@@ -1,7 +1,7 @@
 ---
 title: 修改 terminal 主机名和用户名显示
 author: teemwu
-date: 2020/07/10 00:10
+date: '2020/07/10 00:10'
 isPublished: true
 categories:
   - 系统
@@ -9,6 +9,7 @@ categories:
 tags:
   - zsh
   - shell
+wordCount: 368
 ---
 
 # 修改 terminal 主机名和用户名显示

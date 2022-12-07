@@ -1,11 +1,12 @@
 ---
 title: 日期获取的特殊情况(javascript)
 author: teemwu
-date: 2019/07/22 18:34
+date: '2019/07/22 18:34'
 isPublished: true
 categories:
   - Javascript
-tags:
+tags: null
+wordCount: 73
 ---
 
 # 日期获取的特殊情况(javascript)

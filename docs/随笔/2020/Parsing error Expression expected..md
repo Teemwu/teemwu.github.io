@@ -1,12 +1,13 @@
 ---
 title: Parsing error Expression expected.
 author: teemwu
-date: 2020/04/30 11:57
+date: '2020/04/30 11:57'
 isPublished: true
 categories:
   - 报错
 tags:
   - eslint
+wordCount: 260
 ---
 
 # Parsing error Expression expected.

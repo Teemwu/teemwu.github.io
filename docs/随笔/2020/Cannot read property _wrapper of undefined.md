@@ -1,12 +1,13 @@
 ---
 title: Cannot read property '_wrapper' of undefined
 author: teemwu
-date: 2020/03/11 11:04
+date: '2020/03/11 11:04'
 isPublished: true
 categories:
   - 报错
 tags:
   - vue
+wordCount: 29
 ---
 
 # Cannot read property '_wrapper' of undefined

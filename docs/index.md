@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /随笔/2022/Vitepress 和 Github Pages 搭建个人博客.md
+      link: /随笔/
     - theme: alt
       text: AboutMe 👨‍💻
       link: /about.md
