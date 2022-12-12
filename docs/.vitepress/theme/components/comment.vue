@@ -1,6 +1,6 @@
 <template>
   <div class="comments-container"
-       v-if="!page.frontmatter.hideComment">
+       v-if="loaded && !page.frontmatter.hideComment">
     <Giscus id="comments"
             repo="Teemwu/teemwu.github.io"
             repoId="R_kgDOH_qrDg"
@@ -22,8 +22,14 @@
 <script setup lang="ts">
 import Giscus from '@giscus/vue'
 import { useData } from 'vitepress'
+import { ref, onMounted, nextTick } from 'vue'
 
+const loaded = ref(false)
 const { isDark, page } = useData()
+
+onMounted(() => {
+  nextTick(() => (loaded.value = true))
+})
 </script>
 
 <style lang="scss" scoped>

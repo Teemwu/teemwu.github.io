@@ -4,6 +4,7 @@ import Layout from './Layout.vue'
 import { useGoogleAnalytics } from './hooks/useGooogleAnalytics'
 import { useMediumZoom } from './hooks/useMediumZoom'
 import { useArcoDesign } from './hooks/useAcroDesign'
+import { onMounted } from 'vue'
 
 export default {
 	...DefaultTheme,
@@ -11,8 +12,10 @@ export default {
 	setup() {
 		useArcoDesign()
 		useMediumZoom()
+
+		onMounted(() =>{
+			useGoogleAnalytics()
+		})
 	},
-	enhanceApp() {
-		useGoogleAnalytics()
-	}
+	enhanceApp() { }
 }

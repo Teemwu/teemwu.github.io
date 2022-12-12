@@ -5,9 +5,11 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"jsx": "preserve",
+		"lib": [
+			"DOM",
+		],
 		"types": [
 			"node",
-			"vite/client",
 			"vitepress"
 		]
 	},
