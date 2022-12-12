@@ -4,10 +4,16 @@
 		"isolatedModules": false,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"jsx": "preserve"
+		"jsx": "preserve",
+		"types": [
+			"node",
+			"vite/client",
+			"vitepress"
+		]
 	},
 	"include": [
 		"docs/.vitepress/**/*.ts",
+		"docs/.vitepress/**/*.d.ts",
 		"docs/.vitepress/**/*.vue",
 		"build/*.mjs",
 		"lib/*.mjs"

@@ -35,7 +35,7 @@ import { Icon } from '@arco-design/web-vue'
 
 defineProps<{ modelValue: any }>()
 
-const IconFont = Icon.addFromIconFontCn({ src: '//at.alicdn.com/t/c/font_3814940_1gstz06kjmy.js' });
+const IconFont = Icon.addFromIconFontCn({ src: '//at.alicdn.com/t/c/font_3814940_1gstz06kjmy.js' })
 
 </script>
 
