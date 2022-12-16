@@ -14,7 +14,7 @@
             lang="zh-CN"
             crossorigin="anonymous"
             :theme="isDark ? 'transparent_dark' : 'light'"
-            :term="page.title"
+            :term="encodeURI(page.title)"
             async="true" />
   </div>
 </template>

@@ -5,6 +5,9 @@ import { useGoogleAnalytics } from './hooks/useGooogleAnalytics'
 import { useMediumZoom } from './hooks/useMediumZoom'
 import { useArcoDesign } from './hooks/useAcroDesign'
 import { onMounted } from 'vue'
+import Tags from './components/tags.vue'
+import Archives from './components/archives.vue'
+import Categories from './components/categories.vue'
 
 export default {
 	...DefaultTheme,
@@ -13,9 +16,13 @@ export default {
 		useArcoDesign()
 		useMediumZoom()
 
-		onMounted(() =>{
+		onMounted(() => {
 			useGoogleAnalytics()
 		})
 	},
-	enhanceApp() { }
+	enhanceApp({ app }) {
+		app.component('Tags', Tags)
+		app.component('Archives', Archives)
+		app.component('Categories', Categories)
+	}
 }

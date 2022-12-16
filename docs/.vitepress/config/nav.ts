@@ -5,6 +5,7 @@ export const nav: DefaultTheme.Config['nav'] = [
 	{ text: '基础知识', link: '/基础知识/', activeMatch: '/基础知识/' },
 	{ text: '工程化', link: '/前端工程化/index', activeMatch: '/前端工程化/' },
 	{ text: '面试题集', link: '/面试题集/未分类/杂七杂八', activeMatch: '/面试题集/' },
+	{ text: '归档', link: 'archives', activeMatch: 'archives' },
 	{
 		text: '百宝箱',
 		activeMatch: '/百宝箱/',

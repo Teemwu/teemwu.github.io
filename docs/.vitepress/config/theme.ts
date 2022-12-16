@@ -1,8 +1,14 @@
-import { DefaultTheme } from 'vitepress'
+import { MyConfig } from '../models'
 import { nav } from './nav'
-import { sidebar } from './sidebar'
+import { sidebar, posts, tags, categories } from './init'
 
-export const themeConfig: DefaultTheme.Config = {
+const myConfig: MyConfig = {
+	posts,
+	tags,
+	categories
+}
+
+export const themeConfig: MyConfig = {
 	logo: '/logo.png',
 	outlineTitle: '目录',
 	outline: 'deep',
@@ -31,5 +37,6 @@ export const themeConfig: DefaultTheme.Config = {
 	editLink: {
 		pattern: 'https://github.com/Teemwu/teemwu.github.io/edit/main/docs/:path',
 		text: '编辑'
-	}
+	},
+	...myConfig
 }

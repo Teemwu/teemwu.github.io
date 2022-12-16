@@ -3,25 +3,62 @@ import { DefaultTheme } from 'vitepress/theme'
 import matter from 'gray-matter'
 import { countWord } from '../theme/utils'
 import { outputFileSync } from 'fs-extra'
+import dayjs from 'dayjs'
 
 const files = sync(['docs/**/*.md', '!docs/.vitepress', '!docs/public'], { objectMode: true })
 const sidebar: DefaultTheme.Sidebar = {}
+const _posts = []
+const tagsObj: Record<string, number> = {}
+const categoriesObj: Record<string, number> = {}
 
 if (files && files.length) {
 	files.reverse().forEach(({ name, path }) => {
 		const { data, content } = matter(matter.read(path))
-		const { isPublished, title, wordCount } = data
-		const _wordCount = countWord(content)
+		const { isPublished, title, wordCount, tags, categories } = data
 
+		// 过滤掉不发布文章
+		if (!isPublished) return
+
+		// 标签统计
+		if (tags && tags.length) {
+			tags.forEach(t => {
+				if (tagsObj[t]) {
+					tagsObj[t]++
+				} else {
+					tagsObj[t] = 1
+				}
+			})
+		}
+
+		// 分类统计
+		if (categories && categories.length) {
+			categories.forEach(c => {
+				if (categoriesObj[c]) {
+					categoriesObj[c]++
+				} else {
+					categoriesObj[c] = 1
+				}
+			})
+		}
+
+		/**
+		 * 字数统计
+		 */
+		const _wordCount = countWord(content)
 		if (title && wordCount !== _wordCount) {
 			const _content = matter.stringify(content, Object.assign({}, data, { wordCount: _wordCount }))
 			outputFileSync(path, _content, { encoding: 'utf-8' })
 		}
 
-		if (!isPublished) return
-
 		name = name.replace('.md', '')
 		path = path.replace('.md', '').replace('docs/', '')
+
+		// 新增文章
+		_posts.push({
+			name,
+			path,
+			...data
+		})
 
 		const names = path.split('/')
 		const removeIndex = (str) => str.replace(/^[0-9]+[\.|\-|_]/, '')
@@ -58,6 +95,11 @@ if (files && files.length) {
 	})
 }
 
+// 文章按日期进行排序
+const posts = _posts.sort((a, b) => (dayjs(b.date).unix() - dayjs(a.date).unix()))
+const tags = Object.entries(tagsObj)
+const categories = Object.entries(categoriesObj)
+
 // console.dir(sidebar, { depth: null })
 
-export { sidebar }
+export { sidebar, posts, tags, categories }
