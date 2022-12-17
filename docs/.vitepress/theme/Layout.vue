@@ -1,14 +1,14 @@
 <template>
 	<Layout>
-		<template #doc-after>
+		<!-- <template #doc-after>
 			<Comment  />
-		</template>
+		</template> -->
 	</Layout>
 </template>
 
 <script lang="ts" setup>
 import DefaultTheme from 'vitepress/theme'
-import Comment from './components/comment.vue'
+// import Comment from './components/comment.vue'
 
 const { Layout } = DefaultTheme
 

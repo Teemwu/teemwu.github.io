@@ -1,5 +1,6 @@
 ---
 layout: page
+title: 关于我
 showInSide: false
 hideComment: true
 ---
