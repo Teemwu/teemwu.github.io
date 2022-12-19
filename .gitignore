@@ -3,6 +3,7 @@ node_modules
 pnpm-global
 *.log
 /docs/.vitepress/dist
+docs/.vitepress/cache
 package-lock.json
 CNBlogs_BlogBackup_131_201511_202209.xml
 TODO.md
