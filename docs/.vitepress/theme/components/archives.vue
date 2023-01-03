@@ -4,7 +4,7 @@
 					labelPosition="relative">
 			<template v-for="item in _archives"
 					  :key="item[0]">
-				<a-timeline-item :label="`${item[0]} 年`">
+				<a-timeline-item :label="`${item[0]} 年 - ${item[1].length}篇`">
 					<a-collapse :bordered="false"
 								destroy-on-hide
 								class="-mt-2.5">
@@ -29,11 +29,13 @@ import dayjs from 'dayjs'
 import { ArchiveList } from '../../models'
 
 const { theme } = useData()
-const { posts, categories } = theme.value
+const { posts } = theme.value
 const archives = ref<ArchiveList[]>()
 const archivesObj: Record<number, any> = {}
 
 posts.forEach(p => {
+	if (!p.date) return
+
 	const date = dayjs(p.date)
 	const year = date.format('YYYY')
 	const month = date.format('MM')

@@ -101,5 +101,4 @@ const tags = Object.entries(tagsObj)
 const categories = Object.entries(categoriesObj)
 
 // console.dir(sidebar, { depth: null })
-
 export { sidebar, posts, tags, categories }
