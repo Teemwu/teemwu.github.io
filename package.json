@@ -37,12 +37,12 @@
     "tailwindcss": "3.2.4",
     "unplugin-auto-import": "0.12.1",
     "unplugin-vue-components": "0.22.12",
-    "vitepress": "1.0.0-alpha.34",
+    "vitepress": "1.0.0-alpha.35",
     "vue": "3.2.45"
   },
   "dependencies": {
     "@giscus/vue": "2.2.6",
-    "@vueuse/core": "9.9.0",
+    "@vueuse/core": "9.10.0",
     "dayjs": "1.11.7",
     "fast-glob": "3.2.12",
     "gray-matter": "4.0.3",
