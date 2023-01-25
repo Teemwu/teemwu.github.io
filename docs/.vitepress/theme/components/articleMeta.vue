@@ -1,7 +1,7 @@
 <template>
 	<a-breadcrumb v-if="!modelValue.hideArticleMeta"
 				  separator=""
-				  class="flex-wrap">
+				  class="flex-wrap my-4">
 		<!-- <a-tooltip content="作者"
 				   position="bottom"
 				   mini>

@@ -51,7 +51,9 @@ const searchHandle = (_, input, data, isAdd = true) => {
  * @param {string} input type value
  * @returns string[]
  */
-const searchDir = (_, input = DEFAULT_DIR) => new PinyinEngine(dirs).query(input)
+const searchDir = (_, input = DEFAULT_DIR) => {
+	return new PinyinEngine([...dirs, input]).query(input)
+}
 
 const prompt = inquirer
 	.prompt([

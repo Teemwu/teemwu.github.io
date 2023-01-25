@@ -33,4 +33,8 @@ defineProps<{ modelValue: Post[] }>()
 :deep(.arco-link) {
 	margin-left: -4px;
 }
+
+:deep(.arco-breadcrumb){
+	margin: 0;
+}
 </style>

@@ -37,7 +37,7 @@
 }
 
 .vp-doc div[class*='language-'] {
-	margin: unset;
+	// margin: unset;
 	border-radius: 4px;
 	margin-top: 16px;
 }
@@ -47,11 +47,13 @@
 .vp-doc div[class*='language-']+div[class$='-api']>div[class*='language-'] {
 	margin: unset;
 	margin-top: 8px;
+	margin-bottom: 8px;
 }
 
 img,
 video {
 	border-radius: 4px;
+	margin: 16px 0;
 }
 
 .medium-zoom-overlay {
@@ -60,4 +62,75 @@ video {
 
 .medium-zoom-image {
 	z-index: 21;
+}
+
+.vp-doc li {
+	line-height: 28px;
+
+	&+li {
+		margin-top: unset;
+	}
+}
+
+.vp-doc li>ol,
+.vp-doc li>ul {
+	margin: 0;
+}
+
+.vp-doc ul,
+.vp-doc ol {
+	margin: 0;
+}
+
+.vp-code-group {
+	margin: 8px 0;
+}
+
+.vp-code-group .tabs {
+	margin: unset;
+	border-radius: 4px 4px 0 0;
+}
+
+.vp-code-group .tabs label {
+	font-size: 12px;
+	line-height: 3;
+}
+
+.vp-code-group div[class*='language-'].active {
+	margin: unset;
+}
+
+.vp-doc div[class*=language-] {
+	margin: unset;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+@media (min-width: 640px) {
+	.vp-code-group .tabs {
+		border-radius: 4px 4px 0 0;
+	}
+}
+
+.vp-doc p,
+.vp-doc summary {
+	margin: 0;
+}
+
+.vp-doc h2 {
+	margin: 16px 0;
+	padding: 0;
+	border-top: none;
+}
+
+.vp-doc h1 {
+	margin: 0;
+}
+
+.vp-doc a {
+	font-weight: normal;
+}
+
+.vp-doc h3 {
+	margin: 16px 0 8px 0;
 }

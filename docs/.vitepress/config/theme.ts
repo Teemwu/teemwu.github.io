@@ -9,7 +9,7 @@ const myConfig: MyConfig = {
 }
 
 export const themeConfig: MyConfig = {
-	logo: '/logo.png',
+	logo: '/logo.jpg',
 	outlineTitle: '目录',
 	outline: 'deep',
 	docFooter: {
