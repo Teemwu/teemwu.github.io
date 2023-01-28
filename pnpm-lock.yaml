@@ -29,7 +29,7 @@ specifiers:
   sass: 1.57.1
   sitemap: 7.1.1
   tailwindcss: 3.2.4
-  unplugin-auto-import: 0.12.1
+  unplugin-auto-import: 0.12.2
   unplugin-vue-components: 0.22.12
   vitepress: 1.0.0-alpha.40
   vue: 3.2.45
@@ -65,7 +65,7 @@ devDependencies:
   sass: 1.57.1
   sitemap: 7.1.1
   tailwindcss: 3.2.4_postcss@8.4.21
-  unplugin-auto-import: 0.12.1_@vueuse+core@9.11.1
+  unplugin-auto-import: 0.12.2_@vueuse+core@9.11.1
   unplugin-vue-components: 0.22.12_vue@3.2.45
   vitepress: 1.0.0-alpha.40_bxsr3xqdkl4dikyr45bkypquca
   vue: 3.2.45
@@ -1637,6 +1637,11 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
+  /local-pkg/0.4.3:
+    resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
+    engines: {node: '>=14'}
+    dev: true
+
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
@@ -1709,11 +1714,11 @@ packages:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: true
 
-  /mlly/1.0.0:
-    resolution: {integrity: sha512-QL108Hwt+u9bXdWgOI0dhzZfACovn5Aen4Xvc8Jasd9ouRH4NjnrXEiyP3nVvJo91zPlYjVRckta0Nt2zfoR6g==}
+  /mlly/1.1.0:
+    resolution: {integrity: sha512-cwzBrBfwGC1gYJyfcy8TcZU1f+dbH/T+TuOhtYP2wLv/Fb51/uV7HJQfBPtEupZ2ORLRU1EKFS/QfS3eo9+kBQ==}
     dependencies:
       acorn: 8.8.1
-      pathe: 1.0.0
+      pathe: 1.1.0
       pkg-types: 1.0.1
       ufo: 1.0.1
     dev: true
@@ -1824,8 +1829,8 @@ packages:
       util: 0.10.4
     dev: true
 
-  /pathe/1.0.0:
-    resolution: {integrity: sha512-nPdMG0Pd09HuSsr7QOKUXO2Jr9eqaDiZvDwdyIhNG5SHYujkQHYKDfGQkulBxvbDHz8oHLsTgKN86LSwYzSHAg==}
+  /pathe/1.1.0:
+    resolution: {integrity: sha512-ODbEPR0KKHqECXW1GoxdDb+AZvULmXjVPy4rt+pGo2+TnjJTIPJQSVS6N63n8T2Ip+syHhbn52OewKicV0373w==}
     dev: true
 
   /picocolors/1.0.0:
@@ -1848,8 +1853,8 @@ packages:
     resolution: {integrity: sha512-jHv9HB+Ho7dj6ItwppRDDl0iZRYBD0jsakHXtFgoLr+cHSF6xC+QL54sJmWxyGxOLYSHm0afhXhXcQDQqH9z8g==}
     dependencies:
       jsonc-parser: 3.2.0
-      mlly: 1.0.0
-      pathe: 1.0.0
+      mlly: 1.1.0
+      pathe: 1.1.0
     dev: true
 
   /postcss-import/14.1.0_postcss@8.4.21:
@@ -2286,16 +2291,16 @@ packages:
     dev: true
     optional: true
 
-  /unimport/1.0.2:
-    resolution: {integrity: sha512-DcYkDwl1XMZNmyEKUFzVzHAul0FZcj9m0OM/WRfaAtg6Gw1waYlypYJl6qAg31k57TnNPwGDCAxYPodYC5qomQ==}
+  /unimport/2.0.1:
+    resolution: {integrity: sha512-hMeDspGrEcocahicTr0AQYUGes24FvJtOxk9QEjeEOGv+n1EdpsDiT6z8t209PWhemPg0T5w/ooTVhup2GdrFA==}
     dependencies:
       '@rollup/pluginutils': 5.0.2
       escape-string-regexp: 5.0.0
       fast-glob: 3.2.12
-      local-pkg: 0.4.2
+      local-pkg: 0.4.3
       magic-string: 0.27.0
-      mlly: 1.0.0
-      pathe: 1.0.0
+      mlly: 1.1.0
+      pathe: 1.1.0
       pkg-types: 1.0.1
       scule: 1.0.0
       strip-literal: 1.0.0
@@ -2309,8 +2314,8 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unplugin-auto-import/0.12.1_@vueuse+core@9.11.1:
-    resolution: {integrity: sha512-J/3ZORq5YGKG+8D5vLLOgqaHNK77izlVN07mQ752yRLqBNDbJiwPRSnUwwYqH5N6rDay1SqnJCHaUdbJ9QMI2w==}
+  /unplugin-auto-import/0.12.2_@vueuse+core@9.11.1:
+    resolution: {integrity: sha512-hC4w0GZjPjmLtrxV0u10XO350V9eCtQyEyifXr7B9UGD7SvbbIvKuOcHt58Zd4FAqZJXKWoXkpr9mdhBp85Usw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@vueuse/core': '*'
@@ -2321,9 +2326,9 @@ packages:
       '@antfu/utils': 0.7.2
       '@rollup/pluginutils': 5.0.2
       '@vueuse/core': 9.11.1_vue@3.2.45
-      local-pkg: 0.4.2
+      local-pkg: 0.4.3
       magic-string: 0.27.0
-      unimport: 1.0.2
+      unimport: 2.0.1
       unplugin: 1.0.1
     transitivePeerDependencies:
       - rollup
@@ -2525,7 +2530,7 @@ packages:
     dev: true
 
   github.com/Teemwu/inquirer-checkbox-plus-prompt/6f3e1ee8c905fd0f27b58452ec3107e773d25a80:
-    resolution: {commit: 6f3e1ee8c905fd0f27b58452ec3107e773d25a80, repo: git+ssh://git@github.com/Teemwu/inquirer-checkbox-plus-prompt.git, type: git}
+    resolution: {tarball: https://codeload.github.com/Teemwu/inquirer-checkbox-plus-prompt/tar.gz/6f3e1ee8c905fd0f27b58452ec3107e773d25a80}
     name: inquirer-checkbox-plus-prompt
     version: 1.0.1
     dependencies:
