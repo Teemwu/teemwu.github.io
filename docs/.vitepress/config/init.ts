@@ -74,7 +74,6 @@ if (files && files.length) {
 			const _item = {
 				text: name1,
 				collapsed: true,
-				collapsible: true,
 				items: [{ text, link }]
 			}
 
