@@ -37,7 +37,7 @@
     "tailwindcss": "3.2.4",
     "unplugin-auto-import": "0.13.0",
     "unplugin-vue-components": "0.23.0",
-    "vitepress": "1.0.0-alpha.43",
+    "vitepress": "1.0.0-alpha.44",
     "vue": "3.2.45"
   },
   "dependencies": {

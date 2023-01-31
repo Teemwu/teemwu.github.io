@@ -4,11 +4,11 @@
 					labelPosition="relative">
 			<template v-for="item in _archives"
 					  :key="item[0]">
-				<a-timeline-item :label="`${item[0]} 年 - ${item[1].length}篇`">
+				<a-timeline-item :label="`${item[0]} 年 - ${item[1].count}篇`">
 					<a-collapse :bordered="false"
 								destroy-on-hide
 								class="-mt-2.5">
-						<template v-for="itm in item[1]"
+						<template v-for="itm in item[1].months"
 								  :key="itm[0]">
 							<a-collapse-item :header="`${itm[0]} 月`"
 											 :show-expand-icon="false">
@@ -46,18 +46,22 @@ posts.forEach(p => {
 		} else {
 			archivesObj[year].months[month] = [p]
 		}
+		// 统计篇数
+		archivesObj[year].count++
 	} else {
-		archivesObj[year] = { months: {} }
+		archivesObj[year] = { months: {}, count: 1 }
 		archivesObj[year].months[month] = [p]
 	}
 })
 
 const _archives = Object.entries(archivesObj)
 _archives.map(i => {
-	i[1] = Object.entries(i[1].months).sort((a: any, b: any) => (b[0] - a[0]))
+	// 按月份递减排序
+	i[1].months = Object.entries(i[1].months).sort((a: any, b: any) => (b[0] - a[0]))
 	return i
 })
 
+// 按年份递减排序
 archives.value = _archives.sort((a: any, b: any) => (b[0] - a[0]))
 
 </script>

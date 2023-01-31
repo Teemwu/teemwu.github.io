@@ -1,4 +1,16 @@
-# 常用
+---
+title: Git常用操作
+author: Teemwu
+date: '2022/09/27 21:29'
+isPublished: true
+categories:
+  - 效率
+tags:
+  - git
+wordCount: 424
+---
+
+# Git常用操作
 
 ## 分支操作
 

@@ -13,10 +13,10 @@ import { getTemplateContent, getSafeTitle, getDate } from 'cnblog2md/src/utils.m
 inquirer.registerPrompt('autocomplete', inquirerPrompt)
 inquirer.registerPrompt('checkbox-plus', CheckboxPlusPrompt)
 
-const dirs = fg.sync(['docs/**/*', '!docs/.vitepress', '!docs/public'], { onlyDirectories: true })
-const files = fg.sync(['docs/**/*.md', '!docs/.vitepress', '!docs/public'], { onlyFiles: true })
+const dirs = fg.sync(['posts/**/*'], { onlyDirectories: true })
+const files = fg.sync(['posts/**/*.md'], { onlyFiles: true })
 
-const DEFAULT_DIR = 'docs/随笔/' + dayjs().format('YYYY')
+const DEFAULT_DIR = 'posts/' + dayjs().format('YYYY')
 const DEFAULT_AUTH = 'teemwu'
 
 let categories = []

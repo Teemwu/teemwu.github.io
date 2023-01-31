@@ -5,7 +5,7 @@ import { countWord } from '../theme/utils'
 import { outputFileSync } from 'fs-extra'
 import dayjs from 'dayjs'
 
-const files = sync(['docs/**/*.md', '!docs/.vitepress', '!docs/public'], { objectMode: true })
+const files = sync(['posts/**/*.md'], { objectMode: true })
 const sidebar: DefaultTheme.Sidebar = {}
 const _posts = []
 const tagsObj: Record<string, number> = {}

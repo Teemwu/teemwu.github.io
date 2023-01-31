@@ -1,7 +1,7 @@
 <template>
 	<a-list :bordered="false"
 			:data="modelValue"
-			:pagination-props="modelValue.length > 6 ? { defaultPageSize: 6, total: modelValue.length } : null">
+			:pagination-props="modelValue.length > pageSize ? { defaultPageSize: pageSize, total: modelValue.length } : null">
 		<template #item="{ item }">
 			<a-list-item v-if="item.isPublished && item.title">
 				<a-list-item-meta>
@@ -21,7 +21,8 @@
 import articleMeta from './articleMeta.vue'
 import { Post } from '../../models'
 
-defineProps<{ modelValue: Post[] }>()
+withDefaults(defineProps<{ modelValue: Post[], pageSize?: number }>(), { pageSize: 6 })
+
 </script>
 
 <style lang="scss" scoped>
@@ -34,7 +35,7 @@ defineProps<{ modelValue: Post[] }>()
 	margin-left: -4px;
 }
 
-:deep(.arco-breadcrumb){
+:deep(.arco-breadcrumb) {
 	margin: 0;
 }
 </style>
