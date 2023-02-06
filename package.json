@@ -13,11 +13,11 @@
   "author": "teemwu",
   "license": "ISC",
   "devDependencies": {
-    "@arco-design/web-vue": "2.42.0",
+    "@arco-design/web-vue": "2.42.1",
     "@types/fs-extra": "11.0.1",
     "@types/inquirer": "9.0.3",
     "@types/inquirer-autocomplete-prompt": "3.0.0",
-    "@types/node": "18.11.18",
+    "@types/node": "18.11.19",
     "autoprefixer": "10.4.13",
     "chalk": "5.2.0",
     "cnblog2md": "1.9.0",
