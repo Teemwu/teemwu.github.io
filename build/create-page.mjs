@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { exec } from 'node:child_process'
 import inquirer from 'inquirer'
 import inquirerPrompt from 'inquirer-autocomplete-prompt'
 import CheckboxPlusPrompt from 'inquirer-checkbox-plus-prompt'
@@ -34,6 +35,9 @@ if (files.length) {
 	tags = [...new Set(_tags.filter(i => i))]
 }
 
+/**
+ * Search by value
+ */
 const searchHandle = (_, input, data, isAdd = true) => {
 	return new Promise(function (resolve) {
 		const result = new PinyinEngine(data).query(input)
@@ -55,7 +59,17 @@ const searchDir = (_, input = DEFAULT_DIR) => {
 	return new PinyinEngine([...dirs, input]).query(input)
 }
 
-const prompt = inquirer
+const openFileByVSCode = (filePath) => {
+	exec(`code ${filePath}`, (err, stdout, stderr) => {
+		if (err) return console.log(chalk.red('[打开失败]'), err)
+
+		console.log('\n', chalk.green('[打开成功]'), stdout)
+
+		process.exit()
+	})
+}
+
+inquirer
 	.prompt([
 		{
 			type: 'autocomplete',
@@ -77,7 +91,10 @@ const prompt = inquirer
 			default: null,
 			validate(val, { dir }) {
 				const file = `${dir}/${val}.md`
-				if (files.findIndex(f => f === file) >= 0) return '文章已存在: ' + file
+				if (files.findIndex(f => f === file) >= 0) {
+					openFileByVSCode(file)
+					return '文章已存在: ' + file
+				}
 				if (!val) return '请输入标题'
 				return true
 			}
@@ -122,5 +139,8 @@ const prompt = inquirer
 	.then(answers => {
 		const content = getTemplateContent({ ...answers, safeTitle: getSafeTitle(answers.title), date: getDate() })
 		const outputPath = path.join(answers.dir, answers.title + '.md')
-		fs.outputFile(outputPath, content).then(() => console.log(chalk.green('[完成]'), chalk.gray(outputPath)))
+		fs.outputFile(outputPath, content).then(() => {
+			console.log(chalk.green('[完成]'), chalk.gray(outputPath))
+			openFileByVSCode(outputPath)
+		})
 	})
