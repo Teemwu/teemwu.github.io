@@ -1,11 +1,12 @@
 ---
-title: MacOS 安装、卸载 MySQL 
+title: MacOS 安装、卸载 MySQL
 author: teemwu
-date: 2023/02/02 15:11
+date: '2023/02/02 15:11'
 isPublished: true
 categories:
   - 工具
-tags:
+tags: null
+wordCount: 209
 ---
 
 # MacOS 安装、卸载 MySQL 
