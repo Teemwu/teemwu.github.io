@@ -26,7 +26,7 @@ specifiers:
   pinyin-engine: 1.2.2
   postcss: 8.4.21
   sanitize-html: 2.9.0
-  sass: 1.58.0
+  sass: 1.58.1
   sitemap: 7.1.1
   tailwindcss: 3.2.6
   unplugin-auto-import: 0.14.2
@@ -62,12 +62,12 @@ devDependencies:
   pinyin-engine: 1.2.2
   postcss: 8.4.21
   sanitize-html: 2.9.0
-  sass: 1.58.0
+  sass: 1.58.1
   sitemap: 7.1.1
   tailwindcss: 3.2.6_postcss@8.4.21
   unplugin-auto-import: 0.14.2_@vueuse+core@9.12.0
   unplugin-vue-components: 0.23.0_vue@3.2.47
-  vitepress: 1.0.0-alpha.46_vrmmnf62x6oihundz43nhmnyre
+  vitepress: 1.0.0-alpha.46_7yb4vpocv74szajsxki6u6gjvi
   vue: 3.2.47
 
 packages:
@@ -893,7 +893,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.4_gyrp4zacqcjjrmgvdzgac5epyy
+      vite: 4.0.4_qwczgscu5yinpidm7yywvcndf4
       vue: 3.2.47
     dev: true
 
@@ -2684,8 +2684,8 @@ packages:
       postcss: 8.4.21
     dev: true
 
-  /sass/1.58.0:
-    resolution: {integrity: sha512-PiMJcP33DdKtZ/1jSjjqVIKihoDc6yWmYr9K/4r3fVVIEDAluD0q7XZiRKrNJcPK3qkLRF/79DND1H5q1LBjgg==}
+  /sass/1.58.1:
+    resolution: {integrity: sha512-bnINi6nPXbP1XNRaranMFEBZWUfdW/AF16Ql5+ypRxfTvCRTTKrLsMIakyDcayUt2t/RZotmL4kgJwNH5xO+bg==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -3113,7 +3113,7 @@ packages:
       inherits: 2.0.3
     dev: true
 
-  /vite/4.0.4_gyrp4zacqcjjrmgvdzgac5epyy:
+  /vite/4.0.4_qwczgscu5yinpidm7yywvcndf4:
     resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -3143,12 +3143,12 @@ packages:
       postcss: 8.4.21
       resolve: 1.22.1
       rollup: 3.7.3
-      sass: 1.58.0
+      sass: 1.58.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress/1.0.0-alpha.46_vrmmnf62x6oihundz43nhmnyre:
+  /vitepress/1.0.0-alpha.46_7yb4vpocv74szajsxki6u6gjvi:
     resolution: {integrity: sha512-HiKiHzC0iTPsRsKs8XcsMeMzCpcCt5LWcX9mpDr288Ju+nQf1G8A2+Wm44ZkBsVv4EHxFK4ChmWyZrL1OJUXpg==}
     hasBin: true
     dependencies:
@@ -3159,7 +3159,7 @@ packages:
       '@vueuse/core': 9.12.0_vue@3.2.47
       body-scroll-lock: 4.0.0-beta.0
       shiki: 0.14.0
-      vite: 4.0.4_gyrp4zacqcjjrmgvdzgac5epyy
+      vite: 4.0.4_qwczgscu5yinpidm7yywvcndf4
       vue: 3.2.47
     transitivePeerDependencies:
       - '@algolia/client-search'
