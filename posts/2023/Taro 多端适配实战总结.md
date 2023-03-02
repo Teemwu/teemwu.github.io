@@ -14,6 +14,97 @@ wordCount: 265
 
 ## 自定义 NavBar
 
+微信小程序左上方有一个“胶囊”工具栏，而官方提供的自定义头部导航栏的属性有限，满足不了我们日常的使用需求，自定义头部导航栏就很有必要。
+
+### 获取导航栏尺寸信息
+
+要自定义导航栏我们需要知道胶囊的尺寸、系统状态栏的高度等信息，通过微信提供的方法可获得具体的尺寸信息，如下：
+
+``` js
+import { getSystemInfoSync, getMenuButtonBoundingClientRect, getAppBaseInfo } from '@tarojs/taro'
+
+/**
+ * 获取头部导航栏信息
+ */
+export const getNavBarInfo = () => {
+	const appBaseInfo = getAppBaseInfo() as any
+	// 获取系统信息
+	const info = getSystemInfoSync()
+	// 获取小程序胶囊信息
+	const menuButton = getMenuButtonBoundingClientRect()
+	// 是否为 ios 环境
+	const isIOS = info && /ios/i.test(info.system)
+	// 系统状态栏高度，默认 20
+	const statusBarHeight = info.statusBarHeight || 20
+	// 默认导航栏高度，苹果设备：44 其它设备：48
+	let navHeight = isIOS ? 44 : 48
+
+	if (menuButton) {
+		// 导航栏高度 = 胶囊高度 + (胶囊距离顶部距离 - 系统状态栏高度)*2
+		navHeight = menuButton.height + (menuButton.top - statusBarHeight) * 2
+	}
+
+	// 导航栏总体高度
+	const navBarHeight = statusBarHeight + navHeight
+	// 系统默认字体大小
+	const fontSizeSetting = appBaseInfo.fontSizeSetting || info.fontSizeSetting || 14
+
+	return { statusBarHeight, navBarHeight, navHeight, fontSizeSetting }
+}
+```
+
+### 页面滚动显示或隐藏导航栏背景
+
+通常情况下，滚动页面显示导航栏背景，当滚动高度为零时不显示。此时有两种做法，一种是通过 `createIntersectionObserver` 来监测元素是否在可视区域，另一种是通过监测页面滚动高度来判断。
+
+使用 `createIntersectionObserver` 监测：
+
+```js
+import { createIntersectionObserver, getCurrentInstance, nextTick, useReady } from '@tarojs/taro'
+
+/**
+ * 监测页面滚动
+ */
+const initScrollObserver = () => {
+  const holderBackground = '#FFF'
+  const currentPageInstance = getCurrentInstance().page
+
+  if (!currentPageInstance) return
+
+  const scrollObserver = createIntersectionObserver(currentPageInstance)
+
+  scrollObserver.relativeToViewport().observe('.nav-holder', ({ intersectionRatio }) => {
+    state.currentBackground = intersectionRatio > 0 ? '' : holderBackground || ''
+  })
+}
+
+useReady(() => {
+  nextTick(() => initScrollObserver())
+})
+```
+
+这种做法有个不好的地方是，很难监测到具体的变化过程，如果需要给导航栏背景加透明过渡的话就不行了，所以一般情况我们通过 `usePageScroll` 来监测页面滚动，获得具体的滚动值来进行过渡处理。
+
+```js
+import { useLoad, getCurrentPages, Current, navigateBack, reLaunch, usePageScroll } from '@tarojs/taro'
+
+/**
+ * 监测页面滚动
+ */
+usePageScroll(({ scrollTop }) => {
+  const barHeight = commonStore.navBarInfo.navBarHeight
+  let opacity = scrollTop / barHeight
+
+  if (opacity >= 1) {
+    opacity = 1
+  }
+
+  state.currentBackground = props.holderBackground || ''
+  state.navBackgroundOpacity = opacity
+})
+```
+
+
 ## 自定义 TabBar
 
 微信自带的 TabBar 能满足大部分需求，而对于有设计要求时，则需要进行自定义。使用 Taro 进行自定义时，H5 端是自定义不了的，只能使用 Taro 官方提供的 TabBar。
@@ -192,6 +283,26 @@ module.exports = {
 
 1. 提示“Template `tmpl_0_xx` not found.”错误
 
-这个报错，偶尔会触发，很难定位，根据 [相关讨论](https://github.com/NervJS/taro/issues/12090)，猜测可能是组件解析异常，因为 Taro 会将标签进行转换，组件使用时的名字不要和 [微信自带的组件](https://taro-docs.jd.com/docs/next/components-desc) 名相同，尽量给自定义组件名加前缀，如 `ks-nav-icon`，并且使用时尽量使用小写中横线分割的形式。
+这个报错，偶尔会触发，很难定位，参考 [相关问题可知](https://github.com/NervJS/taro/issues/12553)，了解到，是由于在 `webpack5` 下默认开启了缓存，第三方组件引用时解析不了造成，开启强制弃用缓存即可。
 
-如果使用微信小程序自带组件也报此错，那就通过引入模块的形式进行使用，如 `import { Navigator } from '@tarojs/components'`。
+```js
+// config/index.js
+const config = {
+  // ...
+  compiler: {
+      type: 'webpack5',
+      // 需要强制弃用缓存，否则会偶尔会编译报错：https://github.com/NervJS/taro/issues/12553
+      prebundle: {
+          // 关闭依赖预编译
+          enable: false,
+          // 强行弃用缓存
+          force: true
+        }
+      },
+},
+cache: {
+  enable: false // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
+},
+```
+
+还有一种情况可能是自定义组件或者第三方组件的命名和小程序自带的组件命名冲突了，自定义组件加前缀即可，[微信小程序组件可查看](https://docs.taro.zone/docs/components-desc)。
