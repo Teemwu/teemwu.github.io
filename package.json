@@ -13,11 +13,11 @@
   "author": "teemwu",
   "license": "ISC",
   "devDependencies": {
-    "@arco-design/web-vue": "2.43.2",
+    "@arco-design/web-vue": "2.44.1",
     "@types/fs-extra": "11.0.1",
     "@types/inquirer": "9.0.3",
     "@types/inquirer-autocomplete-prompt": "3.0.0",
-    "@types/node": "18.15.0",
+    "@types/node": "18.15.1",
     "autoprefixer": "10.4.14",
     "chalk": "5.2.0",
     "cnblog2md": "1.9.0",
@@ -32,12 +32,12 @@
     "pinyin-engine": "1.2.2",
     "postcss": "8.4.21",
     "sanitize-html": "2.10.0",
-    "sass": "1.58.3",
+    "sass": "1.59.2",
     "sitemap": "7.1.1",
     "tailwindcss": "3.2.7",
     "unplugin-auto-import": "0.15.1",
     "unplugin-vue-components": "0.24.1",
-    "vitepress": "1.0.0-alpha.51",
+    "vitepress": "1.0.0-alpha.54",
     "vue": "3.2.47"
   },
   "dependencies": {
