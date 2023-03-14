@@ -126,14 +126,32 @@ rm -rf /usr/local/var/db/redis
 
 1. 下载 Redis
 
-在 Redis 的 [官网](https://redis.io/) 中，下载最新的 Redis 压缩包，解压到任意位置，例如：`/usr/local/redis`。
+在 Redis 的 [官网](https://redis.io/download/) 中，下载最新的 Redis 压缩包，解压到任意位置，例如：`/usr/local/redis`。
+
+或者通过 wget 工具直接下载：
+
+```sh
+wget https://download.redis.io/redis-stable.tar.gz
+```
+
+创建 Redis 存放目录：
+
+```sh
+sudo mkdir /usr/local/redis/
+```
+
+通过 tar 解压到 `/usr/local/redis`：
+
+```sh
+sudo tar -xzvf redis-stable.tar.gz -C /usr/local/redis/
+```
 
 2. 编译安装 Redis
 
 在解压后的 Redis 目录下，执行以下命令编译 Redis：
 
 ```sh
-make
+sudo make
 ```
 
 编译完成后，执行以下命令安装 Redis：
@@ -163,6 +181,10 @@ redis-server /path/to/redis.conf
 ```sh
 redis-cli
 ```
+
+为了能在后台运行 Redis 服务，我们需要需改 `redis.conf` 文件，将 `daemonize no` 改为 `daemonize yes` 即可。
+
+为了方便查看日志，`logfile ""` 改为 `logfile ""`。
 
 5. Redis 基本操作
 
