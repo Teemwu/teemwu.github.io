@@ -60,7 +60,7 @@ const searchDir = (_, input = DEFAULT_DIR) => {
 }
 
 const openFileByVSCode = (filePath) => {
-	exec(`code ${filePath}`, (err, stdout, stderr) => {
+	exec(`code ${filePath.replace(' ', '\\ ')}`, (err, stdout, stderr) => {
 		if (err) return console.log(chalk.red('[打开失败]'), err)
 
 		console.log('\n', chalk.green('[打开成功]'), stdout)
