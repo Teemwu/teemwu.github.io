@@ -198,7 +198,7 @@ sudo vim redis.conf
 sudo redis-server redis.conf
 ```
 
-1. Redis 基本操作
+6. Redis 基本操作
 
 连接 Redis 后，可以进行以下基本操作：
 
