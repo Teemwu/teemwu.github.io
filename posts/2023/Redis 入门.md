@@ -192,13 +192,19 @@ sudo vim redis.conf
 - 为了方便查看日志，`logfile ""` 改为 `logfile /usr/local/redis/redis-stable/log`
 - 为了安全起见，开启密码，将 `# requirepass` 注释去掉，改为 `requirepass yourPassword`
 
+macOS 或者 Linux 用户可以用终端随机生成密码:
+
+```sh
+openssl rand -base64 10
+```
+
 保存配置后重新启动服务即可：
 
 ```sh
 sudo redis-server redis.conf
 ```
 
-6. Redis 基本操作
+1. Redis 基本操作
 
 连接 Redis 后，可以进行以下基本操作：
 
