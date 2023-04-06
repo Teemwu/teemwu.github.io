@@ -7,7 +7,7 @@ categories:
   - 数据库
 tags:
   - redis
-wordCount: 1717
+wordCount: 1739
 ---
 
 # Redis 入门

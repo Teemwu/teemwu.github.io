@@ -27,7 +27,7 @@ export const themeConfig: MyConfig = {
 	sidebar,
 	footer: {
 		message: 'Released under the MIT License.',
-		copyright: 'Copyright © 2022-present Teemwu'
+		copyright: '<a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023033148号-1</a> Copyright © 2022-present Teemwu'
 	},
 	// algolia: {
 	// 	appId: 'DSW8O07XW5',
