@@ -1,9 +1,3 @@
-name: Deploy Pages
-
-on:
-  push:
-    branches: [main]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -11,42 +5,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node (LTS) + pnpm cache
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          check-latest: true
-          cache: 'pnpm'
+          cache: 'pnpm' # <-- setup-node action 会自动缓存 pnpm 依赖
 
-      # —— 关键：保证 pnpm 一定存在（Corepack → npm 安装双保险）——
-      - name: Ensure pnpm available (corepack first, npm fallback)
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "Node: $(node -v)"
-          echo "Corepack: $(corepack --version || true)"
+      - name: Enable Corepack
+        run: corepack enable
 
-          # 1) 用 Corepack 启用 pnpm
-          if corepack enable && corepack prepare pnpm@9 --activate; then
-            echo "pnpm via corepack ready."
-          else
-            echo "corepack failed, fallback to npm -g install pnpm@9"
-            npm i -g pnpm@9
-          fi
-
-          # 刷新可执行缓存并检查
-          hash -r || true
-          command -v pnpm
-          pnpm -v
-
-      - name: Install deps
-        run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Build
         run: pnpm build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/.vitepress/dist
