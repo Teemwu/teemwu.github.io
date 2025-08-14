@@ -11,16 +11,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node (LTS) + pnpm cache
+      - name: Setup Node + pnpm cache
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Enable Corepack & pin pnpm
+      - name: Enable Corepack & set pnpm version
         run: |
           corepack enable
-          corepack use pnpm@9
+          corepack prepare pnpm@9 --activate
 
       - name: Install deps
         run: pnpm install --frozen-lockfile
