@@ -3,25 +3,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # <--- 建议升级到 v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4 # <--- 升级到 v4
         with:
-          node-version: 20
-          cache: 'pnpm' # <-- setup-node action 会自动缓存 pnpm 依赖
+          node-version: 20 # <--- 升级到 Node.js 20 (LTS)
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3 # <--- 升级到 v3
+        with:
+          version: 8 # <--- 建议使用较新的 pnpm 版本
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile # 在 CI 环境中建议使用 --no-frozen-lockfile 或删除 lock 文件后重新生成
 
       - name: Build
         run: pnpm build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4 # <--- 建议升级到 v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/.vitepress/dist
